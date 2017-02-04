@@ -7,6 +7,10 @@ import Menu from 'components/Menu';
 
 Vue.use(Router);
 
+function getUid() {
+  return localStorage.getItem('user_uid');
+}
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -14,14 +18,14 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello,
+      redirect: '/menu',
     },
     {
       path: '/menu',
       name: 'Menu',
       component: Menu,
       beforeEnter: (to, from, next) => {
-        const uid = localStorage.getItem('user_uid');
-        if (!uid) {
+        if (!getUid()) {
           next('/user-select');
         } else {
           next();
@@ -32,6 +36,13 @@ export default new Router({
       path: '/user-select',
       name: 'UserSelect',
       component: UserSelect,
+      beforeEnter: (to, from, next) => {
+        if (getUid()) {
+          next('/menu');
+        } else {
+          next();
+        }
+      },
     },
   ],
 });
