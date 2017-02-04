@@ -19,13 +19,6 @@ web:
 db:
   image: postgres:9.6
 
-scheduler:
-  image: task_web
-  volumes: *app_volumes
-  environment: *app_environment
-  links: *app_links
-  command: clockwork clock.rb
-
 bundle_cache:
   image: busybox
   volumes:
