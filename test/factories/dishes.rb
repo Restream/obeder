@@ -2,6 +2,9 @@ FactoryGirl.define do
   factory :dish do
     name
     description
-    dish_type { generate :string }
+
+    trait :salatik do
+      dish_type :salatik
+    end
   end
 end
