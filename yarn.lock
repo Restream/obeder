@@ -4849,10 +4849,6 @@ vue-style-loader@^2.0.0:
     hash-sum "^1.0.2"
     loader-utils "^0.2.7"
 
-vue-switches@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue-switches/-/vue-switches-1.0.1.tgz#5056373f28294d90fd421759ea52822dad622bed"
-
 vue-template-compiler@^2.1.10:
   version "2.1.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.1.10.tgz#cb89643adc395e97435585522e43d0a9b1913257"

@@ -7,19 +7,13 @@
 
     <div class="header__switcher">
       <span class="header__switcher-label">Не ем</span>
-      <switches v-model="neem" :selected="neem" color="blue"></switches>
-      <span class="header__switcher-label">Ем</span>
+      <input type="checkbox" v-model="neem">
     </div>
   </div>
 </template>
 
 <script>
-  import Switches from 'vue-switches';
-
   export default {
-    components: {
-      switches: Switches,
-    },
     name: 'Header',
     data() {
       return {
