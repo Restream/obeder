@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :users, only: [:index] do
+    resources :users, only: [:index, :update] do
       scope module: :users do
         resources :menus, only: [:index]
       end
