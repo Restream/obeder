@@ -17,6 +17,7 @@ gem 'bcrypt'
 gem 'authority'
 gem 'ransack'
 gem 'kaminari'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
