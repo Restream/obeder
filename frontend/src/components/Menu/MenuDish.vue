@@ -21,11 +21,12 @@
       type: String,
     },
     data() {
-      const selectedDish = _.find(this.dishes, { selected: true });
+      const selectedDish = _.find(this.dishes, { selected: true })
+        || _.find(this.dishes, { default: true });
 
       return {
         radioIdentifier: this.date + this.type,
-        selectedDish: selectedDish.name,
+        selectedDish: selectedDish && selectedDish.name,
       };
     },
   };
