@@ -3,7 +3,7 @@
     {{type}}
     <ul>
       <li v-for="dish in dishes">
-        <input type="radio" :name="radioIdentifier" :value="dish.name" v-model="selectedDish">
+        <input type="radio" :name="radioIdentifier" :value="dish.id" v-model="selectedDish">
         {{dish.name}}
       </li>
     </ul>
@@ -13,6 +13,13 @@
 <script>
   import _ from 'lodash';
 
+  function getSelectedDishId(dishes) {
+    const selectedDish = _.find(dishes, { selected: true })
+      || _.find(dishes, { default: true });
+
+    return selectedDish && selectedDish.id;
+  }
+
   export default {
     name: 'MenuDish',
     props: {
@@ -20,13 +27,17 @@
       dishes: Array,
       type: String,
     },
-    data() {
-      const selectedDish = _.find(this.dishes, { selected: true })
-        || _.find(this.dishes, { default: true });
 
+    watch: {
+      dishes(newDishes) {
+        this.selectedDish = getSelectedDishId(newDishes);
+      },
+    },
+
+    data() {
       return {
         radioIdentifier: this.date + this.type,
-        selectedDish: selectedDish && selectedDish.name,
+        selectedDish: getSelectedDishId(this.dishes),
       };
     },
   };
