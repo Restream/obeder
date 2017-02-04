@@ -1,4 +1,4 @@
-class MenuSerializer < ActiveModel::Serializer
+class UserMenuSerializer < ActiveModel::Serializer
   attributes :id, :date, :dishes
 
   def dishes

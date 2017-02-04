@@ -19,6 +19,7 @@ gem 'ransack'
 gem 'kaminari'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'enumerize'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platform: :mri
