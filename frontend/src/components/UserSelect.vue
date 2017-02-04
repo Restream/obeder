@@ -1,8 +1,8 @@
 <template>
   <div class="user-select">
     <div class="content">
-      <img src="../assets/logo.svg" class="logo">
-      <img src="../assets/obeder.svg" class="obeder">
+      <img src="../assets/images/logo.svg" class="logo">
+      <img src="../assets/images/obeder.svg" class="obeder">
       <h1 class="title">Представься, пёс</h1>
       <div class="buttons">
         <button v-for="user in users" v-on:click="makeAuth(user.id)" class="button">
