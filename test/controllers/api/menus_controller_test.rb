@@ -36,7 +36,7 @@ class Api::MenusControllerTest < ActionController::TestCase
   test 'update remove dish' do
     menu = create :menu, :with_dishes
     menu_attrs = attributes_for :menu, :ready
-    menu_attrs[:dishes] = Dish.first.as_json
+    menu_attrs[:menu_dishes] = [MenuDish.first.as_json]
     put :update, params: { id: menu.id, menu: menu_attrs }
     assert_response :success
     assert { MenuDish.count == 1 }
