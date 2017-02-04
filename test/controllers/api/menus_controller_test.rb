@@ -19,10 +19,13 @@ class Api::MenusControllerTest < ActionController::TestCase
   test 'update' do
     menu = create :menu
     menu_attrs = attributes_for :menu, :ready
-    menu_attrs[:dishes] = attributes_for_list(:dish, 3)
+    menu_attrs[:menu_dishes] = create_list(:dish, 3).map do |dish|
+      { dish_id: dish.id }
+    end
 
     put :update, params: { id: menu.id, menu: menu_attrs }
     assert_response :success
+    assert { MenuDish.count == 3 }
   end
 
   test 'update remove dishes' do

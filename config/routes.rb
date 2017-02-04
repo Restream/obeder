@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
     resources :dishes, only: [:index, :create, :update, :destroy]
     resources :menus, only: [:index, :create, :update, :destroy]
-    resources :user_menus, only: [:index]
+    resources :user_menus, only: [:index, :update]
   end
 
   match '*path' => 'web/welcome#index', via: :get
