@@ -15,6 +15,7 @@ WORKDIR /app
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN bundle install --path /bundle_cache
+RUN npm i yarn -g
 
 ADD . /app
 
