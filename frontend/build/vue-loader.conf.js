@@ -10,9 +10,8 @@ module.exports = {
     extract: isProduction,
   }),
   postcss: [
-    require('postcss-import'),
-    require('autoprefixer')({
-      browsers: ['last 2 versions'],
+    require('postcss-import')({
+      path: 'src/assets/styles',
     }),
     require('postcss-cssnext'),
   ],

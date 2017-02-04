@@ -30,6 +30,8 @@
 </script>
 
 <style scoped>
+  @import "../assets/styles/variables.css";
+
   .header {
     background: #FFFFFF;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
@@ -68,7 +70,7 @@
     margin: 0 14px;
   }
 
-  @media (min-width: 800px) {
+  @media (--desktop) {
     .header__logo {
       display: flex;
     }
