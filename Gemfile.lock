@@ -193,6 +193,8 @@ GEM
       railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uglifier (3.0.4)
+      execjs (>= 0.3.0, < 3)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -227,6 +229,7 @@ DEPENDENCIES
   therubyracer
   turbolinks (~> 5)
   twitter-bootstrap-rails
+  uglifier
   wrong
 
 BUNDLED WITH

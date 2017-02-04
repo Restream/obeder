@@ -4,6 +4,7 @@ gem 'rails', '~> 5.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 
+gem 'uglifier'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'twitter-bootstrap-rails'
 gem 'autoprefixer-rails'
