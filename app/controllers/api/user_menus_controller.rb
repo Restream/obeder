@@ -3,6 +3,6 @@ class Api::UserMenusController < Api::ApplicationController
     date = params[:date] || Date.today
     user_menus = UserMenu.for_date(date)
 
-    render json: user_menus
+    render json: user_menus, 
   end
 end

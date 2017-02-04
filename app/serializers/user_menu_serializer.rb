@@ -1,14 +1,15 @@
 class UserMenuSerializer < ActiveModel::Serializer
   attributes :id, :date, :dishes
 
+  def date
+    object.menu.date
+  end
+
   def dishes
-    user = instance_options[:user]
-    user_menu = object.user_menus.find_by(user_id: user.id)
-    return [] if user_menu.blank?
+    menu_dishes = object.menu.menu_dishes
+    user_dish_ids = object.dishes.pluck(:id)
 
-    user_dish_ids = user_menu.dishes.pluck(:id)
-
-    object.menu_dishes.map do |menu_dish|
+    menu_dishes.map do |menu_dish|
       dish = menu_dish.dish
       dish_hash = DishSerializer.new(dish).attributes
       dish_hash[:selected] = user_dish_ids.include?(dish.id)
