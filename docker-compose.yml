@@ -1,0 +1,32 @@
+web:
+  build: .
+  volumes: &app_volumes
+    - .:/app
+    - ~/.ssh:/root/.ssh
+    - ~/.bash_history:/root/.bash_history
+  volumes_from:
+    - bundle_cache
+  environment: &app_environment
+    DATABASE_HOST: db
+    DATABASE_PORT: 5432
+    DATABASE_USERNAME: postgres
+    DATABASE_PASSWORD:
+  ports:
+    - 3000:3000
+  links: &app_links
+    - db
+
+db:
+  image: postgres:9.6
+
+scheduler:
+  image: task_web
+  volumes: *app_volumes
+  environment: *app_environment
+  links: *app_links
+  command: clockwork clock.rb
+
+bundle_cache:
+  image: busybox
+  volumes:
+    - /bundle_cache
