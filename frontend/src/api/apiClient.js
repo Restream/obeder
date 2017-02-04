@@ -4,7 +4,7 @@ import humps from 'humps';
 
 export const baseUrl = '/api';
 
-function request(url, method, urlParams = false, body = false) {
+export function request(url, method, urlParams = false, body = false) {
   let urlParamsPart = '';
   if (urlParams) {
     const urlParamsAsString = queryString.stringify(urlParams);
