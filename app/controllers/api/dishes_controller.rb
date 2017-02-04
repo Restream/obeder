@@ -5,7 +5,7 @@ class Api::DishesController < Api::ApplicationController
   end
 
   def create
-    dish = Dish.new(marker_params)
+    dish = Dish.new(dish_params)
     if dish.save
       render json: dish
     else
@@ -15,7 +15,7 @@ class Api::DishesController < Api::ApplicationController
 
   def update
     dish = Dish.find(params[:id])
-    if dish.update(marker_params)
+    if dish.update(dish_params)
       render json: dish
     else
       render json: { errors: dish.errors }
@@ -33,7 +33,7 @@ class Api::DishesController < Api::ApplicationController
 
   private
 
-  def marker_params
+  def dish_params
     params.require(:dish).permit(:name, :description, :dish_type)
   end
 end

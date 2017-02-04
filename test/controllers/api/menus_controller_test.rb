@@ -13,6 +13,7 @@ class Api::MenusControllerTest < ActionController::TestCase
     assert_response :success
 
     assert { Menu.count == 1 }
+    assert { MenuDish.count == 3 }
   end
 
   test 'update' do
@@ -28,5 +29,7 @@ class Api::MenusControllerTest < ActionController::TestCase
 
     delete :destroy, params: { id: menu.id }
     assert_response :success
+    assert { Menu.count.zero? }
+    assert { MenuDish.count.zero? }
   end
 end
