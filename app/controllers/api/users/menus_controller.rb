@@ -1,6 +1,6 @@
 class Api::Users::MenusController < Api::Users::ApplicationController
   def index
-    menus = resource_user.menus
-    render json: menus
+    menus = Menu.for_week
+    render json: menus, user: resource_user
   end
 end
