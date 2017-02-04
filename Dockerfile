@@ -1,6 +1,9 @@
 FROM ruby:2.4.0
 
 RUN apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g yarn
 
 RUN apt-get install locales
 RUN echo 'ru_RU.UTF-8 UTF-8' >> /etc/locale.gen
