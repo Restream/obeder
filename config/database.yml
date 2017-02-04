@@ -18,3 +18,4 @@ test:
 production:
   <<: *default
   database: obeder_production
+  host: db
