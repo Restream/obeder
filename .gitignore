@@ -9,3 +9,4 @@ public/static/
 app/views/web/welcome/index.html
 npm-debug.log
 node_modules
+.vscode

@@ -1,7 +1,9 @@
 <template>
   <div class="menu">
     <menu-header></menu-header>
-    <daily-menu v-for="date in dates" :day="date"></daily-menu>
+    <div class="content">
+      <daily-menu v-for="date in dates" :day="date"></daily-menu>
+    </div>
   </div>
 </template>
 
@@ -39,4 +41,17 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "../assets/styles/variables.css";
+
+.content {
+  max-width: 800px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+@media (--desktop) {
+  .content {
+    padding: 30px 0;
+  }
+}
 </style>

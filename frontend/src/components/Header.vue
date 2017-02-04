@@ -77,6 +77,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    height: 26px;
 
     & input {
       display: none;
