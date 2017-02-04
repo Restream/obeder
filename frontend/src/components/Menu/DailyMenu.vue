@@ -1,8 +1,10 @@
 <template>
   <div class="daily-menu">
     <h1 class="date">{{date}}</h1>
-    <menu-dish :date="date" v-for="(dishes, type) in dishTypes" :dishes="dishes" :type="type"></menu-dish>
-    <button v-on:click="setToDefault">Сбросить в дефолт</button>
+    <div class="daily-menu__list">
+      <menu-dish :date="date" v-for="(dishes, type) in dishTypes" :dishes="dishes" :type="type"></menu-dish>
+      <button v-on:click="setToDefault">Сбросить в дефолт</button>
+    </div>
   </div>
 </template>
 
@@ -68,6 +70,12 @@
   &:first-letter {
     text-transform: uppercase;
   }
+}
+
+.daily-menu__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 @media (--desktop) {
