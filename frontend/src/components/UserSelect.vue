@@ -1,7 +1,15 @@
 <template>
   <div class="user-select">
-    User Select
-    <button v-for="user in users" v-on:click="makeAuth(user.id)">{{user.name}}</button>
+    <div class="content">
+      <img src="../assets/logo.svg" class="logo">
+      <img src="../assets/obeder.svg" class="obeder">
+      <h1 class="title">Представься, пёс</h1>
+      <div class="buttons">
+        <button v-for="user in users" v-on:click="makeAuth(user.id)" class="button">
+          {{user.name}}
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,4 +44,53 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .user-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content {
+    max-width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .logo {
+    margin-bottom: 14px;
+  }
+
+  .obeder {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button {
+    margin-bottom: 10px;
+    background: #38B5C7;
+    border-radius: 4px;
+    font-family: Roboto;
+    font-size: 20px;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 </style>
