@@ -3,8 +3,8 @@ FactoryGirl.define do
     name
     description
 
-    trait :salatik do
-      dish_type :salatik
+    trait :salad do
+      dish_type :salad
     end
   end
 end
