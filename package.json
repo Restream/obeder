@@ -1,0 +1,22 @@
+{
+  "name": "obeder-app",
+  "version": "1.0.0",
+  "description": "obeder epta",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "cd frontend && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Restream/obeder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Restream/obeder/issues"
+  },
+  "homepage": "https://github.com/Restream/obeder#readme"
+}

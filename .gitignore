@@ -3,5 +3,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+.idea
 .byebug_history
+public/static/
+app/views/web/welcome/index.html
