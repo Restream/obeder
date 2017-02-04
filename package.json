@@ -13,10 +13,13 @@
   "dependencies": {
     "humps": "^2.0.0",
     "postcss-cssnext": "^2.9.0",
+    "node-sass": "^4.5.0",
     "query-string": "^4.3.1",
+    "sass-loader": "^4.1.1",
     "url-join": "^1.1.0",
     "vue": "^2.1.10",
     "vue-router": "^2.2.0",
+    "vue-switches": "^1.0.1",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {

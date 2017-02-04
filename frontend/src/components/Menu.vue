@@ -1,11 +1,16 @@
 <template>
   <div class="menu">
-    Menu
+    <menu-header></menu-header>
   </div>
 </template>
 
 <script>
+  import Header from './Header';
+
   export default {
+    components: {
+      'menu-header': Header,
+    },
     name: 'menu',
     data() {
       return {
