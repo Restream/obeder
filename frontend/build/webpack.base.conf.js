@@ -10,7 +10,8 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    app: './frontend/src/main.js'
+    app: './frontend/src/main.js',
+    fetch: 'whatwg-fetch'
   },
   output: {
     path: config.build.assetsRoot,
