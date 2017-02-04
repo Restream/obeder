@@ -18,7 +18,7 @@ module.exports = {
   'settings': {
     'import/resolver': {
       'webpack': {
-        'config': 'fronbuild/webpack.base.conf.js'
+        'config': 'frontend/build/webpack.base.conf.js'
       }
     }
   },
