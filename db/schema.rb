@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204111159) do
+ActiveRecord::Schema.define(version: 20170204142829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20170204111159) do
   create_table "menu_dishes", force: :cascade do |t|
     t.integer "menu_id"
     t.integer "dish_id"
-    t.boolean "default"
+    t.boolean "default", default: false
     t.index ["dish_id"], name: "index_menu_dishes_on_dish_id", using: :btree
     t.index ["menu_id"], name: "index_menu_dishes_on_menu_id", using: :btree
   end
 
   create_table "menus", force: :cascade do |t|
     t.date    "date"
-    t.boolean "ready"
+    t.boolean "ready", default: false
   end
 
   create_table "user_menu_dishes", force: :cascade do |t|
