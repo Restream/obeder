@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :menus_user do
+  factory :user_menu do
   end
 end

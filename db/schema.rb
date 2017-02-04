@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204100217) do
+ActiveRecord::Schema.define(version: 20170204111159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,20 +22,12 @@ ActiveRecord::Schema.define(version: 20170204100217) do
     t.string "dish_type"
   end
 
-  create_table "dishes_menus", force: :cascade do |t|
+  create_table "menu_dishes", force: :cascade do |t|
     t.integer "menu_id"
     t.integer "dish_id"
     t.boolean "default"
-    t.index ["dish_id"], name: "index_dishes_menus_on_dish_id", using: :btree
-    t.index ["menu_id"], name: "index_dishes_menus_on_menu_id", using: :btree
-  end
-
-  create_table "dishes_menus_users", force: :cascade do |t|
-    t.integer "menus_user_id"
-    t.integer "dish_id"
-    t.boolean "neem"
-    t.index ["dish_id"], name: "index_dishes_menus_users_on_dish_id", using: :btree
-    t.index ["menus_user_id"], name: "index_dishes_menus_users_on_menus_user_id", using: :btree
+    t.index ["dish_id"], name: "index_menu_dishes_on_dish_id", using: :btree
+    t.index ["menu_id"], name: "index_menu_dishes_on_menu_id", using: :btree
   end
 
   create_table "menus", force: :cascade do |t|
@@ -43,10 +35,18 @@ ActiveRecord::Schema.define(version: 20170204100217) do
     t.boolean "ready"
   end
 
-  create_table "menus_users", force: :cascade do |t|
+  create_table "user_menu_dishes", force: :cascade do |t|
+    t.integer "user_menu_id"
+    t.integer "dish_id"
+    t.boolean "neem"
+    t.index ["dish_id"], name: "index_user_menu_dishes_on_dish_id", using: :btree
+    t.index ["user_menu_id"], name: "index_user_menu_dishes_on_user_menu_id", using: :btree
+  end
+
+  create_table "user_menus", force: :cascade do |t|
     t.uuid    "user_id"
     t.integer "menu_id"
-    t.index ["menu_id"], name: "index_menus_users_on_menu_id", using: :btree
+    t.index ["menu_id"], name: "index_user_menus_on_menu_id", using: :btree
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(version: 20170204100217) do
     t.string  "description"
   end
 
-  add_foreign_key "dishes_menus", "dishes"
-  add_foreign_key "dishes_menus", "menus"
-  add_foreign_key "dishes_menus_users", "dishes"
-  add_foreign_key "dishes_menus_users", "menus_users"
-  add_foreign_key "menus_users", "menus"
-  add_foreign_key "menus_users", "users"
+  add_foreign_key "menu_dishes", "dishes"
+  add_foreign_key "menu_dishes", "menus"
+  add_foreign_key "user_menu_dishes", "dishes"
+  add_foreign_key "user_menu_dishes", "user_menus"
+  add_foreign_key "user_menus", "menus"
+  add_foreign_key "user_menus", "users"
 end

@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-  has_many :menus_users
-  has_many :menus, through: :menus_users
+  has_many :user_menus
+  has_many :menus, through: :user_menus
 end
