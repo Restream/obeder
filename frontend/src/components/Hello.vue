@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <img src="../assets/logo.svg">
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -9,7 +10,7 @@ export default {
   name: 'hello',
   data() {
     return {
-      msg: 'Zdarova',
+      msg: 'Obeder',
     };
   },
 };
