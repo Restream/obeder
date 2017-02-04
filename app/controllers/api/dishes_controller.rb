@@ -22,6 +22,15 @@ class Api::DishesController < Api::ApplicationController
     end
   end
 
+  def destroy
+    dish = Dish.find(params[:id])
+    if dish.delete
+      render json: dish
+    else
+      render json: { errors: dish.errors }
+    end
+  end
+
   private
 
   def marker_params
