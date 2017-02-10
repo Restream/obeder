@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# EZ deploy
+ * heroku login
+ * git push heroku master
