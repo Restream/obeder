@@ -13,5 +13,6 @@ module Obeder
     end
 
     config.i18n.default_locale = :ru
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
   end
 end

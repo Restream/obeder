@@ -12,4 +12,9 @@
 
 
   .form-actions
-    = f.button :submit, name: 'Сохранить', class: 'btn btn-primary'
+    = f.button :submit, value: 'Сохранить', class: 'btn btn-primary'
+
+- unless @menu.ready
+  = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
+    .form-actions
+      = f.button :submit, value: 'Опубликовать меню', class: 'btn btn-success'

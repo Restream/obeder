@@ -1,2 +1,9 @@
 ru:
   hello: 'Привет'
+
+  flash:
+    web:
+      admin:
+        menus:
+          approve:
+            success: Меню опубликовано

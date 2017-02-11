@@ -6,7 +6,11 @@ Rails.application.routes.draw do
       root to: 'welcome#index'
       resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]
       resources :user_menus, only: [:index]
-      resources :menus, param: :date, only: [:edit, :update]
+      resources :menus, param: :date, only: [:edit, :update] do
+        member do
+          put :approve
+        end
+      end
     end
   end
 
