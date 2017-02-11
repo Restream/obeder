@@ -2,12 +2,17 @@ FactoryGirl.define do
   factory :user_menu do
     user
     menu
+
     trait :with_dish do
-      user_menu_dishes { create :user_menu_dish }
+      after(:create) do |user_menu|
+        create :user_menu_dish, user_menu: user_menu
+      end
     end
 
     trait :with_dishes do
-      user_menu_dishes { create_list :user_menu_dish, 3 }
+      after(:create) do |user_menu|
+        create_list :user_menu_dish, 3, user_menu: user_menu
+      end
     end
   end
 end
