@@ -7,7 +7,6 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     @menu = current_menu
 
     if @menu.update(menu_params)
-      f(:success)
       redirect_to edit_admin_menu_path(@menu.date)
     else
       render action: 'edit'
