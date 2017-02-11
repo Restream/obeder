@@ -67,9 +67,10 @@
 
   .header__user {
     position: absolute;
-    font-weight: 600;
     right: 10px;
-    color: #000000;
+    font-weight: 400;
+    font-size: 20px;
+    color: #4D4D4D;
   }
 
   .header__logo {
