@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   scope module: :web do
     root to: 'welcome#index'
+
+    namespace :admin do
+      resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]
+    end
   end
 
   namespace :api do

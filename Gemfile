@@ -9,8 +9,10 @@ gem 'autoprefixer-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks', '~> 5'
 gem 'haml-rails'
+gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'twitter-bootstrap-rails'
+gem 'active_link_to'
 
 gem 'aasm'
 gem 'bcrypt'

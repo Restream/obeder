@@ -1,0 +1,8 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{'aria-expanded' => 'false', 'data-target' => '#bs-example-navbar-collapse-1', 'data-toggle' => 'collapse', :type => 'button'}
+      %a.navbar-brand{:href => '#'} Обедер
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
+      %ul.nav.navbar-nav
+        = active_link_to 'Блюда', admin_dishes_path, class_active: 'active', wrap_tag: :li

@@ -1,8 +1,7 @@
-class Api::DishesController < Api::ApplicationController
+class Web::Admin::DishesController < Web::Admin::ApplicationController
   def index
-    q = Dish.ransack(params[:q])
-    dishes = q.result.page(params[:page])
-    render json: dishes
+    @q = Dish.ransack(params[:q])
+    @dishes = @q.result.page(params[:page])
   end
 
   def create
