@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20170211145604) do
   create_table "user_menu_dishes", force: :cascade do |t|
     t.integer "user_menu_id"
     t.integer "dish_id"
-    t.boolean "neem",         default: false
     t.index ["dish_id"], name: "index_user_menu_dishes_on_dish_id", using: :btree
     t.index ["user_menu_id"], name: "index_user_menu_dishes_on_user_menu_id", using: :btree
   end
