@@ -1,0 +1,12 @@
+.row
+  .col-md-12
+    = @date
+- @dishes_stats.in_groups(2, false) do |group|
+  .row
+    - group.each do |stat|
+      .col-md-6
+        #{stat[:type]}: #{stat[:count]}
+.row
+  .col-md-12
+    Не едят:
+    = @neem_users.map(&:name).join(', ')

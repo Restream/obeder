@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]
+      resources :user_menus, only: [:index]
     end
   end
 

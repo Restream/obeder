@@ -1,6 +1,6 @@
 class Web::Admin::DishesController < Web::Admin::ApplicationController
   def index
-    @q = Dish.all.ransack(params[:q])
+    @q = Dish.ransack(params[:q])
     @dishes = @q.result.page(params[:page])
   end
 
