@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204142829) do
+ActiveRecord::Schema.define(version: 20170211085009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170204142829) do
   create_table "user_menu_dishes", force: :cascade do |t|
     t.integer "user_menu_id"
     t.integer "dish_id"
-    t.boolean "neem"
+    t.boolean "neem",         default: false
     t.index ["dish_id"], name: "index_user_menu_dishes_on_dish_id", using: :btree
     t.index ["user_menu_id"], name: "index_user_menu_dishes_on_user_menu_id", using: :btree
   end
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170204142829) do
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string  "name"
     t.string  "email"
-    t.boolean "neem"
+    t.boolean "neem",        default: false
     t.string  "description"
   end
 
