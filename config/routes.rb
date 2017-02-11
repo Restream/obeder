@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     root to: 'welcome#index'
 
     namespace :admin do
+      root to: 'welcome#index'
       resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]
       resources :user_menus, only: [:index]
       resources :menus, param: :date, only: [:edit, :update]
