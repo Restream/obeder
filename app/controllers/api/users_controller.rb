@@ -20,6 +20,6 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def user_params
-    params.permit(:neem)
+    params.require(:user).permit(:neem)
   end
 end

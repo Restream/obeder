@@ -15,8 +15,7 @@ class Api::UsersControllerTest < ActionController::TestCase
   end
 
   test 'update' do
-
-    put :update, params: { id: @user.id, neem: true }
+    put :update, params: { id: @user.id, user: { neem: true } }
     assert_response :success
     assert { @user.reload.neem }
   end
