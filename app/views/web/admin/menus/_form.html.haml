@@ -1,3 +1,10 @@
+.text-center
+  - unless @menu.ready
+    = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
+      = f.button :submit, value: 'Опубликовать меню', class: 'btn btn-lg btn-success'
+    %br
+    %br
+
 = simple_form_for @menu, url: admin_menu_path(@menu.date), method: :put do |f|
   .row
     .col-md-12
@@ -5,16 +12,12 @@
 
       = f.simple_fields_for :menu_dishes do |menu_dish|
         = render 'menu_dish_fields', f: menu_dish
-        %hr
+
+      .links.text-right
+        = link_to_add_association 'Добавить блюдо', f, :menu_dishes, class: 'btn btn-lg btn-info'
 
       %br
       .well
         .pull-left
-          = link_to_add_association 'Добавить блюдо', f, :menu_dishes, class: 'btn btn-lg btn-info'
           = f.button :submit, value: 'Сохранить', class: 'btn btn-lg btn-primary'
-
-        .pull-right
-          - unless @menu.ready
-            = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
-              = f.button :submit, value: 'Опубликовать меню', class: 'btn btn-lg btn-success'
         .clearfix
