@@ -24,5 +24,8 @@ Things you may want to cover:
 * ...
 
 # EZ deploy
+
+Download and install the Heroku CLI. (brew install heroku or download pkg)
+
  * heroku login
  * git push heroku master
