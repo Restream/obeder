@@ -5,6 +5,7 @@ class UserMenu < ApplicationRecord
   has_many :user_menu_dishes
   has_many :dishes, through: :user_menu_dishes
 
+  scope :em, -> { where(user: User.where(neem: false)) }
   scope :for_date, ->(date) { where(menu: Menu.where(date: date)) }
   scope :for_week, -> { where(menu: Menu.where('date >= ? AND date < ?', Date.current, Date.current + 7.days)) }
 end
