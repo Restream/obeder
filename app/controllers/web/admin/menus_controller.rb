@@ -1,5 +1,6 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
   def edit
+    @date = date
     @menu = current_menu
     @dishes = Dish.order(:name).all
   end
@@ -22,5 +23,9 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
 
   def current_menu
     Menu.for_date(params[:date]).first || Menu.create(date: params[:date])
+  end
+
+  def date
+    Date.parse(params[:date])
   end
 end

@@ -1,9 +1,12 @@
 = simple_form_for @menu, url: admin_menu_path(@menu.date), method: :put do |f|
   .row
-    = f.error_notification
     .col-md-12
+      = f.error_notification
+
       = f.simple_fields_for :menu_dishes do |menu_dish|
         = render 'menu_dish_fields', f: menu_dish
+        %hr
+
       .links
         = link_to_add_association 'Добавить блюдо', f, :menu_dishes
 

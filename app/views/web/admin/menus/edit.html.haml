@@ -1,4 +1,16 @@
 .row
-  .col-md-12
-    %h1 Меню
-    = render 'form'
+  .col-md-3
+    = link_to edit_admin_menu_path(@date - 1) do
+      %h2.glyphicon.glyphicon-chevron-left
+  .col-md-6
+    %h1.text-center
+      Меню на
+      = @date
+  .col-md-3
+    .text-right
+      = link_to edit_admin_menu_path(@date + 1) do
+        %h2.glyphicon.glyphicon-chevron-right
+
+%br
+%br
+= render 'form'
