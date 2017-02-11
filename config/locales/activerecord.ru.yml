@@ -1,0 +1,7 @@
+ru:
+  activerecord:
+    attributes:
+      dish:
+        name: 'Название'
+        description: 'Описание'
+        dish_type: 'Тип блюда'

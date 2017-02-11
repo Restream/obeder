@@ -1,6 +1,7 @@
-= simple_form_for @dish, url: url, html: { method: method } do |f|
+= simple_form_for @dish, url: url, html: { method: method, class: 'form-horizontal' } do |f|
   = f.input :name
   = f.input :description
   = f.input :dish_type
-  .form-actions
-    = f.submit 'Сохранить', class: 'btn btn-primary'
+  .form-group
+    .col-sm-offset-3.col-sm-9
+      = f.submit 'Сохранить', class: 'btn btn-primary'

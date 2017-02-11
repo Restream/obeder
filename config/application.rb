@@ -11,5 +11,7 @@ module Obeder
     config.generators do |g|
       g.test_framework :test_unit, fixture: false, fixture_replacement: :factory_girl
     end
+
+    config.i18n.default_locale = :ru
   end
 end

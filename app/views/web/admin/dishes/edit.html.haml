@@ -1,2 +1,5 @@
-%h1 Редактировать блюдо
-= render 'form', url: admin_dish_path(@dish), method: 'PUT'
+.row
+  .col-md-6
+    %h1 Редактировать блюдо
+    %br
+    = render 'form', url: admin_dish_path(@dish), method: 'PUT'
