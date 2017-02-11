@@ -1,2 +1,11 @@
-.test
-  Привет
+.row
+  .col-md-12
+    %h1 Блюда
+
+- @dishes.each do |dish|
+  .row
+    .col-md-6
+      = dish.name
+    .col-md-6
+      = link_to 'Редактировать', edit_admin_dish_path(dish)
+      = link_to 'Удалить', admin_dish_path(dish), method: :delete, data: { confirm: 'Вы уверены?' }
