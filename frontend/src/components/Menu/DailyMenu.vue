@@ -23,6 +23,7 @@
 <script>
   import _ from 'lodash';
 
+  import dishTypesDictionary from 'contants/dishTypes';
   import usersService from 'api/users';
   import MenuDish from './MenuDish';
   import MenuPresenter from '../../presenters/MenuPresenter';
@@ -31,13 +32,20 @@
 
   function getSelectedDishes(dishTypes) {
     return _.reduce(dishTypes, (acc, dishes) => {
-      const selectedDish = _.find(dishes, { selected: true }) || dishes[0];
+      const selectedDish = _.find(dishes, { selected: true });
 
       return [
         ...acc,
-        { id: selectedDish.id },
+        { id: selectedDish && selectedDish.id },
       ];
     }, []);
+  }
+
+  function deselectDishes(dishes) {
+    return dishes && dishes.map(dish => ({
+      ...dish,
+      selected: false,
+    }));
   }
 
   export default {
@@ -79,6 +87,46 @@
       },
 
       onDishChange(type, dishId) {
+        if (!dishId) {
+          this.dishTypes = {
+            ...this.dishTypes,
+            [type]: deselectDishes(this.dishTypes[type]),
+          };
+          return;
+        }
+
+        const dishUpdates = {};
+
+        switch (type) {
+          case dishTypesDictionary.separate_dish: {
+            const mainDishes = deselectDishes(this.dishTypes[dishTypesDictionary.main_dish]);
+            const sideDishes = deselectDishes(this.dishTypes[dishTypesDictionary.side_dish]);
+
+            if (mainDishes) {
+              dishUpdates[dishTypesDictionary.main_dish] = mainDishes;
+            }
+            if (sideDishes) {
+              dishUpdates[dishTypesDictionary.side_dish] = sideDishes;
+            }
+            break;
+          }
+          case dishTypesDictionary.main_dish:
+          case dishTypesDictionary.side_dish: {
+            if (!this.dishTypes[dishTypesDictionary.separate_dish]) {
+              break;
+            }
+
+            const separateDishes = deselectDishes(this.dishTypes[dishTypesDictionary.separate_dish]);
+
+            if (separateDishes) {
+              dishUpdates[dishTypesDictionary.separate_dish] = separateDishes;
+            }
+            break;
+          }
+          default: {
+            break;
+          }
+        }
         const dishes = this.dishTypes[type];
         const updatedDishes = dishes.map(dish => ({
           ...dish,
@@ -87,6 +135,7 @@
 
         this.dishTypes = {
           ...this.dishTypes,
+          ...dishUpdates,
           [type]: updatedDishes,
         };
 

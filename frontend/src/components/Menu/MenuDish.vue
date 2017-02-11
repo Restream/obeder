@@ -28,11 +28,9 @@
   import MenuPresenter from '../../presenters/MenuPresenter';
 
   function getSelectedDishId(dishes) {
-    const selectedDish = _.find(dishes, { selected: true })
-      || _.find(dishes, { default: true })
-      || dishes[0];
+    const selectedDish = _.find(dishes, { selected: true });
 
-    return selectedDish.id;
+    return selectedDish && selectedDish.id;
   }
 
   export default {
