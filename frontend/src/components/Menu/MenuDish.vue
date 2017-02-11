@@ -91,6 +91,7 @@
 }
 
 .menu-dish__radio {
+  flex: 0 0 20px;
   width: 20px;
   height: 20px;
   border: 2px solid rgba(0, 0, 0, 0.5);
