@@ -1,31 +1,42 @@
 .row
   .col-md-3
-    = link_to admin_user_menus_path(date: @date - 1) do
+    = link_to admin_user_menus_path(date: @date - 1), class: 'hidden-print' do
       %h2.glyphicon.glyphicon-chevron-left
   .col-md-6
     %h1.text-center= @date
   .col-md-3
     .text-right
-      = link_to admin_user_menus_path(date: @date + 1) do
+      = link_to admin_user_menus_path(date: @date + 1), class: 'hidden-print' do
         %h2.glyphicon.glyphicon-chevron-right
-- @dishes_stats.in_groups(2, false) do |group|
-  .row
-    - group.each do |stat|
-      .col-md-6
-        #{stat[:type]}: #{stat[:count]}
-.row
-  .col-md-12
-    Не едят:
-    = @neem_users.map(&:name).join(', ')
 
-- @user_menus.each do |user_menu|
+.well
   .row
-    .col-md-4
-      = user_menu.user.name
-    .col-md-4
-      - user_menu.dishes.each do |dish|
-        .row
-          .col-md-12
-            = dish.name
-    .col-md-4
-      - user_menu.description
+    .col-md-9
+      .row
+        - @dishes_stats.in_groups(2, false) do |group|
+          .col-md-6
+            - group.each do |stat|
+              #{stat[:type]}:
+              %b #{stat[:count]}
+              %br
+      %hr
+      .row
+        .col-md-12
+          %b Не едят:
+          = @neem_users.map(&:name).join(', ')
+    .col-md-3.text-right.hidden-print
+      %button.btn.btn-lg.btn-primary{onclick: "window.print()"}
+        %span.glyphicon.glyphicon-print
+        Печать
+
+%table.table.table-condensed
+  - @user_menus.each do |user_menu|
+    %tr
+      %td.visible-print-block
+        %span.glyphicon.glyphicon-unchecked
+      %td
+        = user_menu.user.name
+      %td
+        .small= user_menu.dishes.map(&:name).join(', ')
+      %td
+        - user_menu.description
