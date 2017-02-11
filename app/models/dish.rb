@@ -6,5 +6,5 @@ class Dish < ApplicationRecord
   has_many :user_menu_dishes
   has_many :user_menus, through: :user_menu_dishes
 
-  enumerize :dish_type, in: [:soup, :main_dish, :side_dish, :salad]
+  enumerize :dish_type, in: [:soup, :main_dish, :side_dish, :salad, :separate_dish]
 end
