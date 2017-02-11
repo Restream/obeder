@@ -1,14 +1,22 @@
 .row
-  .col-md-12
+  .col-md-6
     %h1 Блюда
+  .col-md-6
+    .pull-right
+      = link_to 'Добавить', new_admin_dish_path, class: 'btn btn-default btn-lg btn-primary'
+
 .row
   .col-md-12
-    = link_to 'Создать', new_admin_dish_path
-- @dishes.each do |dish|
-  .row
-    .col-md-6
-      = dish.name
-    .col-md-6
-      = link_to 'Редактировать', edit_admin_dish_path(dish)
-      = link_to 'Удалить', admin_dish_path(dish), method: :delete, data: { confirm: 'Вы уверены?' }
-= paginate @dishes
+
+    %table.table.table-hover.table-condensed.table-striped
+      - @dishes.each do |dish|
+        %tr
+          %td
+            = dish.name
+          %td
+            = link_to 'Редактировать', edit_admin_dish_path(dish), class: 'btn btn-info btn-sm'
+            = link_to 'Удалить', admin_dish_path(dish), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger btn-sm'
+
+.row
+  .col-md-12
+    = paginate @dishes
