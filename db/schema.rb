@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211085009) do
+ActiveRecord::Schema.define(version: 20170211102339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170211085009) do
   create_table "user_menus", force: :cascade do |t|
     t.uuid    "user_id"
     t.integer "menu_id"
+    t.text    "description"
     t.index ["menu_id"], name: "index_user_menus_on_menu_id", using: :btree
   end
 
