@@ -50,14 +50,10 @@ GEM
     autoprefixer-rails (6.7.2)
       execjs
     bcrypt (3.1.11)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
     case_transform (0.2)
       activesupport
-    commonjs (0.2.7)
     concurrent-ruby (1.0.4)
     diff-lcs (1.2.5)
     enumerize (2.0.1)
@@ -103,13 +99,6 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
-    less (2.6.0)
-      commonjs (~> 0.2.7)
-    less-rails (2.8.0)
-      actionpack (>= 4.0)
-      less (~> 2.6.0)
-      sprockets (> 2, < 4)
-      tilt
     libv8 (3.16.14.17)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -177,7 +166,6 @@ GEM
       sexp_processor (~> 4.6)
     ruby_parser (3.8.4)
       sexp_processor (~> 4.1)
-    sass (3.4.23)
     sexp_processor (4.8.0)
     spring (2.0.1)
       activesupport (>= 4.2)
@@ -200,11 +188,6 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
-    twitter-bootstrap-rails (3.2.2)
-      actionpack (>= 3.1)
-      execjs (>= 2.2.2, >= 2.2)
-      less-rails (>= 2.5.0)
-      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.4)
@@ -228,7 +211,6 @@ DEPENDENCIES
   authority
   autoprefixer-rails
   bcrypt
-  bootstrap-sass (~> 3.3.6)
   byebug
   enumerize
   factory_girl_rails
@@ -244,7 +226,6 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   therubyracer
   turbolinks (~> 5)
-  twitter-bootstrap-rails
   uglifier
   wrong
 
