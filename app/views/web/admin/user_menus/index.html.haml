@@ -30,11 +30,12 @@
         Печать
 
 %table.table.table-condensed
-  - @user_menus.each do |user_menu|
+  - @user_menus.each_with_index do |user_menu, i|
     %tr
       %td.visible-print-block
         %span.glyphicon.glyphicon-unchecked
       %td
+        #{i + 1}.
         = user_menu.user.name
       %td
         .small= user_menu.dishes.map(&:name).join(', ')
