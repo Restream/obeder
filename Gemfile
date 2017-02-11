@@ -23,6 +23,7 @@ gem 'bootstrap-kaminari-views'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'enumerize'
 gem 'simple_form'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platform: :mri

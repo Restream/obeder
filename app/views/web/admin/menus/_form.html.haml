@@ -1,0 +1,8 @@
+= simple_form_for :menu, url: admin_menu_path(@menu.date), method: :put do |f|
+  .row
+    = f.error_notification
+    .col-md-12
+      = f.input :dishes
+
+  .form-actions
+    = f.button :submit, name: 'Сохранить', class: 'btn btn-primary'

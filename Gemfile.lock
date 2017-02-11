@@ -62,6 +62,7 @@ GEM
     byebug (9.0.6)
     case_transform (0.2)
       activesupport
+    cocoon (1.2.9)
     commonjs (0.2.7)
     concurrent-ruby (1.0.4)
     diff-lcs (1.2.5)
@@ -244,6 +245,7 @@ DEPENDENCIES
   bootstrap-kaminari-views
   bootstrap-sass (~> 3.3.6)
   byebug
+  cocoon
   enumerize
   factory_girl_rails
   haml-rails
