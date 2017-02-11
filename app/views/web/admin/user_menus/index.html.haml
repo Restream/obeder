@@ -1,6 +1,10 @@
 .row
-  .col-md-12
+  .col-md-3
+    = link_to '<', admin_user_menus_path(date: @date - 1)
+  .col-md-3
     = @date
+  .col-md-3
+    = link_to '>', admin_user_menus_path(date: @date + 1)
 - @dishes_stats.in_groups(2, false) do |group|
   .row
     - group.each do |stat|
