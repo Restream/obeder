@@ -3,8 +3,11 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes">
-        <input type="radio" :name="radioIdentifier" :id="dish.id" :value="dish.id" v-model="selectedDish">
-        <label class="menu-dish__label" :for="dish.id" :title="dish.description">{{dish.name}}</label>
+        <label class="menu-dish__label" :for="dish.id" :title="dish.description">
+          <input type="radio" :name="radioIdentifier" :id="dish.id" :value="dish.id" v-model="selectedDish">
+          <span class="menu-dish__radio" />
+          <span class="menu-dish__name">{{dish.name}}</span>
+        </label>
       </li>
     </ul>
   </div>
@@ -67,6 +70,55 @@
 
 .menu-dish__label {
   cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+
+  & input {
+    display: none;
+  }
+
+  & input:checked {
+    & + .menu-dish__radio {
+      border: 2px solid #38B5C7;
+
+      &::after {
+        background-color: #38B5C7;
+        transform: translate(-50%, -50%) scale(10);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.menu-dish__radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: border-color 150ms ease-in-out;
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity, transform 150ms ease-in-out;
+  }
+}
+
+.menu-dish__name {
+  font-size: 16px;
+  color: #000000;
+  letter-spacing: 0.01px;
+  padding-top: 3px;
 }
 
 @media (--desktop) {
