@@ -93,4 +93,20 @@
       opacity: 0.9;
     }
   }
+
+  @media(min-width: 840px) {
+    .content {
+      max-width: 840px;
+    }
+
+    .buttons {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .button {
+      width: calc(50% - 5px);
+    }
+  }
 </style>
