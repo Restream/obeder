@@ -10,3 +10,15 @@
   .col-md-12
     Не едят:
     = @neem_users.map(&:name).join(', ')
+
+- @user_menus.each do |user_menu|
+  .row
+    .col-md-4
+      = user_menu.user.name
+    .col-md-4
+      - user_menu.dishes.each do |dish|
+        .row
+          .col-md-12
+            = dish.name
+    .col-md-4
+      - user_menu.description
