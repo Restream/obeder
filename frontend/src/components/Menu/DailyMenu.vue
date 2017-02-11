@@ -3,7 +3,7 @@
     <h1 class="date">{{date}}</h1>
     <div class="daily-menu__list">
       <menu-dish :date="date" v-for="(dishes, type) in dishTypes" :dishes="dishes" :type="type"></menu-dish>
-      <button v-on:click="setToDefault">Сбросить в дефолт</button>
+      <button v-on:click="setToDefault" class="button">Сбросить в дефолт</button>
     </div>
   </div>
 </template>
@@ -76,6 +76,22 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.button {
+  margin-bottom: 10px;
+  background: #38B5C7;
+  border-radius: 4px;
+  font-family: Roboto;
+  font-size: 20px;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+
+&:hover {
+   opacity: 0.9;
+ }
 }
 
 @media (--desktop) {

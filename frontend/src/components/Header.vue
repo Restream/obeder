@@ -8,7 +8,7 @@
     <div class="header__switcher">
       <span class="header__switcher-label">Не ем</span>
       <label class="label">
-        <input type="checkbox" v-model="neem">
+        <input type="checkbox" v-model="neem" v-on:change="onChange(neem)">
         <span class="circle"></span>
       </label>
       <span class="header__switcher-label">Eм</span>
@@ -17,12 +17,38 @@
 </template>
 
 <script>
+  import usersService from 'api/users';
+
   export default {
     name: 'Header',
+    created() {
+      const id = localStorage.getItem('user_uid');
+
+      usersService
+        .getOne(id)
+        .then(
+          (user) => {
+            this.neem = { neem: !!user.neem };
+          },
+          error => error,
+        );
+    },
     data() {
       return {
         neem: false,
       };
+    },
+    methods: {
+      onChange(neem) {
+        const id = localStorage.getItem('user_uid');
+        const payload = {
+          user: {
+            neem,
+          },
+        };
+
+        usersService.save(id, payload);
+      },
     },
   };
 </script>

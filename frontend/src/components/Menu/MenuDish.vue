@@ -3,8 +3,8 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes">
-        <input type="radio" :name="radioIdentifier" :value="dish.id" v-model="selectedDish">
-        {{dish.name}}
+        <input type="radio" :name="radioIdentifier" :id="dish.id" :value="dish.id" v-model="selectedDish">
+        <label class="menu-dish__label" :for="dish.id" :title="dish.description">{{dish.name}}</label>
       </li>
     </ul>
   </div>
@@ -63,6 +63,10 @@
   font-size: 18px;
   color: #000000;
   letter-spacing: 0.01px;
+}
+
+.menu-dish__label {
+  cursor: pointer;
 }
 
 @media (--desktop) {

@@ -13,8 +13,12 @@ export function request(url, method, urlParams = false, body = false) {
   const options = { method };
   if (body) {
     const jsonWraper = humps.decamelizeKeys(body);
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+    });
 
     options.body = JSON.stringify(jsonWraper);
+    options.headers = headers;
   }
   return fetch(`${url}${urlParamsPart}`, options)
     .then(response => response.text())
