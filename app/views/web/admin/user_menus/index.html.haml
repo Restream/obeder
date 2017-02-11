@@ -1,10 +1,13 @@
 .row
   .col-md-3
-    = link_to '<', admin_user_menus_path(date: @date - 1)
+    = link_to admin_user_menus_path(date: @date - 1) do
+      %h2.glyphicon.glyphicon-chevron-left
+  .col-md-6
+    %h1.text-center= @date
   .col-md-3
-    = @date
-  .col-md-3
-    = link_to '>', admin_user_menus_path(date: @date + 1)
+    .text-right
+      = link_to admin_user_menus_path(date: @date + 1) do
+        %h2.glyphicon.glyphicon-chevron-right
 - @dishes_stats.in_groups(2, false) do |group|
   .row
     - group.each do |stat|
