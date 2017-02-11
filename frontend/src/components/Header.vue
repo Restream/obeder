@@ -28,7 +28,7 @@
         .getOne(id)
         .then(
           (user) => {
-            this.neem = { neem: !!user.neem };
+            this.neem = !!user.neem;
           },
           error => error,
         );
