@@ -3,7 +3,12 @@
     <h1 class="date">{{date}}</h1>
     <div class="daily-menu__list">
       <menu-dish :date="date" v-for="(dishes, type) in dishTypes" :dishes="dishes" :type="type"></menu-dish>
-      <button v-on:click="setToDefault" class="button">Сбросить в дефолт</button>
+      <div class="daily-menu__actions">
+        <div class="daily-menu__comment">
+          <textarea class="daily-menu__textarea" placeholder="Комментарий"></textarea>
+        </div>
+        <button v-on:click="setToDefault" class="button">Сбросить в дефолт</button>
+      </div>
     </div>
   </div>
 </template>
@@ -89,9 +94,31 @@
   cursor: pointer;
   height: 40px;
 
-&:hover {
-   opacity: 0.9;
- }
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.daily-menu__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-menu__comment {
+  flex: 1;
+  min-height: 60px;
+  margin-bottom: 10px;
+}
+
+.daily-menu__textarea {
+  height: 100%;
+  width: 100%;
+  resize: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 3px;
 }
 
 @media (--desktop) {
@@ -103,6 +130,10 @@
     font-size: 36px;
     letter-spacing: 0.02px;
     margin-bottom: 30px;
+  }
+
+  .daily-menu__actions {
+    width: calc(50% - 14px);
   }
 }
 </style>
