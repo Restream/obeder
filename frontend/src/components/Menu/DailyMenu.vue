@@ -2,10 +2,17 @@
   <div class="daily-menu">
     <h1 class="date">{{date}}</h1>
     <div class="daily-menu__list">
-      <menu-dish :date="date" v-for="(dishes, type) in dishTypes" :dishes="dishes" :type="type"></menu-dish>
+      <menu-dish
+        :date="date"
+        v-for="(dishes, type) in dishTypes"
+        :dishes="dishes"
+        :type="type"
+        :onChange="onDishChange"
+      >
+      </menu-dish>
       <div class="daily-menu__actions">
         <div class="daily-menu__comment">
-          <textarea class="daily-menu__textarea" placeholder="Комментарий"></textarea>
+          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="sendComment"></textarea>
         </div>
         <button v-on:click="setToDefault" class="button">Сбросить в дефолт</button>
       </div>
@@ -15,8 +22,23 @@
 
 <script>
   import _ from 'lodash';
+
+  import usersService from 'api/users';
   import MenuDish from './MenuDish';
   import MenuPresenter from '../../presenters/MenuPresenter';
+
+  const userId = localStorage.getItem('user_uid');
+
+  function getSelectedDishes(dishTypes) {
+    return _.reduce(dishTypes, (acc, dishes) => {
+      const selectedDish = _.find(dishes, { selected: true }) || dishes[0];
+
+      return [
+        ...acc,
+        { id: selectedDish.id },
+      ];
+    }, []);
+  }
 
   export default {
     components: {
@@ -52,7 +74,29 @@
             selected: dish.default,
           }));
         });
+
         this.dishTypes = defaultDishes;
+      },
+
+      onDishChange(type, dishId) {
+        const dishes = this.dishTypes[type];
+        const updatedDishes = dishes.map(dish => ({
+          ...dish,
+          selected: dish.id === dishId,
+        }));
+
+        this.dishTypes = {
+          ...this.dishTypes,
+          [type]: updatedDishes,
+        };
+
+        usersService
+          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes));
+      },
+
+      sendComment(event) {
+        usersService
+          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), event.target.value);
       },
     },
   };

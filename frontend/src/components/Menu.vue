@@ -2,12 +2,13 @@
   <div class="menu">
     <menu-header></menu-header>
     <div class="content">
-      <daily-menu v-for="date in dates" :day="date"></daily-menu>
+      <daily-menu v-for="date in sortedDates" :day="date"></daily-menu>
     </div>
   </div>
 </template>
 
 <script>
+  import _ from 'lodash';
   import usersService from 'api/users';
 
   import Header from './Header';
@@ -35,6 +36,11 @@
       return {
         dates: [],
       };
+    },
+    computed: {
+      sortedDates() {
+        return _.sortBy(this.dates, ['date']);
+      },
     },
   };
 </script>

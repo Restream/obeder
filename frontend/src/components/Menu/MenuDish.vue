@@ -3,8 +3,18 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes">
-        <label class="menu-dish__label" :for="dish.id" :title="dish.description">
-          <input type="radio" :name="radioIdentifier" :id="dish.id" :value="dish.id" v-model="selectedDish">
+        <label
+          class="menu-dish__label"
+          :for="date + dish.id"
+          :title="dish.description"
+        >
+          <input
+            type="radio"
+            v-model="selectedDish"
+            :name="date + type"
+            :id="date + dish.id"
+            :value="dish.id"
+          >
           <span class="menu-dish__radio" />
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
@@ -19,9 +29,10 @@
 
   function getSelectedDishId(dishes) {
     const selectedDish = _.find(dishes, { selected: true })
-      || _.find(dishes, { default: true });
+      || _.find(dishes, { default: true })
+      || dishes[0];
 
-    return selectedDish && selectedDish.id;
+    return selectedDish.id;
   }
 
   export default {
@@ -30,18 +41,21 @@
       date: String,
       dishes: Array,
       type: String,
+      onChange: Function,
     },
 
     watch: {
-      dishes(newDishes) {
-        this.selectedDish = getSelectedDishId(newDishes);
+      selectedDish(dish) {
+        this.onChange(this.type, dish);
+      },
+      dishes(dishes) {
+        this.selectedDish = getSelectedDishId(dishes);
       },
     },
 
     data() {
       return {
         typePresented: MenuPresenter.dishType(this.type),
-        radioIdentifier: this.date + this.type,
         selectedDish: getSelectedDishId(this.dishes),
       };
     },

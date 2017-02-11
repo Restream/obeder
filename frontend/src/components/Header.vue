@@ -19,11 +19,10 @@
 <script>
   import usersService from 'api/users';
 
+  const id = localStorage.getItem('user_uid');
   export default {
     name: 'Header',
     created() {
-      const id = localStorage.getItem('user_uid');
-
       usersService
         .getOne(id)
         .then(
@@ -40,7 +39,6 @@
     },
     methods: {
       onChange(neem) {
-        const id = localStorage.getItem('user_uid');
         const payload = {
           user: {
             neem,
