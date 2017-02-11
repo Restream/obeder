@@ -84,7 +84,6 @@
 }
 
 .button {
-  margin-bottom: 10px;
   background: #38B5C7;
   border-radius: 4px;
   font-family: Roboto;
@@ -103,6 +102,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 28px;
 }
 
 .daily-menu__comment {
