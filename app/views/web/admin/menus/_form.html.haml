@@ -7,14 +7,14 @@
         = render 'menu_dish_fields', f: menu_dish
         %hr
 
-      .links
-        = link_to_add_association 'Добавить блюдо', f, :menu_dishes
+      %br
+      .well
+        .pull-left
+          = link_to_add_association 'Добавить блюдо', f, :menu_dishes, class: 'btn btn-lg btn-info'
+          = f.button :submit, value: 'Сохранить', class: 'btn btn-lg btn-primary'
 
-
-  .form-actions
-    = f.button :submit, value: 'Сохранить', class: 'btn btn-primary'
-
-- unless @menu.ready
-  = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
-    .form-actions
-      = f.button :submit, value: 'Опубликовать меню', class: 'btn btn-success'
+        .pull-right
+          - unless @menu.ready
+            = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
+              = f.button :submit, value: 'Опубликовать меню', class: 'btn btn-lg btn-success'
+        .clearfix
