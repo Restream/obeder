@@ -1,34 +1,42 @@
 class Web::Admin::DishesController < Web::Admin::ApplicationController
   def index
-    @q = Dish.ransack(params[:q])
+    @q = Dish.all.ransack(params[:q])
     @dishes = @q.result.page(params[:page])
   end
 
+  def new
+    @dish = Dish.new
+  end
+
+  def edit
+    @dish = Dish.find(params[:id])
+  end
+
   def create
-    dish = Dish.new(dish_params)
-    if dish.save
-      render json: dish
+    @dish = Dish.new(dish_params)
+
+    if @dish.save
+      redirect_to admin_dishes_path
     else
-      render json: { errors: dish.errors }
+      render :new
     end
   end
 
   def update
-    dish = Dish.find(params[:id])
-    if dish.update(dish_params)
-      render json: dish
+    @dish = Dish.find(params[:id])
+
+    if @dish.update dish_params
+      redirect_to admin_dishes_path
     else
-      render json: { errors: dish.errors }
+      render :edit
     end
   end
 
   def destroy
-    dish = Dish.find(params[:id])
-    if dish.delete
-      render json: dish
-    else
-      render json: { errors: dish.errors }
-    end
+    @dish = Dish.find(params[:id])
+    @dish.destroy
+
+    redirect_to admin_dishes_path
   end
 
   private

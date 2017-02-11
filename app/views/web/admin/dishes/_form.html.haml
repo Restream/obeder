@@ -1,0 +1,6 @@
+= simple_form_for @dish, url: url, html: { method: method } do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :dish_type
+  .form-actions
+    = f.submit 'Сохранить', class: 'btn btn-primary'
