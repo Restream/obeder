@@ -8,11 +8,12 @@
     <div class="header__switcher">
       <span class="header__switcher-label">Не ем</span>
       <label class="label">
-        <input type="checkbox" v-model="neem" v-on:change="onChange(neem)">
+        <input type="checkbox" v-model="user.neem" v-on:change="onChange(user.neem)">
         <span class="circle"></span>
       </label>
       <span class="header__switcher-label">Eм</span>
     </div>
+    <div class="header__user">{{user.name}}</div>
   </div>
 </template>
 
@@ -27,14 +28,14 @@
         .getOne(id)
         .then(
           (user) => {
-            this.neem = !!user.neem;
+            this.user = user;
           },
           error => error,
         );
     },
     data() {
       return {
-        neem: false,
+        user: {},
       };
     },
     methods: {
@@ -64,12 +65,17 @@
     align-items: center;
   }
 
+  .header__user {
+    position: absolute;
+    font-weight: 600;
+    right: 10px;
+    color: #000000;
+  }
+
   .header__logo {
     position: absolute;
     height: 36px;
     left: 10px;
-    top: 10px;
-    display: flex;
     align-items: center;
     display: none;
   }
