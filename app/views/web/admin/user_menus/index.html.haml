@@ -38,6 +38,6 @@
         #{i + 1}.
         = user_menu.user.name
       %td
-        .small= user_menu.dishes.map(&:name).join(', ')
+        .small= user_menu.dishes.order(:name).map(&:name).join(', ')
       %td
         - user_menu.description
