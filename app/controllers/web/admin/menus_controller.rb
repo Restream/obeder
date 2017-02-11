@@ -1,6 +1,7 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
   def edit
     @menu = current_menu
+    @dishes = Dish.order(:name).all
   end
 
   def update

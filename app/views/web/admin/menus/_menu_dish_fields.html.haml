@@ -1,4 +1,4 @@
 .nested-fields
   = f.input :default
-  = f.input :dish_id
+  = f.input :dish_id, as: :select, collection: @dishes, label_method: :name
   = link_to_remove_association 'Удалить блюдо', f
