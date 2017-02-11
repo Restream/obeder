@@ -44,6 +44,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  @import "../assets/styles/variables.css";
+
   .user-select {
     display: flex;
     justify-content: center;
@@ -94,9 +96,9 @@
     }
   }
 
-  @media(min-width: 840px) {
+  @media (--desktop) {
     .content {
-      max-width: 840px;
+      max-width: var(--desktop-width);
     }
 
     .buttons {
@@ -107,6 +109,7 @@
 
     .button {
       width: calc(50% - 5px);
+      font-size: 18px;
     }
   }
 </style>

@@ -44,7 +44,7 @@
 @import "../assets/styles/variables.css";
 
 .content {
-  max-width: 800px;
+  max-width: var(--desktop-width);
   padding: 15px;
   margin: 0 auto;
 }
