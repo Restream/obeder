@@ -9,14 +9,18 @@ gem 'autoprefixer-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks', '~> 5'
 gem 'haml-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'twitter-bootstrap-rails'
 
 gem 'aasm'
 gem 'bcrypt'
 gem 'authority'
 gem 'ransack'
 gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'enumerize'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platform: :mri
