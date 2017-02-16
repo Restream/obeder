@@ -1,6 +1,9 @@
 <template>
   <div class="daily-menu">
-    <h1 class="date">{{date}}</h1>
+    <h1 class="date">
+      <span>{{date}}</span>
+      <a v-on:click="setToDefault" class="default_link">Буду дефолт</a>
+    </h1>
     <div class="daily-menu__list">
       <menu-dish
         :date="date"
@@ -14,7 +17,6 @@
         <div class="daily-menu__comment">
           <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="sendComment"></textarea>
         </div>
-        <button v-on:click="setToDefault" class="button">Сбросить в дефолт</button>
       </div>
     </div>
   </div>
@@ -164,6 +166,9 @@
   color: #000000;
   letter-spacing: 0.01px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 
   &:first-letter {
     text-transform: uppercase;
@@ -176,18 +181,16 @@
   justify-content: space-between;
 }
 
-.button {
-  background: #38B5C7;
-  border-radius: 4px;
-  font-family: Roboto;
-  font-size: 20px;
-  color: #FFFFFF;
-  border: none;
+.default_link {
+  font-size: 18px;
   cursor: pointer;
-  height: 40px;
+  text-decoration: none;
+  color: #666;
+  border-bottom: 1px dashed;
 
   &:hover {
-    opacity: 0.9;
+    color: #333;
+    transition: color 300ms ease-in-out;
   }
 }
 
@@ -201,7 +204,6 @@
 .daily-menu__comment {
   flex: 1;
   min-height: 60px;
-  margin-bottom: 10px;
 }
 
 .daily-menu__textarea {
