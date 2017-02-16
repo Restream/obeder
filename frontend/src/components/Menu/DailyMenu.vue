@@ -2,7 +2,7 @@
   <div class="daily-menu">
     <h1 class="date">
       <span>{{date}}</span>
-      <a v-on:click="setToDefault" class="default_link">Буду дефолт</a>
+      <a v-on:click="setToDefault" class="default_link">↺</a>
     </h1>
     <div class="daily-menu__list">
       <menu-dish
