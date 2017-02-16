@@ -28,7 +28,6 @@ Things you may want to cover:
 Download and install the Heroku CLI. (brew install heroku or download pkg)
  * heroku login
  * heroku git:remote -a obeder
- * heroku keys:add
 
 Deploy:
  * git push heroku master
