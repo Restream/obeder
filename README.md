@@ -23,7 +23,7 @@ Things you may want to cover:
 
 * ...
 
-# EZ deploy
+## EZ deploy
 
 Download and install the Heroku CLI. (brew install heroku or download pkg)
  * heroku login
@@ -32,7 +32,7 @@ Download and install the Heroku CLI. (brew install heroku or download pkg)
 Deploy:
  * git push heroku master
 
-Add new user
+## Add new user
 ```
 user = User.create(name: 'ФАМИЛИЯ ИМЯ', email: 'EMAIL')
 menus = Menu.ready.where('date >= ?', Date.current)
