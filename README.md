@@ -1,27 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ * docker-compose up
+ * docker-compose exec web yarn
+ * docker-compose exec web yarn build
 
 ## EZ deploy
 
@@ -30,6 +13,10 @@ Download and install the Heroku CLI. (brew install heroku or download pkg)
  * heroku git:remote -a obeder
 
 Deploy:
+ * heroku buildpacks:add heroku/nodejs
+ * heroku buildpacks:add heroku/ruby
+ * heroku config:set NPM_CONFIG_PRODUCTION=false
+ * heroku addons:create heroku-postgresql:hobby-dev
  * git push heroku master
 
 ## Add new user
