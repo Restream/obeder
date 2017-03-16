@@ -1,4 +1,15 @@
 ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: Введите email
+              invalid_email: Введите Рестрим email, вида username@restream.rt.ru
+            name:
+              blank: Введите Фамилию и Имя
+
   date:
     formats:
       menu_date: '%d %B, %A'

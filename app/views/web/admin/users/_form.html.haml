@@ -1,0 +1,7 @@
+= simple_form_for @user, url: url, html: { method: method, class: 'form-horizontal' } do |f|
+  = f.input :name
+  = f.input :email
+  = f.input :description
+  .form-group
+    .col-sm-offset-3.col-sm-9
+      = f.submit 'Сохранить', class: 'btn btn-primary'
