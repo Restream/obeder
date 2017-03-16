@@ -1,0 +1,29 @@
+.row
+  .col-md-6
+    %h1 Пользователи
+    %br
+  .col-md-6
+    .pull-right
+      = link_to 'Добавить', new_admin_user_path, class: 'btn btn-default btn-lg btn-primary'
+
+.row
+  .col-md-12
+
+    %table.table.table-hover.table-condensed.table-striped
+      %tr
+        %th Фамилия Имя
+        %th Email
+        %th Действия
+      - @users.each do |user|
+        %tr
+          %td
+            = user.name
+          %td
+            = user.email
+          %td
+            = link_to 'Редактировать', edit_admin_user_path(user), class: 'btn btn-info btn-sm'
+            = link_to 'Удалить', admin_user_path(user), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger btn-sm'
+
+.row
+  .col-md-12
+    = paginate @users

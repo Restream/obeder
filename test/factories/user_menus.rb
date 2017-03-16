@@ -15,5 +15,15 @@ FactoryGirl.define do
         create_list :user_menu_dish, 3, user_menu: user_menu
       end
     end
+
+    factory :user_menu_with_user_menu_dishes do
+      transient do
+        posts_count 5
+      end
+      after(:create) do |user_menu, evaluator|
+        create_list(:user_menu_dish, evaluator.posts_count, user_menu: user_menu)
+      end
+    end
+
   end
 end

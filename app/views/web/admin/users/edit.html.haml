@@ -1,0 +1,5 @@
+.row
+  .col-md-6
+    %h1 Редактировать пользователя
+    %br
+    = render 'form', url: admin_user_path(@user), method: 'PUT'
