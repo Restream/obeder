@@ -16,6 +16,7 @@ class Web::Admin::UsersController < Web::Admin::ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      ::DishesService.set_default_dishes_for_user(@user)
       redirect_to admin_users_path
     else
       render :new
