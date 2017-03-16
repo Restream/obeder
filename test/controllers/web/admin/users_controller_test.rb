@@ -1,18 +1,22 @@
 require 'test_helper'
 
-class Web::Admin::UsersControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get web_admin_users_index_url
+class Web::Admin::UsersControllerTest < ActionController::TestCase
+  setup do
+    admin_http_login
+  end
+
+  test 'index' do
+    get :index
     assert_response :success
   end
 
-  test "should get new" do
-    get web_admin_users_new_url
+  test 'new' do
+    get :new
     assert_response :success
   end
 
-  test "should get edit" do
-    get web_admin_users_edit_url
+  test 'edit' do
+    get :edit
     assert_response :success
   end
 
