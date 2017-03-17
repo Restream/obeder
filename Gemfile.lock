@@ -32,6 +32,8 @@ GEM
       activemodel (>= 4.1, < 6)
       case_transform (>= 0.2)
       jsonapi (= 0.1.1.beta6)
+    active_type (0.6.4)
+      activerecord (>= 3.2)
     activejob (5.0.1)
       activesupport (= 5.0.1)
       globalid (>= 0.3.6)
@@ -163,6 +165,8 @@ GEM
       activerecord (>= 3.0)
     predicated (0.2.6)
     puma (3.7.0)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -259,6 +263,7 @@ DEPENDENCIES
   aasm
   active_link_to
   active_model_serializers (~> 0.10.0)
+  active_type
   authority
   autoprefixer-rails
   bcrypt
@@ -278,6 +283,7 @@ DEPENDENCIES
   mocha
   pg (~> 0.18)
   puma (~> 3.0)
+  pundit
   rails (~> 5.0.1)
   ransack
   simple_form

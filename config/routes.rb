@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   scope module: :web do
     root to: 'welcome#index'
 
+    resource :session, only: [:new, :create, :destroy]
+    get 'login' => 'sessions#new'
+    get 'logout' => 'sessions#destroy'
+
     namespace :admin do
       root to: 'welcome#index'
       resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]

@@ -10,6 +10,9 @@ ru:
         email: Email
         neem: Не есть
         description: Описание
+      user_sign_in_type:
+        email: Email
+        password: Пароль
 
     errors:
       messages:
@@ -26,3 +29,11 @@ ru:
               invalid_email: Введите Рестрим email, вида username@restream.rt.ru
             name:
               blank: Введите Фамилию и Имя
+        user_sign_in_type:
+          attributes:
+            email:
+              blank: Введите email
+              invalid_email: Введите Рестрим email, вида username@restream.rt.ru
+            password:
+              blank: Введите пароль
+              user_or_password_invalid: Email или пароль не правильные

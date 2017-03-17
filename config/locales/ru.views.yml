@@ -1,0 +1,6 @@
+ru:
+  web:
+    sessions:
+      new:
+        title: Вход
+        login: Вход

@@ -4,4 +4,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, restream_email: true
+
+  has_secure_password
 end
