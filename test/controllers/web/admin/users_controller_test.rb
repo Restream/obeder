@@ -30,17 +30,16 @@ class Web::Admin::UsersControllerTest < ActionController::TestCase
   end
 
   test 'update' do
-    new_email = 'test@restream.rt.ru'
-    put :update, params: { id: @user.id,
-                           user: { email: new_email } }
+    new_email = generate(:email)
+    put :update, params: { id: @user.id, user: { email: new_email } }
     assert { @user.reload.email = new_email }
+    assert_response :redirect
   end
 
    test 'destroy' do
     assert_difference('User.count', -1) do
       delete :destroy, params: { id: @user.id }
     end
-
     assert_redirected_to admin_users_path
   end
 
