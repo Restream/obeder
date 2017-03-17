@@ -15,5 +15,7 @@ FactoryGirl.define do
         create_list :user_menu_dish, 3, user_menu: user_menu
       end
     end
+
+    factory :user_menu_with_user_menu_dishes, traits: [:with_dishes]
   end
 end

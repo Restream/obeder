@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
 
   sequence :email do |n|
-    "example-#{n}@mail.com"
+    "example-#{n}@restream.rt.ru"
   end
 
   sequence :integer do |n|
