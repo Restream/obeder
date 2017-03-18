@@ -4,3 +4,6 @@ ru:
       new:
         title: Вход
         login: Вход
+    passwords:
+      edit:
+        title: Установка пароля

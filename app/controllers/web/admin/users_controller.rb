@@ -17,6 +17,7 @@ class Web::Admin::UsersController < Web::Admin::ApplicationController
 
     if @user.save
       ::DishesService.set_default_dishes_for_user(@user)
+      UserMailer.set_password(@user).deliver
       redirect_to admin_users_path
     else
       render :new

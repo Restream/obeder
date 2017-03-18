@@ -13,6 +13,9 @@ ru:
       user_sign_in_type:
         email: Email
         password: Пароль
+      password_type:
+        password: Введите пароль
+        password_confirmation: Повторите пароль
 
     errors:
       messages:
@@ -37,3 +40,10 @@ ru:
             password:
               blank: Введите пароль
               user_or_password_invalid: Email или пароль не правильные
+        password_type:
+          attributes:
+            password:
+              blank: Введите пароль
+            password_confirmation:
+              blank: Введите пароль
+              confirmation: Пароли не совпадают

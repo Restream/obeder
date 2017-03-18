@@ -1,4 +1,8 @@
 ru:
+  user_mailer:
+    set_password:
+      subject: Obeder. Установка пароля.
+
   date:
     formats:
       menu_date: '%d %B, %A'
@@ -69,3 +73,5 @@ ru:
 
   title:
     dishes: Блюда
+
+  save: Сохранить

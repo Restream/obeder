@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope module: :web do
     root to: 'welcome#index'
 
+    resource :password, only: [:edit, :update]
     resource :session, only: [:new, :create, :destroy]
     get 'login' => 'sessions#new'
     get 'logout' => 'sessions#destroy'

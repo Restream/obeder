@@ -1,6 +1,5 @@
 class Web::SessionsController < Web::ApplicationController
-  layout 'admin'
-  # skip_before_action :authenticate_user!, only: [:new, :create]
+  layout 'session'
 
   def new
     @session = UserSignInType.new
