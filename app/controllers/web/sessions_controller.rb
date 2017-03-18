@@ -16,7 +16,6 @@ class Web::SessionsController < Web::ApplicationController
       f(:success)
       redirect_to root_path
     else
-      # f(:error, now: true)
       render :new
     end
   end
