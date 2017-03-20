@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     name
     email { generate :email }
+    password { generate :string }
     description
 
     trait :with_user_menu_dishes do

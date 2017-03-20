@@ -2,8 +2,6 @@ require 'test_helper'
 
 class Web::Admin::MenusControllerTest < ActionController::TestCase
   setup do
-    admin_http_login
-
     @menu = create :menu
   end
 

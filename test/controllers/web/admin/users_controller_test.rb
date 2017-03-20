@@ -4,7 +4,6 @@ class Web::Admin::UsersControllerTest < ActionController::TestCase
   setup do
     @user = create :user_with_user_menus, neem: false
     @user_attrs = attributes_for :user
-    admin_http_login
   end
 
   test 'index' do

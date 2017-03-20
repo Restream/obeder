@@ -1,12 +1,14 @@
 require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
-  test "set_password" do
-    mail = UserMailer.set_password
-    assert_equal "Set password", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+  setup do
+    @user = create :user
+  end
+
+  test 'set_password' do
+    mail = UserMailer.set_password(@user)
+    assert_equal [@user.email], mail.to
+    assert_equal ['noreply@restream.rt.ru'], mail.from
   end
 
 end

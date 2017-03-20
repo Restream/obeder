@@ -1,9 +1,19 @@
 require 'test_helper'
 
-class Web::PasswordsControllerTest < ActionDispatch::IntegrationTest
-  test "should get edit" do
-    get web_passwords_edit_url
+class Web::PasswordsControllerTest < ActionController::TestCase
+  setup do
+    @user = create :user_with_user_menus
+  end
+
+  test 'edit' do
+    get :edit, params: { id: @user.id }
     assert_response :success
+  end
+
+  test 'update' do
+    new_password = generate(:string)
+    put :update, params: { id: @user.id, password_type: { password: new_password, password_confirmation: new_password } }
+    assert_redirected_to login_path
   end
 
 end
