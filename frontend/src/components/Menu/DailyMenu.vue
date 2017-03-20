@@ -72,6 +72,8 @@
     data() {
       const types = {};
 
+      this.em = !this.day.neem;
+
       this.day.dishes.forEach((dish) => {
         if (!types[dish.dishType]) {
           types[dish.dishType] = [];
@@ -83,7 +85,6 @@
       return {
         date: MenuPresenter.date(this.day.date),
         dishTypes: types,
-        em: !this.day.neem,
       };
     },
     methods: {
@@ -160,7 +161,7 @@
       sendComment(event) {
         usersService
           .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), event.target.value,
-            this.day.neem);
+            !this.em);
       },
 
       onEmChange(em) {
