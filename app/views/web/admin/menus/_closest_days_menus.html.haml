@@ -1,0 +1,12 @@
+.row.text-center
+  %span.btn.btn-default{ data: { toggle: 'collapse', target: '#closestDaysMenusBox' },
+                         aria: { expanded: 'false', controls: 'closestDaysMenusBox' } }
+    Меню на ближайшие дни
+  .collapse#closestDaysMenusBox
+    .well
+      - @closest_days_menus.each do |menu|
+        %ul
+          = l menu.date, format: :menu_date
+          - menu.dishes.each do |dish|
+            %li
+              = dish.name

@@ -6,6 +6,7 @@ class Menu < ApplicationRecord
 
   accepts_nested_attributes_for :menu_dishes, reject_if: :all_blank, allow_destroy: true
 
-  scope :for_date, ->(date) { where(date: date) }
+  scope :for_date, -> (date) { where(date: date) }
+  scope :for_date_range, -> (date, offset) { where(date: (date - offset.days)..(date + offset.days)).order(:date) }
   scope :ready, -> { where(ready: true) }
 end
