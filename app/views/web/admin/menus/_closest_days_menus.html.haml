@@ -1,12 +1,15 @@
 .row.text-center
-  %span.btn.btn-default{ data: { toggle: 'collapse', target: '#closestDaysMenusBox' },
-                         aria: { expanded: 'false', controls: 'closestDaysMenusBox' } }
+  %span.btn.btn-default{ data: { toggle: 'collapse', target: '#closest-days-menus__container' },
+                         aria: { expanded: 'false', controls: 'closest-days-menus__container' } }
     Меню на ближайшие дни
-  .collapse#closestDaysMenusBox
-    .well
+  #closest-days-menus__container.collapse.text-justify
+    .row.well
+      - bootstrap_max_col_index = 12
+      - col_index = bootstrap_max_col_index / @closest_days_menus.length
       - @closest_days_menus.each do |menu|
-        %ul
-          = l menu.date, format: :menu_date
-          - menu.dishes.each do |dish|
-            %li
-              = dish.name
+        %div{ class: "col-md-#{col_index}" }
+          %ul
+            = l menu.date, format: :menu_date
+            - menu.dishes.each do |dish|
+              %li
+                = dish.name
