@@ -2,6 +2,7 @@
   = f.input :name
   = f.input :email, input_html: { placeholder: 'username@restream.rt.ru' }
   = f.input :description
+  = f.input :role, as: :select
   .form-group
     .col-sm-offset-3.col-sm-9
       = f.submit 'Сохранить', class: 'btn btn-primary'

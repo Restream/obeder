@@ -44,6 +44,6 @@ class Web::Admin::UsersController < Web::Admin::ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :neem, :description)
+    params.require(:user).permit(:name, :email, :neem, :description, :role)
   end
 end

@@ -10,6 +10,7 @@ ru:
         email: Email
         neem: Не есть
         description: Описание
+        role: Роль
       user_sign_in_type:
         email: Email
         password: Пароль
@@ -32,6 +33,8 @@ ru:
               invalid_email: Введите Рестрим email, вида username@restream.rt.ru
             name:
               blank: Введите Фамилию и Имя
+            role:
+              blank: Выберите роль
         user_sign_in_type:
           attributes:
             email:
