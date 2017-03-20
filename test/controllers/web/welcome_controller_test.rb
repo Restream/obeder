@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Web::WelcomeControllerTest < ActionController::TestCase
   setup do
-    @user = create :user_with_user_menus
+    @user = create :user
     sign_in @user
   end
 

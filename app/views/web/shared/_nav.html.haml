@@ -2,7 +2,7 @@
   .container-fluid
     .navbar-header
       %button.navbar-toggle.collapsed{'aria-expanded' => 'false', 'data-target' => '#bs-example-navbar-collapse-1', 'data-toggle' => 'collapse', :type => 'button'}
-      %a.navbar-brand{href: admin_root_path} Обедер
+      = link_to t('obeder'), admin_root_path, class: 'navbar-brand'
     .collapse.navbar-collapse#bs-example-navbar-collapse-1
       %ul.nav.navbar-nav
         = active_link_to t('.menu'), edit_admin_menu_path(Date.current), class_active: 'active', wrap_tag: :li
