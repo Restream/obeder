@@ -10,7 +10,8 @@
       - @closest_days_menus.each do |menu|
         %div{ class: "col-md-#{col_index}" }
           %ul
-            = l menu.date, format: :menu_date
-            - menu.dishes.each do |dish|
+            = l menu[:date], format: :menu_date
+            - menu[:dishes].each do |dish|
               %li
-                = dish.name
+                - dish_name = dish[:name]
+                = dish[:is_default] ? "#{dish_name} (#{t('.default')})" : dish_name

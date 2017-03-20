@@ -4,8 +4,8 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   def edit
     @date = date
     @menu = current_menu
-    @closest_days_menus = closest_days_menus(@date, DATE_OFFSET)
     @dishes = Dish.order(:name).all
+    @closest_days_menus = closest_days_menus(@date, DATE_OFFSET)
   end
 
   def update
@@ -47,9 +47,19 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   end
 
   def closest_days_menus(date, date_offset)
-    Menu.includes(:dishes)
+    Menu.includes(:dishes, :menu_dishes)
         .for_date_range(date, date_offset)
         .except_date(date)
+        .map do |menu|
+          dishes = menu.dishes.map do |dish|
+            {
+              name: dish.name,
+              is_default: menu.menu_dishes.find_by(dish_id: dish.id).default
+            }
+          end
+
+          { date: menu.date, dishes: dishes }
+        end
   end
 
   def date
