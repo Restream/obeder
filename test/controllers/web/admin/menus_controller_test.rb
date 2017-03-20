@@ -3,6 +3,8 @@ require 'test_helper'
 class Web::Admin::MenusControllerTest < ActionController::TestCase
   setup do
     @menu = create :menu
+    @user = create :user, :cook
+    sign_in @user
   end
 
   test 'edit' do

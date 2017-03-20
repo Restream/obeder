@@ -3,7 +3,16 @@ FactoryGirl.define do
     name
     email { generate :email }
     password { generate :string }
+    role 'user'
     description
+
+    trait :admin do
+      role 'admin'
+    end
+
+    trait :cook do
+      role 'cook'
+    end
 
     trait :with_user_menu_dishes do
       after(:create) do |user|

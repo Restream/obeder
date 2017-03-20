@@ -5,7 +5,13 @@
       %a.navbar-brand{href: admin_root_path} Обедер
     .collapse.navbar-collapse#bs-example-navbar-collapse-1
       %ul.nav.navbar-nav
-        = active_link_to 'Меню', edit_admin_menu_path(Date.current), class_active: 'active', wrap_tag: :li
-        = active_link_to 'Отчеты', admin_user_menus_path(date: Date.current), class_active: 'active', wrap_tag: :li
-        = active_link_to 'Блюда', admin_dishes_path, class_active: 'active', wrap_tag: :li
-        = active_link_to 'Пользователи', admin_users_path, class_active: 'active', wrap_tag: :li
+        = active_link_to t('.menu'), edit_admin_menu_path(Date.current), class_active: 'active', wrap_tag: :li
+        = active_link_to t('.reports'), admin_user_menus_path(date: Date.current), class_active: 'active', wrap_tag: :li
+        = active_link_to t('.dishes'), admin_dishes_path, class_active: 'active', wrap_tag: :li
+        = active_link_to t('.users'), admin_users_path, class_active: 'active', wrap_tag: :li
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %p.navbar-text
+            = current_user.name
+        %li
+          = link_to t('logout'), logout_path

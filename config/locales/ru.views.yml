@@ -1,5 +1,11 @@
 ru:
   web:
+    shared:
+      nav:
+        menu: Меню
+        reports: Отчеты
+        dishes: Блюда
+        users: Пользователи
     sessions:
       new:
         title: Вход
