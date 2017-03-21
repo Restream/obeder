@@ -8,14 +8,14 @@
     .pull-right
       = link_to t('form.add'), new_admin_dish_path, class: 'btn btn-default btn-lg btn-primary'
 
+
 .row
   .col-md-12
-    <!-- Nav tabs -->
     %ul.nav.nav-pills.nav-justified{:role => 'tablist'}
-      - @data[:dish_types_labels].each do |d_type_code, d_type_label|
-        %li{role: 'presentation', :class => ('active' if d_type_code.to_s == @data[:req_type])}
+      - Dish.dish_type.values.each do |d_type_code|
+        %li{:class => ('active' if d_type_code.to_s == @data[:req_type])}
           %a{href: admin_dishes_path({type: d_type_code})}
-            = d_type_label
+            = t('enumerize.dish.dish_type.' + d_type_code)
 
     %br
     %table.table.table-hover.table-condensed.table-striped

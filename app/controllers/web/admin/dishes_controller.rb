@@ -1,22 +1,11 @@
 class Web::Admin::DishesController < Web::Admin::ApplicationController
   def index
-    filter = {}
-
-    if !params['type'].nil?
-      queried_rec_type = filter[:dish_type_eq] = params['type']
-    else
-      queried_rec_type = filter[:dish_type_eq] = 'side_dish'
-    end
+    filter = {
+      dish_type_eq: params['type'] || 'side_dish'
+    }
 
     @data = {
-      req_type: queried_rec_type,
-      dish_types_labels: {
-        side_dish: t('enumerize.dish.dish_types.side_dish'),
-        soup: t('enumerize.dish.dish_types.soup'),
-        main_dish: t('enumerize.dish.dish_types.main_dish'),
-        salad: t('enumerize.dish.dish_types.salad'),
-        separate_dish: t('enumerize.dish.dish_types.separate_dish')
-      },
+      req_type: filter[:dish_type_eq],
       items: Dish.order(:name).ransack(filter).result.page(params[:page])
     }
   end
