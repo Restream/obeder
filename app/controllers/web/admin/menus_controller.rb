@@ -8,6 +8,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     @closest_days_menus = Menu.includes(:dishes, :menu_dishes)
                               .for_date_range(@date, DATE_OFFSET)
                               .except_date(@date)
+                              .decorate
   end
 
   def update

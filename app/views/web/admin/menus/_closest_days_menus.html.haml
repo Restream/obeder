@@ -5,9 +5,7 @@
   #closest-days-menus__container.collapse.text-justify
     %br
     .row.well
-      - bootstrap_max_col_index = 12
-      - number_of_columns = @closest_days_menus.empty? ? 1 : @closest_days_menus.length
-      - col_index = bootstrap_max_col_index / number_of_columns
+      - col_index = @closest_days_menus.col_index
       - @closest_days_menus.each do |menu|
         %div{ class: "col-md-#{col_index}" }
           %b{ style: 'padding-left: 20px' }
@@ -15,5 +13,4 @@
           %ul
             - menu.menu_dishes.each do |menu_dish|
               %li
-                - dish_name = menu_dish.dish.name
-                = menu_dish.default? ? [dish_name, t('.default')].join(', ') : dish_name
+                = menu_dish.dish_name(t('.default'))
