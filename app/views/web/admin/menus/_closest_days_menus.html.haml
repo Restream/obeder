@@ -1,8 +1,5 @@
-.row.text-center
-  %button.btn.btn-default{ data: { toggle: 'collapse', target: '#closest-days-menus__container' },
-                           aria: { expanded: 'false', controls: 'closest-days-menus__container' } }
-    = t('.closest_days_menus_btn')
-  #closest-days-menus__container.collapse.text-justify
+.row
+  .text-justify
     %br
     .row.well
       - col_index = @closest_days_menus.col_index
