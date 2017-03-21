@@ -33,6 +33,7 @@
               ...user,
               em: !user.neem,
             };
+            this.$emit('updateSwitchState', !this.user.em);
           },
           error => error,
         );
@@ -50,7 +51,7 @@
             neem: !em,
           },
         };
-
+        this.$emit('updateSwitchState', !this.user.em);
         usersService.save(id, payload);
       },
     },

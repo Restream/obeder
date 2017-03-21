@@ -5,7 +5,7 @@
 
       <div class="switcher">
         <span class="switcher-label">Не ем</span>
-        <label class="label">
+        <label class="label" v-bind:class="{ disable: this.switcherIsDisabled }">
           <input type="checkbox" v-model="em" v-on:change="onEmChange(!em)">
           <span class="circle"></span>
         </label>
@@ -68,6 +68,7 @@
     name: 'DailyMenu',
     props: {
       day: Object,
+      switcherIsDisabled: Boolean,
     },
     data() {
       const types = {};
@@ -294,6 +295,11 @@
     transition: transform 300ms ease-in-out;
     box-sizing: border-box;
   }
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 0.3
 }
 
 @media (--desktop) {

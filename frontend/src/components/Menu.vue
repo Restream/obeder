@@ -1,8 +1,10 @@
 <template>
   <div class="menu">
-    <menu-header></menu-header>
+    <menu-header @updateSwitchState="updateSwitchState">
+    </menu-header>
     <div class="content">
-      <daily-menu v-for="date in sortedDates" :day="date"></daily-menu>
+      <daily-menu v-for="date in sortedDates" :day="date" :switcherIsDisabled="state.switcherIsDisabled">
+      </daily-menu>
     </div>
   </div>
 </template>
@@ -35,11 +37,19 @@
     data() {
       return {
         dates: [],
+        state: {
+          switcherIsDisabled: false,
+        },
       };
     },
     computed: {
       sortedDates() {
         return _.sortBy(this.dates, ['date']);
+      },
+    },
+    methods: {
+      updateSwitchState(switchState) {
+        this.state.switcherIsDisabled = switchState;
       },
     },
   };
