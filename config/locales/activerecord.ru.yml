@@ -2,6 +2,22 @@ ru:
   activerecord:
     attributes:
       dish:
-        name: 'Название'
-        description: 'Описание'
-        dish_type: 'Тип блюда'
+        name: Название
+        description: Описание
+        dish_type: Тип блюда
+      user:
+        name: Фамилия Имя
+        email: Email
+        neem: Не есть
+        description: Описание
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: Введите email
+              invalid_email: Введите Рестрим email, вида username@restream.rt.ru
+            name:
+              blank: Введите Фамилию и Имя
+

@@ -1,7 +1,7 @@
 .text-center
   - unless @menu.ready
     = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
-      = f.button :submit, value: 'Опубликовать меню', class: 'btn btn-lg btn-success'
+      = f.button :submit, value: t('.publish_menu'), class: 'btn btn-lg btn-success'
     %br
     %br
 
@@ -14,10 +14,10 @@
         = render 'menu_dish_fields', f: menu_dish
 
       .links.text-right
-        = link_to_add_association 'Добавить блюдо', f, :menu_dishes, class: 'btn btn-lg btn-info'
+        = link_to_add_association t('.add_dish'), f, :menu_dishes, class: 'btn btn-lg btn-info'
 
       %br
       .well
         .pull-left
-          = f.button :submit, value: 'Сохранить', class: 'btn btn-lg btn-primary'
+          = f.button :submit, value: t('.save'), class: 'btn btn-lg btn-primary'
         .clearfix
