@@ -14,7 +14,8 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
         side_dish: t('enumerize.dish.dish_types.side_dish'),
         soup: t('enumerize.dish.dish_types.soup'),
         main_dish: t('enumerize.dish.dish_types.main_dish'),
-        salad: t('enumerize.dish.dish_types.salad')
+        salad: t('enumerize.dish.dish_types.salad'),
+        separate_dish: t('enumerize.dish.dish_types.separate_dish')
       },
       items: Dish.order(:name).ransack(filter).result.page(params[:page])
     }
