@@ -50,16 +50,6 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     Menu.includes(:dishes, :menu_dishes)
         .for_date_range(date, date_offset)
         .except_date(date)
-        .map do |menu|
-          dishes = menu.dishes.map do |dish|
-            {
-              name: dish.name,
-              is_default: menu.menu_dishes.find_by(dish_id: dish.id).default
-            }
-          end
-
-          { date: menu.date, dishes: dishes }
-        end
   end
 
   def date
