@@ -1,4 +1,4 @@
-class PasswordType < ActiveType::Object
+class UserPasswordEditType < User
   attribute :password, :string
   attribute :password_confirmation, :string
 

@@ -2,17 +2,16 @@ class Web::PasswordsController < Web::ApplicationController
   layout 'session'
 
   def edit
-    @password = PasswordType.new
+    return redirect_to(root_path) unless params[:id]
+    @user = UserPasswordEditType.new
   end
 
   def update
-    @password = PasswordType.new(password_params)
+    return redirect_to(root_path) unless params[:id]
+    @user = UserPasswordEditType.find(params[:id])
 
-    if @password.valid?
-      # FIXME надо пераписать
-      @user = User.find(params[:id])
-      @user.password = @password.password
-      @user.save
+    if @user.update(password_params)
+      flash[:success] = t('password_changed')
       redirect_to login_path
     else
       render :edit
@@ -22,7 +21,7 @@ class Web::PasswordsController < Web::ApplicationController
   private
 
   def password_params
-    params.require(:password_type).permit(:password, :password_confirmation)
+    params.require(:user_password_edit_type).permit(:password, :password_confirmation)
   end
 
 end
