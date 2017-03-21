@@ -1,9 +1,17 @@
 ru:
   enumerize:
     dish:
+      title: Блюдо
+      titles: Блюда
       dish_type:
         soup: Суп
         main_dish: Основное блюдо
         side_dish: Гарнир
         salad: Салат
         separate_dish: Самостоятельное блюдо
+      dish_types:
+        soup: Супы
+        main_dish: Основные блюда
+        side_dish: Гарниры
+        salad: Салаты
+        separate_dish: Самостоятельные блюда

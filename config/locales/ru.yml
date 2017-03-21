@@ -57,3 +57,12 @@ ru:
             success: Меню опубликовано
           update:
             success: Меню обновлено
+  form:
+    confirm: Вы уверены?
+    edit: Редактировать
+    delete: Удалить
+    add: Добавить
+
+  list:
+    no_data: Нет данных
+    actions: Действия

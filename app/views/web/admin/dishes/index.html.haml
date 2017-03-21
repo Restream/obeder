@@ -1,26 +1,40 @@
 .row
   .col-md-6
-    %h1 Блюда
+    %h1
+      = t('enumerize.dish.titles')
+
     %br
   .col-md-6
     .pull-right
-      = link_to 'Добавить', new_admin_dish_path, class: 'btn btn-default btn-lg btn-primary'
+      = link_to t('form.add'), new_admin_dish_path, class: 'btn btn-default btn-lg btn-primary'
 
 .row
   .col-md-12
+    <!-- Nav tabs -->
+    %ul.nav.nav-pills.nav-justified{:role => 'tablist'}
+      - @data[:dish_types_labels].each do |d_type_code, d_type_label|
+        %li{role: 'presentation', :class => ('active' if d_type_code.to_s == @data[:req_type])}
+          %a{href: admin_dishes_path({type: d_type_code})}
+            = d_type_label
 
+    %br
     %table.table.table-hover.table-condensed.table-striped
       %tr
-        %th Название
-        %th Действия
-      - @dishes.each do |dish|
+        %th
+          = t('activerecord.attributes.dish.name')
+        %th{width: '100px'}
+          = t('list.actions')
+      - @data[:items].each do |dish|
         %tr
           %td
             = dish.name
-          %td
-            = link_to 'Редактировать', edit_admin_dish_path(dish), class: 'btn btn-info btn-sm'
-            = link_to 'Удалить', admin_dish_path(dish), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger btn-sm'
+          %td{width: '200px'}
+            %a{href: edit_admin_dish_path(dish), class: 'btn btn-info btn-sm'}
+              %i.glyphicon.glyphicon-plus.hidden-sm.hidden-md.hidden-lg
+              %span.hidden-xs
+                = t('form.edit')
+            = link_to t('form.delete'), admin_dish_path(dish), method: :delete, data: { confirm: t('form.confirm') }, class: 'btn btn-danger btn-sm'
 
 .row
   .col-md-12
-    = paginate @dishes
+    = paginate @data[:items]
