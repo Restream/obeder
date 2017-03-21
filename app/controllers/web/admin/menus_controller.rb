@@ -5,7 +5,9 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     @date = date
     @menu = current_menu
     @dishes = Dish.order(:name).all
-    @closest_days_menus = closest_days_menus(@date, DATE_OFFSET)
+    @closest_days_menus = Menu.includes(:dishes, :menu_dishes)
+                              .for_date_range(@date, DATE_OFFSET)
+                              .except_date(@date)
   end
 
   def update
@@ -44,12 +46,6 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
 
   def current_menu
     Menu.for_date(params[:date]).first || Menu.create(date: params[:date])
-  end
-
-  def closest_days_menus(date, date_offset)
-    Menu.includes(:dishes, :menu_dishes)
-        .for_date_range(date, date_offset)
-        .except_date(date)
   end
 
   def date
