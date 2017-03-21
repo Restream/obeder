@@ -1,9 +1,9 @@
 .nested-fields
   .row
     .col-md-2
-      = f.input :default, label: 'По умолчанию'
+      = f.input :default, label: t('.default')
     .col-md-7
       = f.input :dish_id, as: :select, collection: @dishes, label_method: :name, label: false
     .col-md-3.text-right
-      = link_to_remove_association 'Удалить блюдо', f, class: 'btn btn-danger'
+      = link_to_remove_association t('.delete_dish'), f, class: 'btn btn-danger'
   %hr
