@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <menu-header @disablingMenuSwitchers="disablingMenuSwitchers"/>
+    <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
     <div class="content">
       <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
     </div>
@@ -44,7 +44,7 @@
       },
     },
     methods: {
-      disablingMenuSwitchers(val) {
+      disableMenuSwitchers(val) {
         this.headerSwitchIsDisabled = val;
       },
     },

@@ -2,7 +2,7 @@
   <div class="daily-menu">
     <h1 class="date">
       <span>{{date}}</span>
-      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @toggle="menuSwitchToggle" />
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
 

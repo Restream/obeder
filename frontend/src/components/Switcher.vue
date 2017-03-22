@@ -13,8 +13,14 @@
 export default {
   name: 'Switcher',
   props: {
-    isDisabled: Boolean,
-    isOn: Boolean,
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    isOn: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -28,7 +34,7 @@ export default {
   },
   methods: {
     onChange(value) {
-      this.$emit('toggle', value);
+      this.$emit('onToggle', value);
     },
   },
 };

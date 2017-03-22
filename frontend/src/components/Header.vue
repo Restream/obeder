@@ -5,7 +5,7 @@
       <img class="logo_obeder" src="../assets/images/obeder.svg">
     </div>
 
-    <header-switcher :isDisabled='false' :isOn='isSwitchOn' @toggle="headerSwitchToggle" />
+    <header-switcher :isOn='isSwitchOn' @onToggle="headerSwitchToggle" />
 
     <div class="header__user">{{user.name}}</div>
   </div>
@@ -32,13 +32,13 @@
               em: !user.neem,
             };
             this.isSwitchOn = this.user.em;
-            this.$emit('disablingMenuSwitchers', !this.isSwitchOn);
+            this.$emit('onDisableMenuSwitchers', !this.isSwitchOn);
           },
           error => error,
         );
     },
     mounted() {
-      this.$emit('disablingMenuSwitchers', !this.isSwitchOn);
+      this.$emit('onDisableMenuSwitchers', !this.isSwitchOn);
     },
     data() {
       return {
@@ -57,7 +57,7 @@
         usersService.save(id, payload);
         this.isSwitchOn = em;
         this.user.em = em;
-        this.$emit('disablingMenuSwitchers', !em);
+        this.$emit('onDisableMenuSwitchers', !em);
       },
     },
   };
