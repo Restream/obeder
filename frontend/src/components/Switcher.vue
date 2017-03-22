@@ -21,6 +21,11 @@ export default {
       state: this.isOn,
     };
   },
+  watch: {
+    isOn(val) {
+      this.state = val;
+    },
+  },
   methods: {
     onChange(value) {
       this.$emit('toggle', value);

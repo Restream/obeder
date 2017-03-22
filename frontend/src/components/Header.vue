@@ -32,12 +32,15 @@
               em: !user.neem,
             };
             this.isSwitchOn = this.user.em;
+            this.$emit('disablingMenuSwitchers', !this.isSwitchOn);
           },
           error => error,
         );
     },
+    mounted() {
+      this.$emit('disablingMenuSwitchers', !this.isSwitchOn);
+    },
     data() {
-      this.$emit('disablingMenuSwitchers', true);
       return {
         user: {},
         isSwitchOn: false,
