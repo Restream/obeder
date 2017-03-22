@@ -1,14 +1,14 @@
 class MenuPublishReadinessValidator < ActiveModel::Validator
   def validate(record)
-    errors = record.errors[:dishes]
-    errors << 'Менее двух супов' unless more_than?(record, :soup, 2)
-    errors << 'Менее двух салатов' unless more_than?(record, :salad, 2)
+    errors = record.errors
+    errors.add(:dishes, :less_than_two_soups) unless more_than?(record, :soup, 2)
+    errors.add(:dishes, :less_than_two_salads) unless more_than?(record, :salad, 2)
     has_defaults = (exists_default?(record, :soup) && exists_default?(record, :salad)) ||
                    (exists_default?(record, :main_dish) && exists_default?(record, :side_dish)) ||
                     exists_default?(record, :separate_dish)
 
-    errors << 'Не указаны блюда по умолчанию' unless has_defaults
-    errors << 'Количество гарниров не совпадает с количеством основных блюд' unless quantity_matches?(record, :main_dish, :side_dish)
+    errors.add(:dishes, :no_defaults) unless has_defaults
+    errors.add(:dishes, :main_to_side_dishes_mismatch) unless quantity_matches?(record, :main_dish, :side_dish)
   end
 
   def more_than?(record, dish_type, required_number)
