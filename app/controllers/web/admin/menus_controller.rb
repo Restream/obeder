@@ -26,7 +26,13 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   def approve
     @menu = current_menu
     @menu.ready = true
-    @menu.save
+
+    if @menu.valid?(:menu_publish)
+      @menu.save
+    else
+      f(:error)
+      render action: :edit
+    end
 
     User.find_each do |user|
       user_menu = UserMenu.create(user: user, menu: @menu, neem: user.neem)
