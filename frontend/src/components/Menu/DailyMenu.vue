@@ -2,16 +2,7 @@
   <div class="daily-menu">
     <h1 class="date">
       <span>{{date}}</span>
-
-      <div class="switcher">
-        <span class="switcher-label">Не ем</span>
-        <label class="label" v-bind:class="{ disable: this.switcherIsDisabled }">
-          <input type="checkbox" v-model="em" v-on:change="onEmChange(!em)">
-          <span class="circle"></span>
-        </label>
-        <span class="switcher-label">Ем</span>
-      </div>
-
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @toggle="menuSwitchToggle" />
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
 
@@ -26,7 +17,7 @@
       </menu-dish>
       <div class="daily-menu__actions">
         <div class="daily-menu__comment">
-          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="sendComment"></textarea>
+          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="onChangeComment"></textarea>
         </div>
       </div>
     </div>
@@ -40,6 +31,8 @@
   import usersService from 'api/users';
   import MenuDish from './MenuDish';
   import MenuPresenter from '../../presenters/MenuPresenter';
+  import Switcher from '../Switcher';
+
 
   const userId = localStorage.getItem('user_uid');
 
@@ -64,16 +57,15 @@
   export default {
     components: {
       'menu-dish': MenuDish,
+      'menu-switcher': Switcher,
     },
     name: 'DailyMenu',
     props: {
       day: Object,
-      switcherIsDisabled: Boolean,
+      isSwitchDisabled: Boolean,
     },
     data() {
       const types = {};
-
-      this.em = !this.day.neem;
 
       this.day.dishes.forEach((dish) => {
         if (!types[dish.dishType]) {
@@ -86,9 +78,16 @@
       return {
         date: MenuPresenter.date(this.day.date),
         dishTypes: types,
+        isSwitchOn: !this.day.neem,
       };
     },
     methods: {
+      sendData() {
+        usersService
+          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), this.day.description,
+            this.day.neem);
+      },
+
       setToDefault() {
         const defaultDishes = {};
 
@@ -155,20 +154,17 @@
           [type]: updatedDishes,
         };
 
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes));
+        this.sendData();
       },
 
-      sendComment(event) {
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), event.target.value,
-            !this.em);
+      onChangeComment(event) {
+        this.day.description = event.target.value;
+        this.sendData();
       },
 
-      onEmChange(em) {
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), event.target.value,
-            em);
+      menuSwitchToggle(value) {
+        this.day.neem = !value;
+        this.sendData();
       },
     },
   };

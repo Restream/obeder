@@ -5,22 +5,20 @@
       <img class="logo_obeder" src="../assets/images/obeder.svg">
     </div>
 
-    <div class="header__switcher">
-      <span class="header__switcher-label">Не ем</span>
-      <label class="label">
-        <input type="checkbox" v-model="user.em" v-on:change="onChange(user.em)">
-        <span class="circle"></span>
-      </label>
-      <span class="header__switcher-label">Eм</span>
-    </div>
+    <header-switcher :isDisabled='false' :isOn='isSwitchOn' @toggle="headerSwitchToggle" />
+
     <div class="header__user">{{user.name}}</div>
   </div>
 </template>
 
 <script>
   import usersService from 'api/users';
+  import Switcher from './Switcher';
 
   export default {
+    components: {
+      'header-switcher': Switcher,
+    },
     name: 'Header',
     created() {
       const id = localStorage.getItem('user_uid');
@@ -33,26 +31,30 @@
               ...user,
               em: !user.neem,
             };
-            this.$emit('updateSwitchState', !this.user.em);
+            this.isSwitchOn = this.user.em;
           },
           error => error,
         );
     },
     data() {
+      this.$emit('disablingMenuSwitchers', true);
       return {
         user: {},
+        isSwitchOn: false,
       };
     },
     methods: {
-      onChange(em) {
+      headerSwitchToggle(em) {
         const id = localStorage.getItem('user_uid');
         const payload = {
           user: {
             neem: !em,
           },
         };
-        this.$emit('updateSwitchState', !this.user.em);
         usersService.save(id, payload);
+        this.isSwitchOn = em;
+        this.user.em = em;
+        this.$emit('disablingMenuSwitchers', !em);
       },
     },
   };
