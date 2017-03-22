@@ -17,6 +17,7 @@ ru:
         less_than_two_salads: Менее двух салатов
         no_defaults: Блюда по умолчанию не указаны или указаны некорректно
         main_to_side_dishes_mismatch: Количество гарниров не совпадает с количеством основных блюд
+        less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
       models:
         user:
           attributes:
