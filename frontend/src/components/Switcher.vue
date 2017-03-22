@@ -2,7 +2,7 @@
   <div class="switcher">
     <span class="switcher-label">Не ем</span>
     <label class="label" v-bind:class="{ disable: this.isDisabled }">
-      <input type="checkbox" v-model="state" v-on:change="onChange(state)">
+      <input type="checkbox" v-model="active" v-on:change="onChange(active)">
       <span class="circle"></span>
     </label>
     <span class="switcher-label">Ем</span>
@@ -24,12 +24,12 @@ export default {
   },
   data() {
     return {
-      state: this.isOn,
+      active: this.isOn,
     };
   },
   watch: {
-    isOn(val) {
-      this.state = val;
+    isOn(newVal) {
+      this.active = newVal;
     },
   },
   methods: {
