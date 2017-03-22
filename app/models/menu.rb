@@ -7,4 +7,5 @@ class Menu < ApplicationRecord
   has_many :users, through: :user_menus
 
   accepts_nested_attributes_for :menu_dishes, reject_if: :all_blank, allow_destroy: true
+  validates_with MenuPublishReadinessValidator, on: :menu_publish
 end
