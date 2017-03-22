@@ -14,24 +14,20 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   def update
     @menu = current_menu
 
-    if @menu.update(menu_params)
-      f(:success)
-      redirect_to edit_admin_menu_path(@menu.date)
-    else
-      f(:error)
-      render action: :edit
-    end
+    @menu.update(menu_params) ? f(:success) : f(:error)
+    redirect_to edit_admin_menu_path(@menu.date)
   end
 
   def approve
     @menu = current_menu
-    @menu.ready = true
 
     if @menu.valid?(:menu_publish)
+      @menu.ready = true
       @menu.save
     else
       f(:error)
-      render action: :edit
+      redirect_to edit_admin_menu_path(@menu.date)
+      return
     end
 
     User.find_each do |user|
