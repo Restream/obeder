@@ -1,17 +1,9 @@
 en:
   enumerize:
     dish:
-      title: Dish
-      titles: Dishes
       dish_type:
         soup: Soup
         main_dish: Main dish
         side_dish: Side dish
         salad: Salad
         separate_dish: Separate dish
-      dish_types:
-        soup: Soups
-        main_dish: Main dishes
-        side_dish: Side dishes
-        salad: Salads
-        separate_dish: Separate dishes

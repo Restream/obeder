@@ -66,3 +66,6 @@ ru:
   list:
     no_data: Нет данных
     actions: Действия
+
+  title:
+    dishes: Блюда

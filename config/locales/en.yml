@@ -31,3 +31,6 @@ en:
   list:
     no_data: No data
     actions: Actions
+
+  title:
+    dishes: Dishes
