@@ -1,8 +1,4 @@
 class Api::UsersController < Api::ApplicationController
-  def index
-    users = User.order(:name).all
-    render json: users
-  end
 
   def show
     user = User.find(params[:id])

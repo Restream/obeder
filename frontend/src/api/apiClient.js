@@ -19,6 +19,7 @@ export function request(url, method, urlParams = false, body = false) {
 
     options.body = JSON.stringify(jsonWraper);
     options.headers = headers;
+    options.credentials = 'same-origin';
   }
   return fetch(`${url}${urlParamsPart}`, options)
     .then(response => response.text())
