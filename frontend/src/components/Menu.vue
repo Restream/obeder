@@ -1,8 +1,8 @@
 <template>
   <div class="menu">
-    <menu-header></menu-header>
+    <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
     <div class="content">
-      <daily-menu v-for="date in sortedDates" :day="date"></daily-menu>
+      <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
     </div>
   </div>
 </template>
@@ -35,11 +35,17 @@
     data() {
       return {
         dates: [],
+        headerSwitchIsDisabled: false,
       };
     },
     computed: {
       sortedDates() {
         return _.sortBy(this.dates, ['date']);
+      },
+    },
+    methods: {
+      disableMenuSwitchers(val) {
+        this.headerSwitchIsDisabled = val;
       },
     },
   };
