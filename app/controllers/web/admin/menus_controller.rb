@@ -25,7 +25,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
       @menu.ready = true
       @menu.save
     else
-      f(:error)
+      flash[:error] = @menu.errors[:dishes]
       redirect_to edit_admin_menu_path(@menu.date)
       return
     end
