@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      dish:
+        name: 'Name'
+        description: 'Description'
+        dish_type: 'Dish type'
