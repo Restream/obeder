@@ -191,7 +191,6 @@
       menuSwitchToggle(value) {
         this.day.neem = !value;
         this.sendData();
-
       },
     },
   };
