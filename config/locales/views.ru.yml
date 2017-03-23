@@ -3,15 +3,19 @@ ru:
     admin:
       menus:
         edit:
-          menu_for: 'Меню на'
+          menu_for: Меню на
         closest_days_menus:
           closest_days_menus_btn: Меню на ближайшие дни
-          default: 'по умолчанию'
+          default: по умолчанию
         menu_dish_fields:
-          default: 'По умолчанию'
-          delete_dish: 'Удалить блюдо'
+          default: По умолчанию
+          delete_dish: Удалить блюдо
         form:
-          publish_menu: 'Опубликовать меню'
-          confirm: 'Подтвердить'
-          add_dish: 'Добавить блюдо'
-          save: 'Сохранить'
+          publish_menu: Опубликовать меню
+          publish_modal_header: Подтвердите публикацию меню
+          validation_in_progress: Валидация меню...
+          validation_ok: Валидация прошла успешно
+          validation_failed: Во время валидации возникли ошибки
+          confirm: Подтвердить
+          add_dish: Добавить блюдо
+          save: Сохранить
