@@ -5,10 +5,6 @@ import Menu from 'components/Menu';
 
 Vue.use(Router);
 
-function getUid() {
-  return localStorage.getItem('user_uid');
-}
-
 export default new Router({
   mode: 'history',
   routes: [
@@ -16,12 +12,12 @@ export default new Router({
       path: '/',
       name: 'Menu',
       component: Menu,
-      beforeEnter: (to, from, next) => {
-        if (!getUid()) {
-          next('/login');
-        } else {
-          next();
-        }
+    },
+    {
+      path: '/logout',
+      beforeEnter: () => {
+        // NOTE redirect to logout_path of rails
+        window.location.href = '/logout';
       },
     },
   ],

@@ -11,15 +11,14 @@ export function request(url, method, urlParams = false, body = false) {
     urlParamsPart = `?${urlParamsAsString}`;
   }
   const options = { method };
+  options.credentials = 'same-origin';
   if (body) {
     const jsonWraper = humps.decamelizeKeys(body);
     const headers = new Headers({
       'Content-Type': 'application/json',
     });
-
     options.body = JSON.stringify(jsonWraper);
     options.headers = headers;
-    options.credentials = 'same-origin';
   }
   return fetch(`${url}${urlParamsPart}`, options)
     .then(response => response.text())

@@ -7,7 +7,10 @@
 
     <header-switcher :isOn='isSwitchOn' @onToggle="headerSwitchToggle" />
 
-    <div class="header__user">{{user.name}}</div>
+    <div class="header__user">
+      {{user.name}}
+      <router-link to='/logout'>Выйти</router-link>
+    </div>
   </div>
 </template>
 
@@ -21,10 +24,8 @@
     },
     name: 'Header',
     created() {
-      const id = localStorage.getItem('user_uid');
-
       usersService
-        .getOne(id)
+        .getOne(null)
         .then(
           (user) => {
             this.user = {
@@ -48,13 +49,12 @@
     },
     methods: {
       headerSwitchToggle(em) {
-        const id = localStorage.getItem('user_uid');
         const payload = {
           user: {
             neem: !em,
           },
         };
-        usersService.save(id, payload);
+        usersService.save(null, payload);
         this.isSwitchOn = em;
         this.user.em = em;
         this.$emit('onDisableMenuSwitchers', !em);

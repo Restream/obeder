@@ -23,10 +23,8 @@
       'daily-menu': DailyMenu,
     },
     created() {
-      const id = localStorage.getItem('user_uid');
-
       usersService
-        .getMenus(id)
+        .getMenus()
         .then(
           (menuDates) => {
             this.dates = menuDates;

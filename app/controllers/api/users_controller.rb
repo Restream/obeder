@@ -1,12 +1,12 @@
 class Api::UsersController < Api::ApplicationController
 
   def show
-    user = User.find(params[:id])
+    user = current_user
     render json: user
   end
 
   def update
-    user = User.find(params[:id])
+    user = current_user
 
     if user.update(user_params)
       render json: user

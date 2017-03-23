@@ -108,7 +108,7 @@
 
         lastState = currentState;
         usersService
-          .setMenu(userId, this.day.id, currentState)
+          .setMenu(this.day.id, currentState)
           .catch(() => {
             this.errors.push(MENU_SAVE_ERROR);
           });
@@ -191,6 +191,7 @@
       menuSwitchToggle(value) {
         this.day.neem = !value;
         this.sendData();
+
       },
     },
   };
