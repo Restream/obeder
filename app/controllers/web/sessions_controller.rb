@@ -12,7 +12,7 @@ class Web::SessionsController < Web::ApplicationController
       user = @session.user
       sign_in(user)
 
-      redirect_to root_path
+      redirect_to (user.role.admin? || user.role.cook?) ? admin_root_path : root_path
     else
       render :new
     end
