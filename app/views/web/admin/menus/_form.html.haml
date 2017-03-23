@@ -1,8 +1,8 @@
-= render 'menu_publish_confirm_modal'
+= render 'validation_modal'
 
 .text-center
   - unless @menu.ready
-    %button{ id: 'publish_btn', class: 'btn btn-lg btn-success', data: { toggle: :modal, target: '#publish_modal' } }
+    %button{ id: 'menu-publish__btn', class: 'btn btn-lg btn-success', data: { toggle: :modal, target: '#menu-validation__modal' } }
       = t('.publish_menu')
     %br
     %br

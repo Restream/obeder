@@ -1,4 +1,4 @@
-#publish_modal.modal.fade{ role: :dialog, validationUrl: validate_admin_menu_path(@menu.date) }
+#menu-validation__modal.modal.fade{ role: :dialog, validationUrl: validate_admin_menu_path(@menu.date) }
   .modal-dialog{ role: :document }
     .modal-content
       .modal-header
@@ -8,21 +8,20 @@
         %h4
           = t('.publish_modal_header')
       .modal-body
+        %ul#menu-validation__menu-dishes
         %p
           %span.glyphicon.glyphicon-warning-sign
           = t('.check_if_menu_saved')
-        %p#in_validation_marker
+        %p#menu-validation__marker__in-validation
           %span.glyphicon.glyphicon-refresh
           = t('.validation_in_progress')
-        %p#validation_ok_marker
+        %p#menu-validation__marker__ok
           %span.glyphicon.glyphicon-ok
           = t('.validation_ok')
-        %p#validation_failed_marker
+        %p#menu-validation__marker__failed
           %span.glyphicon.glyphicon-remove
           = t('.validation_failed')
-        %ol#validation_errors_list
+        %ol#menu-validation__errors-list
       .modal-footer
         = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
-          = f.button :submit, value: t('.confirm'), id: 'publish_submit_btn', class: 'btn btn-primary', disabled: true
-
-= javascript_include_tag 'web/admin/menus/confirm_publish'
+          = f.button :submit, value: t('.confirm'), id: 'menu-validation__submit-btn', class: 'btn btn-primary', disabled: true

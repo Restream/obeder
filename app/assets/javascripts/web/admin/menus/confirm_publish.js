@@ -1,26 +1,26 @@
-$(function() {
-  var publishBtn = $('#publish_btn');
-  var publishModal = $('#publish_modal');
-  var publishSubmitBtn = $('#publish_submit_btn');
+(function() {
+  var publishBtn = $('#menu-publish__btn');
+  var validationModal = $('#menu-validation__modal');
+  var validationSubmitBtn = $('#menu-validation__submit-btn');
 
-  var validationUrl = publishModal.attr('validationUrl');
+  var validationUrl = validationModal.attr('validationUrl');
 
   var validationMarkers = {
-    inProgress: $('#in_validation_marker'),
-    ok: $('#validation_ok_marker'),
-    failed: $('#validation_failed_marker')
+    inProgress: $('#menu-validation__marker__in-validation'),
+    ok: $('#menu-validation__marker__ok'),
+    failed: $('#menu-validation__marker__failed')
   };
 
-  var validationErrorsList = $('#validation_errors_list');
+  var validationErrorsList = $('#menu-validation__errors-list');
 
-  publishModal.on('show.bs.modal', function (e) {
+  validationModal.on('show.bs.modal', function (e) {
     validationMarkers.inProgress.show();
     validationMarkers.ok.hide();
     validationMarkers.failed.hide();
   });
 
-  publishModal.on('hide.bs.modal', function (e) {
-    publishSubmitBtn.prop('disabled', true);
+  validationModal.on('hide.bs.modal', function (e) {
+    validationSubmitBtn.prop('disabled', true);
     validationErrorsList.empty();
   });
 
@@ -36,7 +36,7 @@ $(function() {
         validationMarkers.ok.show();
       }
 
-      publishSubmitBtn.prop('disabled', false);
+      validationSubmitBtn.prop('disabled', false);
     });
   });
-});
+})();
