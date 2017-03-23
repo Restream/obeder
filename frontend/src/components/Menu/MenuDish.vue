@@ -30,6 +30,7 @@
   import _ from 'lodash';
   import 'vue-awesome/icons/question-circle-o';
   import Hint from 'vue-hint.css';
+  import 'hint.css';
   import Icon from 'vue-awesome/components/Icon';
   import MenuPresenter from '../../presenters/MenuPresenter';
 
@@ -73,7 +74,7 @@
 
 <style scoped>
 @import "../../assets/styles/variables.css";
-@import "//cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.0/hint.min.css";
+@import "hint.css/hint.min.css";
 
 .menu-dish {
   width: 100%;
