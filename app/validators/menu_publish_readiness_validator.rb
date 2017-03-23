@@ -2,14 +2,14 @@ class MenuPublishReadinessValidator < ActiveModel::Validator
   def validate(record)
     errors = record.errors
     dishes = record.dishes
-    errors.add(:dishes, :less_than_two_soups) unless more_than?(dishes, :soup, 2)
-    errors.add(:dishes, :less_than_two_salads) unless more_than?(dishes, :salad, 2)
+    errors.add(:dishes, :less_than_two_soups) unless more_than?(dishes, :soup, 1)
+    errors.add(:dishes, :less_than_two_salads) unless more_than?(dishes, :salad, 1)
 
     main_and_separate_dishes = dishes.where(dish_type: :main_dish)
                               .or(dishes.where(dish_type: :main_dish))
                               .size
 
-    errors.add(:dishes, :less_than_two_main_dishes) unless main_and_separate_dishes > 2
+    errors.add(:dishes, :less_than_two_main_dishes) unless main_and_separate_dishes > 1
 
     has_defaults = (exists_default?(dishes, :soup) && exists_default?(dishes, :salad)) ||
                    (exists_default?(dishes, :main_dish) && exists_default?(dishes, :side_dish)) ||

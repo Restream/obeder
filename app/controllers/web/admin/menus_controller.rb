@@ -19,12 +19,12 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   end
 
   def validate
-    @menu = current_menu
+    menu = current_menu
 
-    if @menu.valid?(:menu_publish)
-      render json: { valid: true }
+    if menu.valid?(:menu_publish)
+      render json: { valid: true,  }
     else
-      render json: { valid: false, errors: @menu.errors[:dishes] }
+      render json: { valid: false, errors: menu.errors[:dishes] }
     end
   end
 

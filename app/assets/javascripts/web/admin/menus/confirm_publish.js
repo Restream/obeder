@@ -19,7 +19,8 @@
   });
 
   publishModal.on('hide.bs.modal', function (e) {
-    publishSubmitBtn.prop('disabled', true);;
+    publishSubmitBtn.prop('disabled', true);
+    validationErrorsList.empty();
   });
 
   publishBtn.click(function(e) {
