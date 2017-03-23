@@ -12,5 +12,6 @@ ru:
           delete_dish: 'Удалить блюдо'
         form:
           publish_menu: 'Опубликовать меню'
+          confirm: 'Подтвердить'
           add_dish: 'Добавить блюдо'
           save: 'Сохранить'

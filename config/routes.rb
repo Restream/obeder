@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :menus, param: :date, only: [:edit, :update] do
         member do
           put :approve
+          get :validate
         end
       end
     end

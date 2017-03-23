@@ -1,7 +1,20 @@
+#publish_modal.modal.fade{ role: :dialog, validationUrl: validate_admin_menu_path(@menu.date), url: approve_admin_menu_path(@menu.date) }
+  .modal-dialog{ role: :document }
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: 'modal' } }
+          %span{ aria: { hidden: 'true' } }
+            &times
+        %h4 Подтвердите публикацию меню
+      .modal-body
+      .modal-footer
+        = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
+          = f.button :submit, value: t('.confirm'), class: 'btn btn-primary'
+
 .text-center
   - unless @menu.ready
-    = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
-      = f.button :submit, value: t('.publish_menu'), class: 'btn btn-lg btn-success'
+    %button{ id: 'publish_btn', class: 'btn btn-lg btn-success', data: { toggle: :modal, target: '#publish_modal' } }
+      = t('.publish_menu')
     %br
     %br
 

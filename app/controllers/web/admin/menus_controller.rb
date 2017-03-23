@@ -18,17 +18,20 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     redirect_to edit_admin_menu_path(@menu.date)
   end
 
-  def approve
+  def validate
     @menu = current_menu
 
     if @menu.valid?(:menu_publish)
-      @menu.ready = true
-      @menu.save
+      render json: { valid: true }
     else
-      flash[:error] = @menu.errors[:dishes]
-      redirect_to edit_admin_menu_path(@menu.date)
-      return
+      render json: { valid: false, errors: @menu.errors[:dishes] }
     end
+  end
+
+  def approve
+    @menu = current_menu
+    @menu.ready = true
+    @menu.save
 
     User.find_each do |user|
       user_menu = UserMenu.create(user: user, menu: @menu, neem: user.neem)
