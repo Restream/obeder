@@ -1,7 +1,7 @@
 (function() {
   var publishBtn = $('#publish_btn');
   var publishModal = $('#publish_modal');
-  var publishSubmitBtn = $('#publish_submit_btn')
+  var publishSubmitBtn = $('#publish_submit_btn');
 
   var validationUrl = publishModal.attr('validationUrl');
 

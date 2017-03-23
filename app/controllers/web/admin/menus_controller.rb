@@ -22,7 +22,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     menu = current_menu
 
     if menu.valid?(:menu_publish)
-      render json: { valid: true,  }
+      render json: { valid: true }
     else
       render json: { valid: false, errors: menu.errors[:dishes] }
     end
