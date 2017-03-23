@@ -1,4 +1,4 @@
-(function() {
+$(function() {
   var publishBtn = $('#publish_btn');
   var publishModal = $('#publish_modal');
   var publishSubmitBtn = $('#publish_submit_btn');
@@ -39,4 +39,4 @@
       publishSubmitBtn.prop('disabled', false);
     });
   });
-})()
+});

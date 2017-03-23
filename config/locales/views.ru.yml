@@ -12,11 +12,12 @@ ru:
           delete_dish: Удалить блюдо
         form:
           publish_menu: Опубликовать меню
+          add_dish: Добавить блюдо
+          save: Сохранить
+        menu_publish_confirm_modal:
           publish_modal_header: Подтвердите публикацию меню
+          check_if_menu_saved: Проверьте, сохранено ли меню!
           validation_in_progress: Валидация меню...
           validation_ok: Валидация прошла успешно
           validation_failed: Во время валидации возникли ошибки
           confirm: Подтвердить
-          add_dish: Добавить блюдо
-          save: Сохранить
-          check_if_menu_saved: Проверьте, сохранено ли меню!

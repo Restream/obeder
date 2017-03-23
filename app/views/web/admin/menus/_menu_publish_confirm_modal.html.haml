@@ -1,0 +1,28 @@
+#publish_modal.modal.fade{ role: :dialog, validationUrl: validate_admin_menu_path(@menu.date) }
+  .modal-dialog{ role: :document }
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: :modal } }
+          %span{ aria: { hidden: true } }
+            &times
+        %h4
+          = t('.publish_modal_header')
+      .modal-body
+        %p
+          %span.glyphicon.glyphicon-warning-sign
+          = t('.check_if_menu_saved')
+        %p#in_validation_marker
+          %span.glyphicon.glyphicon-refresh
+          = t('.validation_in_progress')
+        %p#validation_ok_marker
+          %span.glyphicon.glyphicon-ok
+          = t('.validation_ok')
+        %p#validation_failed_marker
+          %span.glyphicon.glyphicon-remove
+          = t('.validation_failed')
+        %ol#validation_errors_list
+      .modal-footer
+        = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
+          = f.button :submit, value: t('.confirm'), id: 'publish_submit_btn', class: 'btn btn-primary', disabled: true
+
+= javascript_include_tag 'web/admin/menus/confirm_publish'
