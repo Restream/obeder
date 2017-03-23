@@ -1,4 +1,5 @@
 (function() {
+  var menuForm = $('#menu-form__form');
   var publishBtn = $('#menu-publish__btn');
   var validationModal = $('#menu-validation__modal');
   var validationSubmitBtn = $('#menu-validation__submit-btn');
@@ -12,6 +13,10 @@
   };
 
   var validationErrorsList = $('#menu-validation__errors-list');
+
+  menuForm.change(function(e) {
+    publishBtn.prop('disabled', true);
+  });
 
   validationModal.on('show.bs.modal', function (e) {
     validationMarkers.inProgress.show();
