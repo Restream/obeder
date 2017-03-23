@@ -4,18 +4,23 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   def edit
     @date = date
     @menu = current_menu
-    @dishes = Dish.order(:name).all
-    @closest_days_menus = Menu.includes(menu_dishes: :dish)
-      .except_date(@date)
-      .for_date_range(@date, DATE_OFFSET)
-      .decorate
+    @dishes = dishes
+    @closest_days_menus = closest_days_menus(date, DATE_OFFSET)
   end
 
   def update
     @menu = current_menu
 
-    @menu.update(menu_params) ? f(:success) : f(:error)
-    redirect_to edit_admin_menu_path(@menu.date)
+    if @menu.update(menu_params)
+      f(:success)
+      redirect_to edit_admin_menu_path(@menu.date)
+    else
+      f(:error)
+      @date = @menu.date
+      @dishes = dishes
+      @closest_days_menus = closest_days_menus(@date, DATE_OFFSET)
+      render action: :edit
+    end
   end
 
   def validate
@@ -56,5 +61,16 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
 
   def date
     Date.parse(params[:date])
+  end
+
+  def dishes
+    Dish.order(:name).all
+  end
+
+  def closest_days_menus(date, offset)
+    Menu.includes(:dishes, :menu_dishes)
+      .for_date_range(date, offset)
+      .except_date(date)
+      .decorate
   end
 end
