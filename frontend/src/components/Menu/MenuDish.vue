@@ -7,7 +7,6 @@
           class="menu-dish__label"
           :for="date + dish.id"
           :title="dish.description"
-
         >
           <input
             type="radio"
@@ -17,10 +16,7 @@
             :value="dish.id"
           >
           <span class="menu-dish__radio" />
-          <span
-            class="menu-dish__name"
-          >{{dish.name}}</span>
-
+          <span class="menu-dish__name">{{dish.name}}</span>
         </label>
         <a href="#" v-if="dish.description.length > 0" v-hint.right.rounded="dish.description">
           <icon name="question-circle-o"></icon>
