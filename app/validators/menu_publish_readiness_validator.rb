@@ -6,7 +6,7 @@ class MenuPublishReadinessValidator < ActiveModel::Validator
     errors.add(:dishes, :less_than_two_salads) unless more_than?(dishes, :salad, 1)
 
     main_and_separate_dishes = dishes.where(dish_type: :main_dish)
-                              .or(dishes.where(dish_type: :main_dish))
+                              .or(dishes.where(dish_type: :separate_dish))
                               .size
 
     errors.add(:dishes, :less_than_two_main_dishes) unless main_and_separate_dishes > 1
