@@ -13,8 +13,7 @@
     %ul.nav.nav-pills.nav-justified{role: 'tablist'}
       - Dish.dish_type.values.each do |dish_type|
         %li{class: ('active' if dish_type.to_s == @selected_dish_type)}
-          %a{href: admin_dishes_path(q: {dish_type_eq: dish_type})}
-            = dish_type.text
+          = link_to dish_type.text, admin_dishes_path(q: {dish_type_eq: dish_type})
 
     %br
     %table.table.table-hover.table-condensed.table-striped
@@ -27,12 +26,17 @@
         %tr
           %td
             = dish.name
+
           %td{width: '200px'}
-            %a{href: edit_admin_dish_path(dish), class: 'btn btn-info btn-sm'}
+            = link_to edit_admin_dish_path(dish), {class: 'btn btn-info btn-sm'} do
               %i.glyphicon.glyphicon-plus.hidden-sm.hidden-md.hidden-lg
               %span.hidden-xs
                 = t('form.edit')
-            = link_to t('form.delete'), admin_dish_path(dish), method: :delete, data: { confirm: t('form.confirm') }, class: 'btn btn-danger btn-sm'
+
+            = link_to admin_dish_path(dish), {class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: t('form.confirm') }} do
+              %i.glyphicon.glyphicon-trash.hidden-sm.hidden-md.hidden-lg
+              %span.hidden-xs
+                = t('form.delete')
 
 .row
   .col-md-12

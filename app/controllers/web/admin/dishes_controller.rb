@@ -1,8 +1,7 @@
 class Web::Admin::DishesController < Web::Admin::ApplicationController
   def index
-    unless params.has_key?(:q)
-      params[:q] = { dish_type_eq: 'soup' }
-    end
+    params[:q] ||= {}
+    params[:q][:dish_type_eq] ||= 'soup'
 
     @q = Dish.order(:name).ransack(params[:q])
     @dishes = @q.result.page(params[:page])
