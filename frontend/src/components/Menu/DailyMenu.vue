@@ -2,8 +2,10 @@
   <div class="daily-menu">
     <h1 class="date">
       <span>{{date}}</span>
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
+
     <div class="daily-menu__list">
       <menu-dish
         :date="date"
@@ -15,7 +17,7 @@
       </menu-dish>
       <div class="daily-menu__actions">
         <div class="daily-menu__comment">
-          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="sendComment"></textarea>
+          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="onChangeComment"></textarea>
         </div>
       </div>
     </div>
@@ -29,6 +31,8 @@
   import usersService from 'api/users';
   import MenuDish from './MenuDish';
   import MenuPresenter from '../../presenters/MenuPresenter';
+  import Switcher from '../Switcher';
+
 
   const userId = localStorage.getItem('user_uid');
 
@@ -53,10 +57,12 @@
   export default {
     components: {
       'menu-dish': MenuDish,
+      'menu-switcher': Switcher,
     },
     name: 'DailyMenu',
     props: {
       day: Object,
+      isSwitchDisabled: Boolean,
     },
     data() {
       const types = {};
@@ -72,9 +78,16 @@
       return {
         date: MenuPresenter.date(this.day.date),
         dishTypes: types,
+        isSwitchOn: !this.day.neem,
       };
     },
     methods: {
+      sendData() {
+        usersService
+          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), this.day.description,
+            this.day.neem);
+      },
+
       setToDefault() {
         const defaultDishes = {};
 
@@ -141,13 +154,17 @@
           [type]: updatedDishes,
         };
 
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes));
+        this.sendData();
       },
 
-      sendComment(event) {
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), event.target.value);
+      onChangeComment(event) {
+        this.day.description = event.target.value;
+        this.sendData();
+      },
+
+      menuSwitchToggle(value) {
+        this.day.neem = !value;
+        this.sendData();
       },
     },
   };
@@ -214,6 +231,11 @@
   padding: 10px;
   font-size: 16px;
   border-radius: 3px;
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 0.3
 }
 
 @media (--desktop) {
