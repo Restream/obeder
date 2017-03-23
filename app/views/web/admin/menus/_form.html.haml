@@ -8,6 +8,9 @@
         %h4
           = t('.publish_modal_header')
       .modal-body
+        %p
+          %span.glyphicon.glyphicon-warning-sign
+          = t('.check_if_menu_saved')
         %p#in_validation_marker
           %span.glyphicon.glyphicon-refresh
           = t('.validation_in_progress')
@@ -15,9 +18,6 @@
           %span.glyphicon.glyphicon-ok
           = t('.validation_ok')
         %p#validation_failed_marker
-          %span.glyphicon.glyphicon-warning-sign
-          = t('.check_if_menu_saved')
-          %br
           %span.glyphicon.glyphicon-remove
           = t('.validation_failed')
         %ol#validation_errors
