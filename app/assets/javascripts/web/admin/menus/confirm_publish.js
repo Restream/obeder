@@ -2,6 +2,7 @@
   var publishBtn = $('#publish_btn');
   var publishModal = $('#publish_modal');
   var publishSubmitBtn = $('#publish_submit_btn')
+
   var validationUrl = publishModal.attr('validationUrl');
 
   var validationMarkers = {
@@ -10,7 +11,7 @@
     failed: $('#validation_failed_marker')
   };
 
-  var validationErrorsList = $('#validation_errors');
+  var validationErrorsList = $('#validation_errors_list');
 
   publishModal.on('show.bs.modal', function (e) {
     validationMarkers.inProgress.show();

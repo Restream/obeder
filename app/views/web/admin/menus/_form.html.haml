@@ -20,7 +20,7 @@
         %p#validation_failed_marker
           %span.glyphicon.glyphicon-remove
           = t('.validation_failed')
-        %ol#validation_errors
+        %ol#validation_errors_list
       .modal-footer
         = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
           = f.button :submit, value: t('.confirm'), id: 'publish_submit_btn', class: 'btn btn-primary', disabled: true
