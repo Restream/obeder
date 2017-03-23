@@ -24,6 +24,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'enumerize'
 gem 'simple_form'
 gem 'cocoon'
+gem 'draper', '3.0.0.pre1'
 
 group :development, :test do
   gem 'byebug', platform: :mri

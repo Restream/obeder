@@ -1,6 +1,6 @@
 class MenuDish < ApplicationRecord
+  include MenuDishRepository
+
   belongs_to :dish
   belongs_to :menu
-
-  scope :default, -> { where(default: true) }
 end
