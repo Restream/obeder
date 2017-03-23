@@ -3,7 +3,9 @@
     <menu-header></menu-header>
     <div class="content">
       <daily-menu v-for="date in sortedDates" :day="date"></daily-menu>
-    </div>
+      <div v-if="sortedDates.length === 0" class="bs-callout">
+        <h4>К сожалению, меню еще не заполнено</h4>
+      </div>
   </div>
 </template>
 
@@ -59,5 +61,18 @@
   .content {
     padding: 30px 0;
   }
+}
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  border-left-color: #1b809e !important;
+}
+.bs-callout h4 {
+  color: #1b809e;
+  font-size: 18px;
+  margin: 0 0 5px;
 }
 </style>
