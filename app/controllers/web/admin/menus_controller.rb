@@ -5,9 +5,9 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     @date = date
     @menu = current_menu
     @dishes = Dish.order(:name).all
-    @closest_days_menus = Menu.includes(:dishes, :menu_dishes)
-                              .for_date_range(@date, DATE_OFFSET)
+    @closest_days_menus = Menu.includes(menu_dishes: :dish)
                               .except_date(@date)
+                              .for_date_range(@date, DATE_OFFSET)
                               .decorate
   end
 

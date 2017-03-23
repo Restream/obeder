@@ -39,4 +39,15 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.after_initialize do
+    # Enable Bullet gem, otherwise do nothing
+    Bullet.enable = true
+
+    # Log to the Bullet log file (Rails.root/log/bullet.log)
+    Bullet.bullet_logger = true
+
+    # Raise errors, useful for making your specs fail unless they have optimized queries
+    Bullet.raise = true
+  end
 end
