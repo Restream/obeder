@@ -6,6 +6,7 @@
       <div v-if="sortedDates.length === 0" class="bs-callout">
         <h4>К сожалению, меню еще не заполнено</h4>
       </div>
+    </div>
   </div>
 </template>
 
