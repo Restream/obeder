@@ -12,5 +12,4 @@ class User < ApplicationRecord
   has_secure_password validations: false
 
   enumerize :role, in: [:admin, :cook, :user], default: :user
-
 end

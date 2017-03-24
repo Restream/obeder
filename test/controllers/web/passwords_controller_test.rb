@@ -15,5 +15,4 @@ class Web::PasswordsControllerTest < ActionController::TestCase
     put :update, params: { id: @user.id, user_password_edit_type: { password: new_password, password_confirmation: new_password } }
     assert_redirected_to login_path
   end
-
 end
