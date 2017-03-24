@@ -16,7 +16,6 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
 
     @dishes_stats = @user_menus.map(&:dishes).flatten.group_by(&:name)
       .map{ |key, value| { type: key, count: value.count } }
-    @user_menus
   end
 
 end
