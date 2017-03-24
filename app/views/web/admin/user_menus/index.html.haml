@@ -31,6 +31,10 @@
         %span.glyphicon.glyphicon-print
         = t('.print')
 
+%p
+  = t('.default_dishes')
+  = @default_dishes.names
+
 %table.table.table-condensed
   - @user_menus.each_with_index do |user_menu, i|
     %tr
@@ -40,6 +44,6 @@
         #{i + 1}.
         = user_menu.user.name
       %td
-        .small= user_menu.decorate.print_user_dishes
+        .small= user_menu.dishes.ordered_by_name.decorate.names
       %td
         = user_menu.description

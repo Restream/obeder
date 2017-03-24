@@ -25,6 +25,7 @@ ru:
         index:
           print: Печать
           dont_eat: 'Не едят:'
+          default_dishes: 'Блюда по умолчанию:'
     shared:
       nav:
         menu: Меню
