@@ -29,6 +29,7 @@ gem 'draper', '3.0.0.pre1'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_girl_rails', require: false
+  gem 'bullet'
 end
 
 group :development do
