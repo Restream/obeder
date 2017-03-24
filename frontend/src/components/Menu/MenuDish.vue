@@ -116,9 +116,7 @@
 }
 
 .menu-dish__underscored {
-    border-bottom-style: dashed;
-    border-bottom-width: 1px;
-    border-bottom-color: #625f66;
+  border-bottom: 1px dashed #625f66;
 }
 
 .menu-dish__radio {
