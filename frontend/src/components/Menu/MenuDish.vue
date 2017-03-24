@@ -18,6 +18,9 @@
           <span class="menu-dish__radio" />
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
+        <a href="#" v-if="dish.description.length > 0" v-hint.right.rounded="dish.description">
+          <icon name="question-circle-o"></icon>
+        </a>
       </li>
     </ul>
   </div>
@@ -25,6 +28,10 @@
 
 <script>
   import _ from 'lodash';
+  import 'vue-awesome/icons/question-circle-o';
+  import Hint from 'vue-hint.css';
+  import 'hint.css';
+  import Icon from 'vue-awesome/components/Icon';
   import MenuPresenter from '../../presenters/MenuPresenter';
 
   function getSelectedDishId(dishes) {
@@ -41,7 +48,12 @@
       type: String,
       onChange: Function,
     },
-
+    components: {
+      Icon,
+    },
+    directives: {
+      Hint,
+    },
     watch: {
       selectedDish(dish) {
         this.onChange(this.type, dish);
@@ -62,6 +74,7 @@
 
 <style scoped>
 @import "../../assets/styles/variables.css";
+@import "hint.css/hint.min.css";
 
 .menu-dish {
   width: 100%;
@@ -82,7 +95,7 @@
 
 .menu-dish__label {
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   margin-bottom: 10px;
 
   & input {
@@ -100,6 +113,10 @@
       }
     }
   }
+}
+
+.menu-dish__underscored {
+  border-bottom: 1px dashed #625f66;
 }
 
 .menu-dish__radio {
