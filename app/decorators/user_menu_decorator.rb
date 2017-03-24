@@ -1,8 +1,7 @@
-class UserMenuDecorator < Drapper::Decorator
+class UserMenuDecorator < Draper::Decorator
   delegate_all
-  decorates_assotiation :menu :dishes
 
-  def get_user_dishes
+  def print_user_dishes
     model.dishes.order(:name).map(&:name).join(', ')
   end
 end
