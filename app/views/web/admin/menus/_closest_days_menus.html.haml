@@ -2,12 +2,13 @@
   .text-justify
     %br
     .row.well
-      - col_index = @closest_days_menus.col_index
-      - @closest_days_menus.each do |menu|
+      - closest_days_menus = Menu.closest_days_menus(@menu.date)
+      - col_index = col_index(closest_days_menus)
+      - closest_days_menus.each do |menu|
         %div{ class: "col-md-#{col_index}" }
           %b{ style: 'padding-left: 20px' }
             = l menu.date, format: :menu_date
           %ul
             - menu.menu_dishes.each do |menu_dish|
               %li
-                = menu_dish.dish_name(t('.default'))
+                = menu_dish.decorate.dish_name(t('.default'))

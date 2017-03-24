@@ -1,11 +1,6 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
-  DATE_OFFSET = 2
-
   def edit
-    @date = date
     @menu = current_menu
-    @dishes = dishes
-    @closest_days_menus = closest_days_menus(date, DATE_OFFSET)
   end
 
   def update
@@ -16,9 +11,6 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
       redirect_to edit_admin_menu_path(@menu.date)
     else
       f(:error)
-      @date = @menu.date
-      @dishes = dishes
-      @closest_days_menus = closest_days_menus(@date, DATE_OFFSET)
       render action: :edit
     end
   end
@@ -61,16 +53,5 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
 
   def date
     Date.parse(params[:date])
-  end
-
-  def dishes
-    Dish.order(:name).all
-  end
-
-  def closest_days_menus(date, offset)
-    Menu.includes(:dishes, :menu_dishes)
-      .for_date_range(date, offset)
-      .except_date(date)
-      .decorate
   end
 end
