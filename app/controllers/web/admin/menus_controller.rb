@@ -15,16 +15,6 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     end
   end
 
-  def validate
-    menu = current_menu
-
-    if menu.valid?(:menu_publish)
-      render json: { valid: true }
-    else
-      render json: { valid: false, errors: menu.errors[:dishes] }
-    end
-  end
-
   def approve
     @menu = current_menu
     @menu.ready = true
@@ -48,7 +38,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   end
 
   def current_menu
-    Menu.for_date(params[:date]).first || Menu.create(date: params[:date])
+    Menu.current_menu(params[:date])
   end
 
   def date

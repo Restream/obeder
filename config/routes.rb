@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       resources :menus, param: :date, only: [:edit, :update] do
         member do
           put :approve
-          get :validate
         end
       end
     end
@@ -20,6 +19,13 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :update] do
       scope module: :users do
         resources :menus, only: [:index]
+      end
+    end
+    namespace :admin do
+      resources :menus, param: :date do
+        member do
+          get :validate
+        end
       end
     end
     resources :dishes, only: [:index, :create, :update, :destroy]
