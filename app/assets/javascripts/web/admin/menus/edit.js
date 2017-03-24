@@ -35,7 +35,7 @@
 
       if (!data.valid) {
         validationMarkers.failed.show();
-        var errors = $.map(data.errors, function(error, i) {
+        var errors = $.map(data.errors, function(error) {
           return $('<li></li>').text(error);
         });
         validationErrorsList.html(errors);
