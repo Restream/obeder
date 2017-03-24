@@ -25,7 +25,7 @@
     name: 'Header',
     created() {
       usersService
-        .getOne(null)
+        .getUser()
         .then(
           (user) => {
             this.user = {
@@ -54,7 +54,7 @@
             neem: !em,
           },
         };
-        usersService.save(null, payload);
+        usersService.saveUser(payload);
         this.isSwitchOn = em;
         this.user.em = em;
         this.$emit('onDisableMenuSwitchers', !em);

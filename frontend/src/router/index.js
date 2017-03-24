@@ -17,7 +17,7 @@ export default new Router({
       path: '/logout',
       beforeEnter: () => {
         // NOTE redirect to logout_path of rails
-        window.location.href = '/logout';
+        window.location.replace('/logout');
       },
     },
   ],
