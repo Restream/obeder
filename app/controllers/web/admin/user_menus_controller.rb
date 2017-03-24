@@ -23,5 +23,4 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
       .where(menu_dishes: { default: true })
       .ordered_by_name
   end
-
 end
