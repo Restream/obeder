@@ -8,7 +8,8 @@
         = active_link_to t('.menu'), edit_admin_menu_path(Date.current), class_active: 'active', wrap_tag: :li
         = active_link_to t('.reports'), admin_user_menus_path(date: Date.current), class_active: 'active', wrap_tag: :li
         = active_link_to t('.dishes'), admin_dishes_path, class_active: 'active', wrap_tag: :li
-        = active_link_to t('.users'), admin_users_path, class_active: 'active', wrap_tag: :li
+        - if current_user.role.admin?
+          = active_link_to t('.users'), admin_users_path, class_active: 'active', wrap_tag: :li
       %ul.nav.navbar-nav.navbar-right
         %li
           %p.navbar-text
