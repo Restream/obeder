@@ -26,6 +26,7 @@ ru:
           print: Печать
           dont_eat: 'Не едят:'
           default_dishes: 'Блюда по умолчанию:'
+          default_marker: По умолчанию
     shared:
       nav:
         menu: Меню

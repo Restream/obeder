@@ -33,7 +33,7 @@
 
 %p
   = t('.default_dishes')
-  = @default_dishes.names
+  = @default_dishes.decorate.names
 
 %table.table.table-condensed
   - @user_menus.each_with_index do |user_menu, i|
@@ -44,6 +44,7 @@
         #{i + 1}.
         = user_menu.user.name
       %td
-        .small= user_menu.dishes.ordered_by_name.decorate.names
+        - default_marker = t('.default_marker')
+        .small= user_menu.dishes.ordered_by_name.decorate.names_or_default(@default_dishes, default_marker)
       %td
         = user_menu.description

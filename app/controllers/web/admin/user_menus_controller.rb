@@ -22,7 +22,6 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
       .joins(:menu_dishes)
       .where(menu_dishes: { default: true })
       .ordered_by_name
-      .decorate
   end
 
 end
