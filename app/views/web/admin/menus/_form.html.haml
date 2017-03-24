@@ -7,7 +7,7 @@
     %br
     %br
 
-= simple_form_for @menu, html: { id: 'menu-form__form' }, url: admin_menu_path(@menu.date), method: :put do |f|
+= simple_form_for @menu, url: admin_menu_path(@menu.date), method: :put, html: { id: 'menu-form__form' } do |f|
   .row
     .col-md-12
       = f.error_notification
