@@ -23,12 +23,13 @@
       %hr
       .row
         .col-md-12
-          %b Не едят:
+          %b
+            = t('.dont_eat')
           = @neem_users.map(&:name).join(', ')
     .col-md-3.text-right.hidden-print
       %button.btn.btn-lg.btn-primary{onclick: "window.print()"}
         %span.glyphicon.glyphicon-print
-        Печать
+        = t('.print')
 
 %table.table.table-condensed
   - @user_menus.each_with_index do |user_menu, i|
