@@ -24,5 +24,4 @@ class Web::ApplicationController < ApplicationController
   def authorize_user
     authorize :user
   end
-
 end

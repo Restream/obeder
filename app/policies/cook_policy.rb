@@ -8,5 +8,4 @@ class CookPolicy < ApplicationPolicy
   def method_missing(name, *args)
     true
   end
-
 end

@@ -23,5 +23,4 @@ class Web::PasswordsController < Web::ApplicationController
   def password_params
     params.require(:user_password_edit_type).permit(:password, :password_confirmation)
   end
-
 end

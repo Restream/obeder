@@ -10,5 +10,4 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal [@user.email], mail.to
     assert_equal ['noreply@restream.rt.ru'], mail.from
   end
-
 end
