@@ -3,8 +3,8 @@
     <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
     <div class="content">
       <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
-      <div v-if="sortedDates.length === 0" class="bs-callout bs-callout-info">
-        <h4>К сожалению, меню еще не заполнено</h4>
+      <div v-if="sortedDates.length === 0" class="bs-callout">
+        <h4 class="title">К сожалению, меню еще не заполнено</h4>
       </div>
     </div>
   </div>
@@ -73,19 +73,11 @@
   padding: 20px;
   margin: 20px 0;
   border: 1px solid #eee;
-  border-left-width: 5px;
+  border-left: 5px solid #1b809e;
   border-radius: 3px;
-
-  & h4 {
-    margin: 0 0 5px;
-  }
 }
-
-.bs-callout-info {
-  border-left-color: #1b809e;
-
-  & h4 {
-    color: #1b809e;
-  }
+.title {
+  margin: 0 0 5px;
+  color: #1b809e;
 }
 </style>
