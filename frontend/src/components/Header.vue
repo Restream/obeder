@@ -9,18 +9,24 @@
 
     <div class="header__user">
       {{user.name}}
-      <router-link to='/logout'>Выйти</router-link>
+      <router-link class='logout_icon' to='/logout' v-hint.left.rounded='`Выйти`'>
+        <i class='fa fa-sign-out fa-lg' aria-hidden='true'></i>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
+  import Hint from 'vue-hint.css';
   import usersService from 'api/users';
   import Switcher from './Switcher';
 
   export default {
     components: {
       'header-switcher': Switcher,
+    },
+    directives: {
+      Hint,
     },
     name: 'Header',
     created() {
@@ -90,6 +96,11 @@
     left: 10px;
     align-items: center;
     display: none;
+  }
+
+  .logout_icon {
+    color:inherit;
+    text-decoration: none;
   }
 
   .logo {
