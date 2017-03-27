@@ -14,7 +14,9 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
       .where.not(user: @neem_users, users: { role: 'cook' })
       .ordered_by_user_name
 
-    @dishes_stats = @user_menus.map(&:dishes).flatten.group_by(&:name)
+    @dishes_stats = Dish.joins(:user_menus)
+      .where('user_menus.id IN (?)', @user_menus.pluck(:id))
+      .group_by(&:name)
       .map{ |key, value| { type: key, count: value.count } }
 
     menu = Menu.find_by(date: date)
