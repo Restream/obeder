@@ -30,7 +30,8 @@ ru:
           attributes:
             email:
               blank: Введите email
-              invalid_email: Введите Рестрим email, вида username@restream.rt.ru
+              invalid_email: Неправильный email
+              invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
             name:
               blank: Введите Фамилию и Имя
             role:
@@ -39,7 +40,8 @@ ru:
           attributes:
             email:
               blank: Введите email
-              invalid_email: Введите Рестрим email, вида username@restream.rt.ru
+              invalid_email: Неправильный email
+              invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
             password:
               blank: Введите пароль
               user_or_password_invalid: Email или пароль не правильные
