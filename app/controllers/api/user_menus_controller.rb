@@ -22,7 +22,7 @@ class Api::UserMenusController < Api::ApplicationController
   private
 
   def user_menu_params
-    params.require(:user_menu).permit(:description)
+    params.require(:user_menu).permit(:description, :neem)
   end
 
   def dishes_params

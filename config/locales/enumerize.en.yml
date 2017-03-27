@@ -1,0 +1,9 @@
+en:
+  enumerize:
+    dish:
+      dish_type:
+        soup: Soup
+        main_dish: Main dish
+        side_dish: Side dish
+        salad: Salad
+        separate_dish: Separate dish

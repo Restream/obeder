@@ -1,7 +1,11 @@
 class Web::Admin::DishesController < Web::Admin::ApplicationController
   def index
+    params[:q] ||= {}
+    params[:q][:dish_type_eq] ||= 'soup'
+
     @q = Dish.order(:name).ransack(params[:q])
     @dishes = @q.result.page(params[:page])
+    @selected_dish_type = params[:q][:dish_type_eq]
   end
 
   def new

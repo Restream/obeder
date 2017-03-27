@@ -11,17 +11,18 @@
     "webpack": "webpack --config frontend/build/webpack.prod.conf.js --display-error-details"
   },
   "dependencies": {
+    "font-awesome": "^4.7.0",
+    "hint.css": "^2.4.1",
     "humps": "^2.0.0",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
-    "node-sass": "^4.5.0",
     "postcss-cssnext": "^2.9.0",
     "postcss-import": "^9.1.0",
     "query-string": "^4.3.1",
-    "sass-loader": "^4.1.1",
     "uglify-js": "^2.7.5",
     "url-join": "^1.1.0",
     "vue": "^2.1.10",
+    "vue-hint.css": "^0.0.2",
     "vue-router": "^2.2.0",
     "whatwg-fetch": "^2.0.2"
   },

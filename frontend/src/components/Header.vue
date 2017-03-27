@@ -5,22 +5,20 @@
       <img class="logo_obeder" src="../assets/images/obeder.svg">
     </div>
 
-    <div class="header__switcher">
-      <span class="header__switcher-label">Не ем</span>
-      <label class="label">
-        <input type="checkbox" v-model="user.em" v-on:change="onChange(user.em)">
-        <span class="circle"></span>
-      </label>
-      <span class="header__switcher-label">Eм</span>
-    </div>
+    <header-switcher :isOn='isSwitchOn' @onToggle="headerSwitchToggle" />
+
     <div class="header__user">{{user.name}}</div>
   </div>
 </template>
 
 <script>
   import usersService from 'api/users';
+  import Switcher from './Switcher';
 
   export default {
+    components: {
+      'header-switcher': Switcher,
+    },
     name: 'Header',
     created() {
       const id = localStorage.getItem('user_uid');
@@ -33,25 +31,33 @@
               ...user,
               em: !user.neem,
             };
+            this.isSwitchOn = this.user.em;
+            this.$emit('onDisableMenuSwitchers', !this.isSwitchOn);
           },
           error => error,
         );
     },
+    mounted() {
+      this.$emit('onDisableMenuSwitchers', !this.isSwitchOn);
+    },
     data() {
       return {
         user: {},
+        isSwitchOn: false,
       };
     },
     methods: {
-      onChange(em) {
+      headerSwitchToggle(em) {
         const id = localStorage.getItem('user_uid');
         const payload = {
           user: {
             neem: !em,
           },
         };
-
         usersService.save(id, payload);
+        this.isSwitchOn = em;
+        this.user.em = em;
+        this.$emit('onDisableMenuSwitchers', !em);
       },
     },
   };
@@ -93,66 +99,6 @@
 
   .logo_obeder {
     height: 24px;
-  }
-
-  .header__switcher {
-    display: flex;
-    align-items: center;
-  }
-
-  .header__switcher-label {
-    font-weight: 400;
-    font-size: 20px;
-    color: #4D4D4D;
-    letter-spacing: 0.01px;
-    display: inline-block;
-    margin: 0 14px;
-  }
-
-  .label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    height: 26px;
-
-    & input {
-      display: none;
-    }
-
-    & input:checked {
-      & + .circle {
-        &::after {
-          transform: translateX(24px);
-          background: #38B5C7;
-          border: none;
-        }
-      }
-    }
-  }
-
-  .circle {
-    background: rgba(0,0,0,0.30);
-    height: 2px;
-    width: 50px;
-    position: relative;
-    top: 2px;
-    display: inline-block;
-    font-size: 0;
-
-    &::after {
-      content: '';
-      display: block;
-      width: 26px;
-      height: 26px;
-      position: absolute;
-      left: 0;
-      top: -13px;
-      background-color: #fff;
-      border: 2px solid #4a4a4a;
-      border-radius: 50%;
-      transition: transform 300ms ease-in-out;
-      box-sizing: border-box;
-    }
   }
 
   @media (--desktop) {

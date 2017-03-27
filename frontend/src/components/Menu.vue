@@ -1,8 +1,11 @@
 <template>
   <div class="menu">
-    <menu-header></menu-header>
+    <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
     <div class="content">
-      <daily-menu v-for="date in sortedDates" :day="date"></daily-menu>
+      <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
+      <div v-if="sortedDates.length === 0" class="bs-callout">
+        <h4 class="title">К сожалению, меню еще не заполнено</h4>
+      </div>
     </div>
   </div>
 </template>
@@ -35,11 +38,17 @@
     data() {
       return {
         dates: [],
+        headerSwitchIsDisabled: false,
       };
     },
     computed: {
       sortedDates() {
         return _.sortBy(this.dates, ['date']);
+      },
+    },
+    methods: {
+      disableMenuSwitchers(val) {
+        this.headerSwitchIsDisabled = val;
       },
     },
   };
@@ -59,5 +68,16 @@
   .content {
     padding: 30px 0;
   }
+}
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left: 5px solid #1b809e;
+  border-radius: 3px;
+}
+.title {
+  margin: 0 0 5px;
+  color: #1b809e;
 }
 </style>

@@ -21,3 +21,16 @@
 
 en:
   hello: "Hello world"
+
+  form:
+    confirm: Are you sure?
+    edit: Edit
+    delete: Delete
+    add: Create
+
+  list:
+    no_data: No data
+    actions: Actions
+
+  title:
+    dishes: Dishes

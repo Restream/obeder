@@ -1,0 +1,16 @@
+ru:
+  web:
+    admin:
+      menus:
+        edit:
+          menu_for: 'Меню на'
+        closest_days_menus:
+          closest_days_menus_btn: Меню на ближайшие дни
+          default: 'по умолчанию'
+        menu_dish_fields:
+          default: 'По умолчанию'
+          delete_dish: 'Удалить блюдо'
+        form:
+          publish_menu: 'Опубликовать меню'
+          add_dish: 'Добавить блюдо'
+          save: 'Сохранить'
