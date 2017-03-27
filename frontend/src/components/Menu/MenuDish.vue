@@ -18,7 +18,7 @@
           <span class="menu-dish__radio" />
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
-        <a href="#" v-if="dish.description.length > 0" v-hint.right.rounded="dish.description">
+        <a href="#" v-if="dish.description" v-hint.right.rounded="dish.description">
           <i class="fa fa-question-circle-o" aria-hidden="true"></i>
         </a>
       </li>
