@@ -3,7 +3,7 @@ class DishesDecorator < Draper::CollectionDecorator
     object.map(&:name).join(', ')
   end
 
-  def names_or_default(default_dishes, default_marker)
-    default_dishes == object ? default_marker : names
+  def names_or_default(default_dishes, default_text)
+    default_dishes == object ? default_text : names
   end
 end
