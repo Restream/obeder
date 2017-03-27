@@ -11,6 +11,7 @@ function resolve(dir) {
 module.exports = {
   entry: {
     app: './frontend/src/main.js',
+    styles: ['font-awesome/css/font-awesome.min.css', 'hint.css'],
     fetch: 'whatwg-fetch',
   },
   output: {
