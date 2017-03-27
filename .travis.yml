@@ -1,0 +1,4 @@
+rvm:
+  2.4.0
+script:
+  bundle && rake db:create db:migrate db:seed && rake test
