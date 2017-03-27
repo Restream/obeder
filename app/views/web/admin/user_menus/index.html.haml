@@ -25,7 +25,7 @@
         .col-md-12
           %b
             = t('.dont_eat')
-          = @neem_users.map(&:name).join(', ')
+          = @neem_users.decorate.names
     .col-md-3.text-right.hidden-print
       %button.btn.btn-lg.btn-primary{onclick: "window.print()"}
         %span.glyphicon.glyphicon-print
