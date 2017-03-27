@@ -17,10 +17,12 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
     @dishes_stats = @user_menus.map(&:dishes).flatten.group_by(&:name)
       .map{ |key, value| { type: key, count: value.count } }
 
-    @default_dishes = Menu.find_by(date: date)
-      .dishes
-      .joins(:menu_dishes)
-      .where(menu_dishes: { default: true })
-      .ordered_by_name
+    menu = Menu.find_by(date: date)
+    unless menu.nil?
+      @default_dishes = menu.dishes
+        .joins(:menu_dishes)
+        .where(menu_dishes: { default: true })
+        .ordered_by_name
+    end
   end
 end

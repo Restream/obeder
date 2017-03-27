@@ -33,7 +33,7 @@
 
 %p
   = t('.default_dishes')
-  = @default_dishes.decorate.names
+  = @default_dishes && @default_dishes.decorate.names
 
 %table.table.table-condensed
   - @user_menus.each_with_index do |user_menu, i|
