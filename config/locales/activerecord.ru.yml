@@ -12,6 +12,12 @@ ru:
         description: Описание
 
     errors:
+      messages:
+        less_than_two_soups: Менее двух супов
+        less_than_two_salads: Менее двух салатов
+        no_defaults: Блюда по умолчанию не указаны или указаны некорректно
+        main_to_side_dishes_mismatch: Количество гарниров не совпадает с количеством основных блюд
+        less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
       models:
         user:
           attributes:
@@ -20,4 +26,3 @@ ru:
               invalid_email: Введите Рестрим email, вида username@restream.rt.ru
             name:
               blank: Введите Фамилию и Имя
-

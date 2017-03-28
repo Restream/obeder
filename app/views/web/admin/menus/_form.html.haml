@@ -1,11 +1,13 @@
+= render 'validation_modal'
+
 .text-center
   - unless @menu.ready
-    = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
-      = f.button :submit, value: t('.publish_menu'), class: 'btn btn-lg btn-success'
+    %button{ id: 'menu-publish__btn', class: 'btn btn-lg btn-success', data: { toggle: :modal, target: '#menu-validation__modal' } }
+      = t('.publish_menu')
     %br
     %br
 
-= simple_form_for @menu, url: admin_menu_path(@menu.date), method: :put do |f|
+= simple_form_for @menu, url: admin_menu_path(@menu.date), method: :put, html: { id: 'menu-form__form' } do |f|
   .row
     .col-md-12
       = f.error_notification

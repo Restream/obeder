@@ -21,6 +21,13 @@ Rails.application.routes.draw do
         resources :menus, only: [:index]
       end
     end
+    namespace :admin do
+      resources :menus, param: :date do
+        member do
+          get :validate
+        end
+      end
+    end
     resources :dishes, only: [:index, :create, :update, :destroy]
     resources :menus, only: [:index, :create, :update, :destroy]
     resources :user_menus, only: [:index, :update]

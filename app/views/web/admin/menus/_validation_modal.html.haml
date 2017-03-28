@@ -1,0 +1,26 @@
+#menu-validation__modal.modal.fade{ role: :dialog, validationUrl: validate_api_admin_menu_path(@menu.date) }
+  .modal-dialog{ role: :document }
+    .modal-content
+      .modal-header
+        %button.close{ data: { dismiss: :modal } }
+          %span{ aria: { hidden: true } }
+            &times
+        %h4
+          = t('.publish_modal_header')
+      .modal-body
+        %p
+          %span.glyphicon.glyphicon-warning-sign
+          = t('.check_if_menu_saved')
+        %p#menu-validation__marker__in-validation
+          %span.glyphicon.glyphicon-refresh
+          = t('.validation_in_progress')
+        %p#menu-validation__marker__ok
+          %span.glyphicon.glyphicon-ok
+          = t('.validation_ok')
+        %p#menu-validation__marker__failed
+          %span.glyphicon.glyphicon-remove
+          = t('.validation_failed')
+        %ol#menu-validation__errors-list
+      .modal-footer
+        = simple_form_for @menu, url: approve_admin_menu_path(@menu.date), method: :put do |f|
+          = f.button :submit, value: t('.confirm'), id: 'menu-validation__submit-btn', class: 'btn btn-primary', disabled: true

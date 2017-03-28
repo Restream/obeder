@@ -12,6 +12,11 @@ class Web::Admin::MenusControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'update' do
+    put :update, params: { date: @menu.date, menu: { date: generate(:date) } }
+    assert_response :redirect
+  end
+
   test 'approve' do
     put :approve, params: { date: @menu.date.to_s }
     assert_response :redirect

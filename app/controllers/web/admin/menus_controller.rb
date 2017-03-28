@@ -1,14 +1,6 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
-  DATE_OFFSET = 2
-
   def edit
-    @date = date
     @menu = current_menu
-    @dishes = Dish.order(:name).all
-    @closest_days_menus = Menu.includes(menu_dishes: :dish)
-      .except_date(@date)
-      .for_date_range(@date, DATE_OFFSET)
-      .decorate
   end
 
   def update
@@ -46,7 +38,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   end
 
   def current_menu
-    Menu.for_date(params[:date]).first || Menu.create(date: params[:date])
+    Menu.current_menu(params[:date])
   end
 
   def date
