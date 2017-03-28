@@ -32,6 +32,7 @@ ru:
               blank: Введите email
               invalid_email: Неправильный email
               invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
+              taken: Пользователь с таким email уже существует
             name:
               blank: Введите Фамилию и Имя
             role:
