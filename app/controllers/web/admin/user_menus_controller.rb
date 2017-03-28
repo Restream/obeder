@@ -14,17 +14,10 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
       .where.not(user: @neem_users, users: { role: 'cook' })
       .ordered_by_user_name
 
-    @dishes_stats = Dish.joins(:user_menus)
-      .where('user_menus.id IN (?)', @user_menus.pluck(:id))
-      .group_by(&:name)
+    @dishes_stats = @user_menus.includes(:user_menu_dishes).map(&:dishes).flatten.group_by(&:name)
       .map{ |key, value| { type: key, count: value.count } }
 
     menu = Menu.find_by(date: date)
-    unless menu.nil?
-      @default_dishes = menu.dishes
-        .joins(:menu_dishes)
-        .where(menu_dishes: { default: true })
-        .ordered_by_name
-    end
+    @default_dishes = menu.dishes.where(menu_dishes: { default: true }).ordered_by_name if menu.present?
   end
 end

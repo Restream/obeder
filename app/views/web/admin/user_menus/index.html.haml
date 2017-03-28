@@ -45,6 +45,7 @@
         = user_menu.user.name
       %td
         - default_marker = t('.default_marker')
-        .small= user_menu.dishes.ordered_by_name.decorate.names_or_default(@default_dishes, default_marker)
+        .small
+          = user_menu.dishes.ordered_by_name.decorate.names_or_default(@default_dishes, default_marker)
       %td
         = user_menu.description
