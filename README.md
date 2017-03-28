@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/bukaninandrei/obeder.svg?branch=feature%2F%2330)](https://travis-ci.org/bukaninandrei/obeder)
+
 ## Setup
 
  * docker-compose up
