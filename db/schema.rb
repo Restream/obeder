@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211145604) do
+ActiveRecord::Schema.define(version: 20170328131232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170211145604) do
     t.integer "user_menu_id"
     t.integer "dish_id"
     t.index ["dish_id"], name: "index_user_menu_dishes_on_dish_id", using: :btree
+    t.index ["user_menu_id", "dish_id"], name: "index_user_menu_dishes_on_user_menu_id_and_dish_id", unique: true, using: :btree
     t.index ["user_menu_id"], name: "index_user_menu_dishes_on_user_menu_id", using: :btree
   end
 
