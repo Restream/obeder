@@ -2,7 +2,7 @@
   <div class="menu-dish">
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
-      <li v-for="dish in dishes">
+      <li v-for="dish in dishes" class="menu-dish__item">
         <label
           class="menu-dish__label"
           :for="date + dish.id"
@@ -18,9 +18,7 @@
           <span class="menu-dish__radio" />
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
-        <span v-if="dish.description" v-hint.right.rounded="dish.description">
-          <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-        </span>
+        <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
       </li>
     </ul>
   </div>
@@ -28,7 +26,6 @@
 
 <script>
   import _ from 'lodash';
-  import Hint from 'vue-hint.css';
   import MenuPresenter from '../../presenters/MenuPresenter';
 
   function getSelectedDishId(dishes) {
@@ -44,9 +41,6 @@
       dishes: Array,
       type: String,
       onChange: Function,
-    },
-    directives: {
-      Hint,
     },
     watch: {
       selectedDish(dish) {
@@ -65,7 +59,7 @@
     },
   };
 </script>
-<style scoped>
+<style scoped type="less">
 @import "../../assets/styles/variables.css";
 
 .menu-dish {
@@ -75,6 +69,10 @@
   box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
   border-radius: 3px;
   padding: 16px 13px;
+}
+
+.menu-dish__item {
+  margin-bottom: 10px;
 }
 
 .menu-dish__header {
@@ -88,7 +86,6 @@
 .menu-dish__label {
   cursor: pointer;
   display: inline-flex;
-  margin-bottom: 10px;
 
   & input {
     display: none;
@@ -136,7 +133,14 @@
   font-size: 16px;
   color: #000000;
   letter-spacing: 0.01px;
-  padding-top: 3px;
+  padding-top: 1px;
+}
+
+.menu-dish__description {
+  font-size: 10px;
+  margin-left: 30px;
+  text-align: justify;
+  display: block;
 }
 
 @media (--desktop) {
