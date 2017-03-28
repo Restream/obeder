@@ -2,8 +2,7 @@ class UserSignInType < ActiveType::Object
   attribute :email, :string
   attribute :password, :string
 
-  validates :email, presence: true, restream_email: true
-  validates :password, presence: true
+  validates :email, :password, presence: true
   validate :check_authenticate, if: :email
 
   def user
