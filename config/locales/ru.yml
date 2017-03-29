@@ -75,6 +75,10 @@ ru:
     dishes: Блюда
 
   save: Сохранить
+  add: Добавить
+  edit: Редактировать
+  delete: Удалить
+  are_you_sure: Вы уверены?
   password_changed: Пароль изменен успешно
   authenticate_to_change_password: Авторизуйтесь для смены пароля
   password_not_set: Пароль не установлен

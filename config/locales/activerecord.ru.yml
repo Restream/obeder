@@ -11,6 +11,9 @@ ru:
         neem: Не есть
         description: Описание
         role: Роль
+        aasm_state:
+          active: Активный
+          inactive: Неактивный
       user_sign_in_type:
         email: Email
         password: Пароль
