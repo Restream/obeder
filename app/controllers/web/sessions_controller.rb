@@ -7,13 +7,16 @@ class Web::SessionsController < Web::ApplicationController
 
   def create
     @session = UserSignInType.new(user_sign_in_type_params)
+    user = @session.user
 
-    if @session.valid?
-      user = @session.user
+    if user.blank?
+      flash[:error] = t('user_not_found')
+      redirect_to login_path
+    elsif user.active? && @session.valid?
       sign_in(user)
-
       redirect_to (user.role.admin? || user.role.cook?) ? admin_root_path : root_path
     else
+      flash.now[:error] = t('password_not_set') if user.inactive?
       render :new
     end
   end
