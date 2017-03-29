@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/Restream/obeder.svg?branch=develop)](https://travis-ci.org/Restream/obeder)
+
 ## Setup
 
  * docker-compose up
