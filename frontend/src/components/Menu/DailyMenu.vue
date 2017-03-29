@@ -46,7 +46,6 @@
   const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
 
   let lastState;
-  let commentSendTimeout;
 
   function getSelectedDishes(dishTypes) {
     return _.reduce(dishTypes, (acc, dishes) => {
@@ -64,10 +63,6 @@
       ...dish,
       selected: false,
     }));
-  }
-
-  function areSameStates(oldState, newState) {
-    return _.isEqual(oldState, newState);
   }
 
   export default {
@@ -98,6 +93,9 @@
         errors: [],
       };
     },
+    created() {
+      this.sendComment = _.debounce(this.sendData, COMMENT_SEND_TIMEOUT);
+    },
     methods: {
       sendData() {
         const currentState = {
@@ -106,7 +104,7 @@
           neem: this.day.neem,
         };
 
-        if (areSameStates(lastState, currentState)) return;
+        if (_.isEqual(lastState, currentState)) return;
 
         lastState = currentState;
         usersService
@@ -187,11 +185,7 @@
 
       onChangeComment(event) {
         this.day.description = event.target.value;
-        if (commentSendTimeout) {
-          clearTimeout(commentSendTimeout);
-          commentSendTimeout = null;
-        }
-        commentSendTimeout = setTimeout(this.sendData, COMMENT_SEND_TIMEOUT);
+        this.sendComment();
       },
 
       menuSwitchToggle(value) {
