@@ -1,15 +1,16 @@
-class Web::PasswordsController < Web::ApplicationController
-  layout 'session'
-
+class Web::User::PasswordsController < Web::User::ApplicationController
   def edit
-    return redirect_to(root_path) unless params[:id]
     @user = UserPasswordEditType.new
   end
 
   def update
-    return redirect_to(root_path) unless params[:id]
-    @user = UserPasswordEditType.find(params[:id])
-    if (@user.active? && (current_user.try(:id) != @user.id))
+    @user = UserPasswordEditType.find_by_id(params[:user_id])
+
+    if @user.blank?
+      flash[:error] = t('user_not_found')
+      redirect_to edit_user_password_path
+    elsif
+      @user.active? && (current_user.try(:id) != @user.id)
       flash[:error] = t('authenticate_to_change_password')
       redirect_to login_path
     elsif @user.update(password_params)

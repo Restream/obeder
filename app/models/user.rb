@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  include AASM
   extend Enumerize
+  include AASM
 
   aasm do
     state :inactive, :initial => true

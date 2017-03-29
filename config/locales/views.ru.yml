@@ -31,6 +31,7 @@ ru:
       new:
         title: Вход
         login: Вход
-    passwords:
-      edit:
-        title: Установка пароля
+    user:
+      passwords:
+        edit:
+          title: Установка пароля

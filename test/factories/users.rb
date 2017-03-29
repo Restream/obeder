@@ -5,6 +5,7 @@ FactoryGirl.define do
     password { generate :string }
     role 'user'
     description
+    aasm_state 'active'
 
     trait :admin do
       role 'admin'
