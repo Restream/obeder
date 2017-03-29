@@ -76,6 +76,7 @@ ru:
 
   save: Сохранить
   password_changed: Пароль изменен успешно
+  authenticate_to_change_password: Авторизуйтесь для смены пароля
   logout: Выйти
   obeder: Обедер
 

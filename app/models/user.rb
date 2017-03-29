@@ -1,5 +1,15 @@
 class User < ApplicationRecord
+  include AASM
   extend Enumerize
+
+  aasm do
+    state :inactive, :initial => true
+    state :active
+
+    event :activate do
+      transitions from: [:active, :inactive], to: :active
+    end
+  end
 
   has_many :user_menus, dependent: :destroy
   has_many :menus, through: :user_menus

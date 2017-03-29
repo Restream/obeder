@@ -9,8 +9,11 @@ class Web::PasswordsController < Web::ApplicationController
   def update
     return redirect_to(root_path) unless params[:id]
     @user = UserPasswordEditType.find(params[:id])
-
-    if @user.update(password_params)
+    if (@user.active? && (current_user.try(:id) != @user.id))
+      flash[:error] = t('authenticate_to_change_password')
+      redirect_to login_path
+    elsif @user.update(password_params)
+      @user.activate!
       flash[:success] = t('password_changed')
       redirect_to login_path
     else
