@@ -6,6 +6,10 @@
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
 
+    <div v-if="errors.length > 0" class="daily-menu__errors">
+      <span>{{errors.join(', ')}}</span>
+    </div>
+
     <div class="daily-menu__list">
       <menu-dish
         :date="date"
@@ -33,9 +37,10 @@
   import MenuPresenter from '../../presenters/MenuPresenter';
   import Switcher from '../Switcher';
 
-  let lastState;
-
   const userId = localStorage.getItem('user_uid');
+  const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу';
+
+  let lastState;
 
   function getSelectedDishes(dishTypes) {
     return _.reduce(dishTypes, (acc, dishes) => {
@@ -84,6 +89,7 @@
         date: MenuPresenter.date(this.day.date),
         dishTypes: types,
         isSwitchOn: !this.day.neem,
+        errors: [],
       };
     },
     methods: {
@@ -94,15 +100,13 @@
           neem: this.day.neem,
         };
 
-        if (areSameStates(lastState, currentState)) {
-          return;
-        }
+        if (areSameStates(lastState, currentState)) return;
 
         lastState = currentState;
         usersService
           .setMenu(userId, this.day.id, currentState)
-          .catch((err) => {
-            alert(err);
+          .catch(() => {
+            this.errors.push(MENU_SAVE_ERROR);
           });
       },
 
@@ -227,6 +231,15 @@
     color: #333;
     transition: color 300ms ease-in-out;
   }
+}
+
+.daily-menu__errors {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  opacity: 0.7;
 }
 
 .daily-menu__actions {
