@@ -33,6 +33,7 @@
   import MenuPresenter from '../../presenters/MenuPresenter';
   import Switcher from '../Switcher';
 
+  let lastState;
 
   const userId = localStorage.getItem('user_uid');
 
@@ -52,6 +53,10 @@
       ...dish,
       selected: false,
     }));
+  }
+
+  function areSameStates(oldState, newState) {
+    return _.isEqual(oldState, newState);
   }
 
   export default {
@@ -83,9 +88,22 @@
     },
     methods: {
       sendData() {
+        const currentState = {
+          dishes: getSelectedDishes(this.dishTypes),
+          description: this.day.description,
+          neem: this.day.neem,
+        };
+
+        if (areSameStates(lastState, currentState)) {
+          return;
+        }
+
+        lastState = currentState;
         usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), this.day.description,
-            this.day.neem);
+          .setMenu(userId, this.day.id, currentState)
+          .catch((err) => {
+            alert(err);
+          });
       },
 
       setToDefault() {
