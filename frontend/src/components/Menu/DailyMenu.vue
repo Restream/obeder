@@ -7,7 +7,11 @@
     </h1>
 
     <div v-if="errors.length > 0" class="daily-menu__errors">
-      <span>{{errors.join(', ')}}</span>
+      <ul>
+        <li v-for="error in errors">
+          {{error}}
+        </li>
+      </ul>
     </div>
 
     <div class="daily-menu__list">
@@ -38,7 +42,7 @@
   import Switcher from '../Switcher';
 
   const userId = localStorage.getItem('user_uid');
-  const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу';
+  const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
 
   let lastState;
 
