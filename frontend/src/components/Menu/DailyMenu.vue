@@ -42,9 +42,11 @@
   import Switcher from '../Switcher';
 
   const userId = localStorage.getItem('user_uid');
+  const COMMENT_SEND_TIMEOUT = 350;
   const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
 
   let lastState;
+  let commentSendTimeout;
 
   function getSelectedDishes(dishTypes) {
     return _.reduce(dishTypes, (acc, dishes) => {
@@ -185,7 +187,11 @@
 
       onChangeComment(event) {
         this.day.description = event.target.value;
-        this.sendData();
+        if (commentSendTimeout) {
+          clearTimeout(commentSendTimeout);
+          commentSendTimeout = null;
+        }
+        commentSendTimeout = setTimeout(this.sendData, COMMENT_SEND_TIMEOUT);
       },
 
       menuSwitchToggle(value) {
