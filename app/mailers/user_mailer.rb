@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  def set_password(user)
+  def change_password(user)
     @user = user
     mail to: user.email
   end

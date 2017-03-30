@@ -1,6 +1,6 @@
 ru:
   user_mailer:
-    set_password:
+    change_password:
       subject: Obeder. Установка пароля.
 
   date:

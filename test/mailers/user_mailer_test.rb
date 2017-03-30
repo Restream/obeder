@@ -5,8 +5,8 @@ class UserMailerTest < ActionMailer::TestCase
     @user = create :user
   end
 
-  test 'set_password' do
-    mail = UserMailer.set_password(@user)
+  test 'change_password' do
+    mail = UserMailer.change_password(@user)
     assert_equal [@user.email], mail.to
     assert_equal ['noreply@restream.rt.ru'], mail.from
   end
