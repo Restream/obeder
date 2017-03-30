@@ -4,7 +4,7 @@ class DishesService
       menus = Menu.where('date >= ?', Date.current).ready
       menus.each do |menu|
         user_menu = UserMenu.create(user: user, menu: menu, neem: user.neem)
-        menu_dishes = menu.menu_dishes.default.includes(:dish)
+        menu_dishes = menu.menu_dishes.with_dish.default
         dishes = menu_dishes.map(&:dish)
         user_menu.dishes << dishes
       end

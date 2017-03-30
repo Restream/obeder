@@ -6,7 +6,7 @@ class UserSignInType < ActiveType::Object
   validate :check_authenticate, if: :email
 
   def user
-    ::User.find_by(email: email.mb_chars.downcase)
+    User.find_by(email: email.mb_chars.downcase)
   end
 
   private

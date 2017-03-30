@@ -2,15 +2,6 @@ class User < ApplicationRecord
   extend Enumerize
   include AASM
 
-  aasm do
-    state :inactive, :initial => true
-    state :active
-
-    event :activate do
-      transitions from: [:active, :inactive], to: :active
-    end
-  end
-
   has_many :user_menus, dependent: :destroy
   has_many :menus, through: :user_menus
 
@@ -23,4 +14,13 @@ class User < ApplicationRecord
   has_secure_password validations: false
 
   enumerize :role, in: [:admin, :cook, :user], default: :user
+
+  aasm do
+    state :inactive, :initial => true
+    state :active
+
+    event :activate do
+      transitions from: [:active, :inactive], to: :active
+    end
+  end
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Web::Admin::UsersControllerTest < ActionController::TestCase
   setup do
-    @user = create :user_with_user_menus, neem: false
+    @user = create :user, :with_user_menu_dishes, neem: false
     @admin = create :user, :admin
     sign_in @admin
     @user_attrs = attributes_for :user

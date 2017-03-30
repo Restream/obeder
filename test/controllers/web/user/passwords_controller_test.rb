@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Web::User::PasswordsControllerTest < ActionController::TestCase
   setup do
-    @user = create :user_with_user_menus
+    @user = create :user, :with_user_menu_dishes
   end
 
   test 'edit' do

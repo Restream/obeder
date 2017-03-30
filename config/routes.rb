@@ -8,8 +8,8 @@ Rails.application.routes.draw do
       end
     end
     resource :session, only: [:new, :create, :destroy]
-    get 'login' => 'sessions#new'
-    get 'logout' => 'sessions#destroy'
+    get :login, to: :new, controller: :sessions
+    get :logout, to: :destroy, controller: :sessions
 
     namespace :admin do
       root to: 'welcome#index'
