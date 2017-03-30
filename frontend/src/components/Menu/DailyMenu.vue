@@ -41,7 +41,6 @@
   import MenuPresenter from '../../presenters/MenuPresenter';
   import Switcher from '../Switcher';
 
-  const userId = localStorage.getItem('user_uid');
   const COMMENT_SEND_TIMEOUT = 350;
   const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
 
@@ -108,7 +107,7 @@
 
         lastState = currentState;
         usersService
-          .setMenu(userId, this.day.id, currentState)
+          .setMenu(this.day.id, currentState)
           .catch(() => {
             this.errors.push(MENU_SAVE_ERROR);
           });

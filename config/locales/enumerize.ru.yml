@@ -7,3 +7,8 @@ ru:
         side_dish: Гарнир
         salad: Салат
         separate_dish: Самостоятельное блюдо
+    user:
+      role:
+        admin: Админ
+        cook: Повар
+        user: Пользователь

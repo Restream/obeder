@@ -21,3 +21,17 @@ ru:
           validation_ok: Валидация прошла успешно
           validation_failed: Во время валидации возникли ошибки
           confirm: Подтвердить
+    shared:
+      nav:
+        menu: Меню
+        reports: Отчеты
+        dishes: Блюда
+        users: Пользователи
+    sessions:
+      new:
+        title: Вход
+        login: Вход
+    user:
+      passwords:
+        edit:
+          title: Установка пароля

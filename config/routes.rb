@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   scope module: :web do
     root to: 'welcome#index'
 
+    resources :user, only: [] do
+      scope module: :user do
+        resource :password, only: [:edit, :update]
+      end
+    end
+    resource :session, only: [:new, :create, :destroy]
+    get :login, to: 'sessions#new'
+    get :logout, to: 'sessions#destroy'
+
     namespace :admin do
       root to: 'welcome#index'
       resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]
@@ -16,8 +25,8 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :users, only: [:index, :show, :update] do
-      scope module: :users do
+    resource :user, only: [:show, :update] do
+      scope module: :user do
         resources :menus, only: [:index]
       end
     end

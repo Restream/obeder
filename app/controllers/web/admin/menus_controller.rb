@@ -1,4 +1,6 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
+  before_action :authorize_cook
+
   def edit
     @menu = current_menu
   end

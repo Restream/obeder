@@ -1,5 +1,6 @@
 class Web::WelcomeController < Web::ApplicationController
-  http_basic_authenticate_with name: 'user', password: 'password'
+  before_action :authorize_user
+  after_action :verify_authorized
 
   def index
   end
