@@ -1,6 +1,5 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
   before_action :authorize_cook
-  DATE_OFFSET = 2
 
   def edit
     @menu = current_menu
