@@ -2,6 +2,8 @@ ru:
   user_mailer:
     change_password:
       subject: Obeder. Установка пароля.
+    notify_menu_changed:
+      subject: Obeder. Новое меню.
 
   date:
     formats:
