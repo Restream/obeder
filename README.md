@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/Restream/obeder.svg?branch=develop)](https://travis-ci.org/Restream/obeder)
 
 ## Setup
-
  * docker-compose up
  * docker-compose exec web yarn
  * docker-compose exec web yarn build
