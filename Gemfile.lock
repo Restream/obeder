@@ -72,6 +72,9 @@ GEM
     byebug (9.0.6)
     case_transform (0.2)
       activesupport
+    clockwork (2.0.2)
+      activesupport
+      tzinfo
     cocoon (1.2.9)
     commonjs (0.2.7)
     concurrent-ruby (1.0.4)
@@ -271,6 +274,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bullet
   byebug
+  clockwork
   cocoon
   config
   draper (= 3.0.0.pre1)
