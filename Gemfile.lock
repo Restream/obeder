@@ -73,6 +73,10 @@ GEM
     cocoon (1.2.9)
     commonjs (0.2.7)
     concurrent-ruby (1.0.4)
+    config (1.4.0)
+      activesupport (>= 3.0)
+      deep_merge (~> 1.1.1)
+    deep_merge (1.1.1)
     diff-lcs (1.2.5)
     draper (3.0.0.pre1)
       actionpack (~> 5.0)
@@ -263,6 +267,7 @@ DEPENDENCIES
   bullet
   byebug
   cocoon
+  config
   draper (= 3.0.0.pre1)
   enumerize
   factory_girl_rails

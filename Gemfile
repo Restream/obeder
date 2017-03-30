@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'twitter-bootstrap-rails'
 gem 'active_link_to'
+gem 'config'
 
 gem 'aasm'
 gem 'bcrypt'
