@@ -1,5 +1,5 @@
 <template>
-  <div class="daily-menu">
+  <div class="daily-menu" v-bind:class="{ disable: !this.day.editable }">
     <h1 class="date">
       <span>{{date}}</span>
       <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
