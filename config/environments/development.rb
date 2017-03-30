@@ -38,8 +38,7 @@ Rails.application.configure do
     address: 'smtp.sendgrid.net',
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],
-    # FIXME move domain to config
-    domain: 'obeder.heroku.com',
+    domain: Settings.domain,
     authentication: :plain,
   }
 
