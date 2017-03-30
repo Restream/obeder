@@ -19,6 +19,7 @@ Deploy:
  * heroku buildpacks:add heroku/ruby
  * heroku config:set NPM_CONFIG_PRODUCTION=false
  * heroku addons:create heroku-postgresql:hobby-dev
+ * heroku addons:create sendgrid:starter
  * git push heroku master
 
 ## Add new user
