@@ -8,6 +8,9 @@
  * docker-compose exec web yarn
  * docker-compose exec web yarn build
 
+ Если возникает ошибка `ERROR: Couldn't find env file: /Users/maksim/Workspace/obeder/secrets.env`,
+ берем файлик secrets.sample.env, копируем его и соответствующим образом называем.
+
 ## EZ deploy
 
 Download and install the Heroku CLI. (brew install heroku or download pkg)
