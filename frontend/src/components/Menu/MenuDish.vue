@@ -59,7 +59,7 @@
     },
   };
 </script>
-<style scoped type="less">
+<style scoped>
 @import "../../assets/styles/variables.css";
 
 .menu-dish {
