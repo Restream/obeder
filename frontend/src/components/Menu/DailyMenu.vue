@@ -41,7 +41,6 @@
   import MenuPresenter from '../../presenters/MenuPresenter';
   import Switcher from '../Switcher';
 
-  const userId = localStorage.getItem('user_uid');
   const COMMENT_SEND_TIMEOUT = 350;
   const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
 
