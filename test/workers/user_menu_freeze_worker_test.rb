@@ -5,8 +5,8 @@ class UserMenuFreezeWorkerTest < ActiveSupport::TestCase
     @em_users = create_list :user, 5, neem: false
     @neem_users = create_list :user, 5, neem: true
     menu = create :menu, date: Date.tomorrow
-    @em_users.each { |user| create :user_menu, user: user, menu: menu, neem: false }
-    @neem_users.each { |user| create :user_menu, user: user, menu: menu, neem: false }
+    users = @em_users + @neem_users
+    users.each { |user| create :user_menu, user: user, menu: menu, neem: false }
   end
 
   test 'user_menus_freeze' do
