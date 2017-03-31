@@ -9,6 +9,6 @@ handler do |job|
   puts "Running #{job}"
 end
 
-every(1.second, 'guzzle.update', at: Settings.worker_guzzle_at) do
-  GuzzleWorker.perform_async
+every(1.day, 'freeze_user_menu', at: Settings.freeze_user_menu_at) do
+  UserMenuFreezeWorker.perform_async
 end

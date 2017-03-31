@@ -23,6 +23,4 @@ ADD . /app
 
 EXPOSE 3000
 
-RUN rm -rf /var/lib/apt/lists/*
-
-CMD bash start.sh
+CMD bundle && rake db:create db:migrate db:seed && rm -f tmp/pids/server.pid && rails s -b '0.0.0.0'

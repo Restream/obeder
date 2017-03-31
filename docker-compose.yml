@@ -12,6 +12,7 @@ web:
     - db
     - redis
   env_file:
+    - web.env
     - secrets.env
 
 db:
