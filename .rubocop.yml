@@ -7,6 +7,8 @@ AllCops:
     - '**/templates/**/*'
     - '**/vendor/**/*'
     - 'actionpack/lib/action_dispatch/journey/parser.rb'
+    - 'db/**'
+    - 'bin/**'
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
@@ -49,7 +51,7 @@ Style/HashSyntax:
 # extra level of indentation.
 Style/IndentationConsistency:
   Enabled: true
-  EnforcedStyle: rails
+  EnforcedStyle: normal
 
 # Two spaces, no tabs (for indentation).
 Style/IndentationWidth:
