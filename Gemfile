@@ -28,8 +28,9 @@ gem 'cocoon'
 gem 'draper', '3.0.0.pre1'
 gem 'active_type'
 gem 'pundit'
-gem 'clockwork', require: false
-gem 'sidekiq', require: false
+gem 'clockwork'
+gem 'sidekiq'
+gem 'redis-namespace'
 
 group :development, :test do
   gem 'byebug', platform: :mri

@@ -1,2 +1,3 @@
 closest_menus_date_offset: 2
 domain: obeder.heroku.com
+worker_guzzle_at: '19:00'

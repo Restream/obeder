@@ -6,15 +6,11 @@ web:
     - ~/.bash_history:/root/.bash_history
   volumes_from:
     - bundle_cache
-  environment: &app_environment
-    DATABASE_HOST: db
-    DATABASE_PORT: 5432
-    DATABASE_USERNAME: postgres
-    DATABASE_PASSWORD:
   ports:
     - 3000:3000
   links: &app_links
     - db
+    - redis
   env_file:
     - secrets.env
 
@@ -25,3 +21,6 @@ bundle_cache:
   image: busybox
   volumes:
     - /bundle_cache
+
+redis:
+  image: redis:3.0

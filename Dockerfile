@@ -1,6 +1,6 @@
 FROM ruby:2.4.0
 
-RUN apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev curl
+RUN apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev curl redis-tools
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g yarn
@@ -23,4 +23,6 @@ ADD . /app
 
 EXPOSE 3000
 
-CMD bundle && rake db:create db:migrate db:seed && rm -f tmp/pids/server.pid && rails s -b '0.0.0.0'
+RUN rm -rf /var/lib/apt/lists/*
+
+CMD bash start.sh
