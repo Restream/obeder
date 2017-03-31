@@ -4,9 +4,7 @@ AllCops:
   # to ignore them, so only the ones explicitly set in this file are enabled.
   DisabledByDefault: true
   Exclude:
-    - '**/templates/**/*'
     - '**/vendor/**/*'
-    - 'actionpack/lib/action_dispatch/journey/parser.rb'
     - 'db/**'
     - 'bin/**'
 
@@ -51,7 +49,6 @@ Style/HashSyntax:
 # extra level of indentation.
 Style/IndentationConsistency:
   Enabled: true
-  EnforcedStyle: normal
 
 # Two spaces, no tabs (for indentation).
 Style/IndentationWidth:
@@ -123,4 +120,7 @@ Lint/EndAlignment:
 
 # Use my_method(my_arg) not my_method( my_arg ) or my_method my_arg.
 Lint/RequireParentheses:
+  Enabled: true
+
+Bundler/DuplicatedGem:
   Enabled: true
