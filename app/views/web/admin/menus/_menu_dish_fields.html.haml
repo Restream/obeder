@@ -4,7 +4,7 @@
       = f.input :default, label: t('.default')
     .col-md-7
       = f.input :dish_id, as: :select, collection: Dish.ordered_by_name.decorate,
-          label_method: :name_and_type, label: false
+          label_method: :name_with_type, label: false
     .col-md-3.text-right
       = link_to_remove_association t('.delete_dish'), f, class: 'btn btn-danger'
   %hr
