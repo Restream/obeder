@@ -84,6 +84,7 @@ ru:
   password_changed: Пароль изменен успешно
   authenticate_to_change_password: Авторизуйтесь для смены пароля
   password_not_set: Пароль не установлен
+  password_has_been_reset: Пароль был сброшен, проверьте свой email
   user_not_found: Пользователь не найден
   logout: Выйти
   obeder: Обедер

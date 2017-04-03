@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resource :password, only: [:edit, :update]
       end
     end
+    resource :remind_password, only: [:edit, :update]
     resource :session, only: [:new, :create, :destroy]
     get :login, to: 'sessions#new'
     get :logout, to: 'sessions#destroy'

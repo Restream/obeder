@@ -28,24 +28,26 @@ ru:
         no_defaults: Блюда по умолчанию не указаны или указаны некорректно
         main_to_side_dishes_mismatch: Количество гарниров не совпадает с количеством основных блюд
         less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
+        invalid_email: Неправильный email
+        invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
       models:
         user:
           attributes:
             email:
               blank: Введите email
-              invalid_email: Неправильный email
-              invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
               taken: Пользователь с таким email уже существует
             name:
               blank: Введите Фамилию и Имя
             role:
               blank: Выберите роль
+        user_remind_password_type:
+          attributes:
+            email:
+              blank: Введите email
         user_sign_in_type:
           attributes:
             email:
               blank: Введите email
-              invalid_email: Неправильный email
-              invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
             password:
               blank: Введите пароль
               user_or_password_invalid: Email или пароль не правильные
