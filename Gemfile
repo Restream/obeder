@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'twitter-bootstrap-rails'
 gem 'active_link_to'
+gem 'config'
 
 gem 'aasm'
 gem 'bcrypt'
@@ -24,10 +25,14 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'enumerize'
 gem 'simple_form'
 gem 'cocoon'
+gem 'draper', '3.0.0.pre1'
+gem 'active_type'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_girl_rails', require: false
+  gem 'bullet'
 end
 
 group :development do

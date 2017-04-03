@@ -1,16 +1,18 @@
+= render 'closest_days_menus'
 .row
   .col-md-3
-    = link_to edit_admin_menu_path(@date - 1) do
+    = link_to edit_admin_menu_path(@menu.date - 1) do
       %h2.glyphicon.glyphicon-chevron-left
   .col-md-6
     %h1.text-center
-      Меню на
-      =l @date, format: :menu_date
+      = t('.menu_for')
+      = l @menu.date, format: :menu_date
   .col-md-3
     .text-right
-      = link_to edit_admin_menu_path(@date + 1) do
+      = link_to edit_admin_menu_path(@menu.date + 1) do
         %h2.glyphicon.glyphicon-chevron-right
 
 %br
 %br
 = render 'form'
+= javascript_include_tag 'web/admin/menus/edit'

@@ -2,7 +2,7 @@
   <div class="menu-dish">
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
-      <li v-for="dish in dishes">
+      <li v-for="dish in dishes" class="menu-dish__item">
         <label
           class="menu-dish__label"
           :for="date + dish.id"
@@ -18,6 +18,7 @@
           <span class="menu-dish__radio" />
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
+        <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
       </li>
     </ul>
   </div>
@@ -41,7 +42,6 @@
       type: String,
       onChange: Function,
     },
-
     watch: {
       selectedDish(dish) {
         this.onChange(this.type, dish);
@@ -59,7 +59,6 @@
     },
   };
 </script>
-
 <style scoped>
 @import "../../assets/styles/variables.css";
 
@@ -72,6 +71,10 @@
   padding: 16px 13px;
 }
 
+.menu-dish__item {
+  margin-bottom: 10px;
+}
+
 .menu-dish__header {
   margin-bottom: 12px;
   font-weight: 500;
@@ -82,8 +85,7 @@
 
 .menu-dish__label {
   cursor: pointer;
-  display: flex;
-  margin-bottom: 10px;
+  display: inline-flex;
 
   & input {
     display: none;
@@ -131,7 +133,14 @@
   font-size: 16px;
   color: #000000;
   letter-spacing: 0.01px;
-  padding-top: 3px;
+  padding-top: 1px;
+}
+
+.menu-dish__description {
+  font-size: 10px;
+  margin-left: 30px;
+  text-align: justify;
+  display: block;
 }
 
 @media (--desktop) {

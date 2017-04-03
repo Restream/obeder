@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default_url_options[:host] = "https://#{ Settings.domain }"
+  default from: 'noreply@restream.rt.ru'
   layout 'mailer'
 end

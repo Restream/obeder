@@ -10,3 +10,8 @@ app/views/web/welcome/index.html
 npm-debug.log
 node_modules
 .vscode
+secrets.env
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml

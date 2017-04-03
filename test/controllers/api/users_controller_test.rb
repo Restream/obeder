@@ -3,10 +3,7 @@ require 'test_helper'
 class Api::UsersControllerTest < ActionController::TestCase
   setup do
     @user = create :user, neem: false
-  end
-  test 'index' do
-    get :index
-    assert_response :success
+    sign_in @user
   end
 
   test 'show' do

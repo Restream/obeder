@@ -1,0 +1,48 @@
+ru:
+  web:
+    admin:
+      menus:
+        edit:
+          menu_for: Меню на
+        closest_days_menus:
+          closest_days_menus_btn: Меню на ближайшие дни
+          default: по умолчанию
+        menu_dish_fields:
+          default: По умолчанию
+          delete_dish: Удалить блюдо
+        form:
+          publish_menu: Опубликовать меню
+          add_dish: Добавить блюдо
+          save: Сохранить
+        validation_modal:
+          publish_modal_header: Подтвердите публикацию меню
+          check_if_menu_saved: Проверьте, сохранено ли меню!
+          validation_in_progress: Валидация меню...
+          validation_ok: Валидация прошла успешно
+          validation_failed: Во время валидации возникли ошибки
+          confirm: Подтвердить
+      user_menus:
+        index:
+          print: Печать
+          dont_eat: 'Не едят:'
+          default_dishes: 'Блюда по умолчанию:'
+          default_marker: По умолчанию
+    shared:
+      nav:
+        menu: Меню
+        reports: Отчеты
+        dishes: Блюда
+        users: Пользователи
+    sessions:
+      new:
+        title: Вход
+        login: Вход
+        did_you_forgot_password: Забыли пароль?
+    remind_passwords:
+      edit:
+        title: Восстановление пароля
+        reset_password: Сбросить пароль
+    user:
+      passwords:
+        edit:
+          title: Установка пароля

@@ -1,5 +1,6 @@
 class Dish < ApplicationRecord
   extend Enumerize
+  include DishRepository
 
   has_many :menu_dishes
   has_many :menus, through: :menu_dishes

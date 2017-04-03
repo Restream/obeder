@@ -1,8 +1,8 @@
-let path = require('path');
-let utils = require('./utils');
-let config = require('../config');
-let vueLoaderConfig = require('./vue-loader.conf');
-let eslintFriendlyFormatter = require('eslint-friendly-formatter');
+const path = require('path');
+const utils = require('./utils');
+const config = require('../config');
+const vueLoaderConfig = require('./vue-loader.conf');
+const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -11,6 +11,7 @@ function resolve(dir) {
 module.exports = {
   entry: {
     app: './frontend/src/main.js',
+    styles: ['font-awesome/css/font-awesome.min.css', 'hint.css'],
     fetch: 'whatwg-fetch',
   },
   output: {

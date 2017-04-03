@@ -1,8 +1,8 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
+  before_action :authorize_cook
+
   def edit
-    @date = date
     @menu = current_menu
-    @dishes = Dish.order(:name).all
   end
 
   def update
@@ -40,7 +40,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   end
 
   def current_menu
-    Menu.for_date(params[:date]).first || Menu.create(date: params[:date])
+    Menu.current_menu(params[:date])
   end
 
   def date

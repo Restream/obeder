@@ -2,8 +2,18 @@
   <div class="daily-menu">
     <h1 class="date">
       <span>{{date}}</span>
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
+
+    <div v-if="errors.length > 0" class="daily-menu__errors">
+      <ul>
+        <li v-for="error in errors">
+          {{error}}
+        </li>
+      </ul>
+    </div>
+
     <div class="daily-menu__list">
       <menu-dish
         :date="date"
@@ -15,7 +25,7 @@
       </menu-dish>
       <div class="daily-menu__actions">
         <div class="daily-menu__comment">
-          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="sendComment"></textarea>
+          <textarea class="daily-menu__textarea" v-model="day.description" placeholder="Комментарий" v-on:keyup="onChangeComment"></textarea>
         </div>
       </div>
     </div>
@@ -29,8 +39,12 @@
   import usersService from 'api/users';
   import MenuDish from './MenuDish';
   import MenuPresenter from '../../presenters/MenuPresenter';
+  import Switcher from '../Switcher';
 
-  const userId = localStorage.getItem('user_uid');
+  const COMMENT_SEND_TIMEOUT = 350;
+  const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
+
+  let lastState;
 
   function getSelectedDishes(dishTypes) {
     return _.reduce(dishTypes, (acc, dishes) => {
@@ -53,10 +67,12 @@
   export default {
     components: {
       'menu-dish': MenuDish,
+      'menu-switcher': Switcher,
     },
     name: 'DailyMenu',
     props: {
       day: Object,
+      isSwitchDisabled: Boolean,
     },
     data() {
       const types = {};
@@ -72,9 +88,31 @@
       return {
         date: MenuPresenter.date(this.day.date),
         dishTypes: types,
+        isSwitchOn: !this.day.neem,
+        errors: [],
       };
     },
+    created() {
+      this.sendComment = _.debounce(this.sendData, COMMENT_SEND_TIMEOUT);
+    },
     methods: {
+      sendData() {
+        const currentState = {
+          dishes: getSelectedDishes(this.dishTypes),
+          description: this.day.description,
+          neem: this.day.neem,
+        };
+
+        if (_.isEqual(lastState, currentState)) return;
+
+        lastState = currentState;
+        usersService
+          .setMenu(this.day.id, currentState)
+          .catch(() => {
+            this.errors.push(MENU_SAVE_ERROR);
+          });
+      },
+
       setToDefault() {
         const defaultDishes = {};
 
@@ -141,13 +179,17 @@
           [type]: updatedDishes,
         };
 
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes));
+        this.sendData();
       },
 
-      sendComment(event) {
-        usersService
-          .setMenu(userId, this.day.id, getSelectedDishes(this.dishTypes), event.target.value);
+      onChangeComment(event) {
+        this.day.description = event.target.value;
+        this.sendComment();
+      },
+
+      menuSwitchToggle(value) {
+        this.day.neem = !value;
+        this.sendData();
       },
     },
   };
@@ -194,6 +236,15 @@
   }
 }
 
+.daily-menu__errors {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  opacity: 0.7;
+}
+
 .daily-menu__actions {
   width: 100%;
   display: flex;
@@ -214,6 +265,11 @@
   padding: 10px;
   font-size: 16px;
   border-radius: 3px;
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 0.3
 }
 
 @media (--desktop) {
