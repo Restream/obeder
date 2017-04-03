@@ -11,7 +11,6 @@ npm-debug.log
 node_modules
 .vscode
 secrets.env
-vendor/bundle/
 
 config/settings.local.yml
 config/settings/*.local.yml
