@@ -30,7 +30,7 @@ gem 'active_type'
 gem 'pundit'
 gem 'clockwork'
 gem 'sidekiq'
-gem 'redis-namespace'
+gem 'redis'
 
 group :development, :test do
   gem 'byebug', platform: :mri
