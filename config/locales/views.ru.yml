@@ -1,6 +1,9 @@
 ru:
   web:
     admin:
+      users:
+        new:
+          add_user: Добавить пользователя
       menus:
         edit:
           menu_for: Меню на

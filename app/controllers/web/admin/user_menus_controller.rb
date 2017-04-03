@@ -12,7 +12,7 @@ class Web::Admin::UserMenusController < Web::Admin::ApplicationController
       .ordered_by_user_name
 
     @dishes_stats = @user_menus.map(&:dishes).flatten.group_by(&:name)
-      .map{ |key, value| { type: key, count: value.count } }
+      .map { |key, value| { type: key, count: value.count } }
 
     menu = Menu.find_by(date: @date)
     @default_dishes = menu.dishes.where(menu_dishes: { default: true }).ordered_by_name if menu.present?

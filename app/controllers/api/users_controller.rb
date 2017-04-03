@@ -1,5 +1,4 @@
 class Api::UsersController < Api::ApplicationController
-
   def show
     user = current_user
     render json: user

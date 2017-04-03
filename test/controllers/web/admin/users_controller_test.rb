@@ -37,11 +37,10 @@ class Web::Admin::UsersControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-   test 'destroy' do
+  test 'destroy' do
     assert_difference('User.count', -1) do
       delete :destroy, params: { id: @user.id }
     end
     assert_redirected_to admin_users_path
   end
-
 end
