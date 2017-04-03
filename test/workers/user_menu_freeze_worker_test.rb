@@ -16,13 +16,11 @@ class UserMenuFreezeWorkerTest < ActiveSupport::TestCase
     @em_users.each do |user|
       user.reload
       assert user.user_menus.where(neem: false).exists?
-      assert user.user_menus.where(neem: true).empty?
     end
 
     @neem_users.each do |user|
       user.reload
       assert user.user_menus.where(neem: true).exists?
-      assert user.user_menus.where(neem: false).empty?
     end
   end
 end
