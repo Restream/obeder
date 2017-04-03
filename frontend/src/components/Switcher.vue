@@ -2,7 +2,7 @@
   <div class="switcher">
     <span class="switcher-label">Не ем</span>
     <label class="label" v-bind:class="{ disable: this.isDisabled }">
-      <input type="checkbox" v-model="active" v-on:change="onChange(active)">
+      <input type="checkbox" v-model="active" @click="onChange(active)">
       <span class="circle"></span>
     </label>
     <span class="switcher-label">Ем</span>
