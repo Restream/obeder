@@ -2,10 +2,10 @@ class UserMenuFreezeWorker
   include Sidekiq::Worker
 
   def perform
-    users_tomorrow = UserMenu.joins(:menu, :user).where(menus: { date: Date.tomorrow })
-    users_tomorrow.update(editable: false)
+    tomorrow_user_menus = UserMenu.joins(:menu, :user).where(menus: { date: Date.tomorrow })
+    tomorrow_user_menus.update(editable: false)
 
-    neem_users = users_tomorrow.where(users: { neem: true })
-    neem_users.update(neem: true)
+    neem_user_menus = tomorrow_user_menus.where(users: { neem: true })
+    neem_user_menus.update(neem: true)
   end
 end
