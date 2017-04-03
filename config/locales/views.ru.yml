@@ -37,7 +37,7 @@ ru:
       new:
         title: Вход
         login: Вход
-        have_you_forgotten_passowrd: Забыли пароль?
+        have_you_forgotten_password: Забыли пароль?
     remind_passwords:
       edit:
         title: Восстановление пароля
