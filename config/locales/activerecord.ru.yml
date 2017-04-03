@@ -40,6 +40,11 @@ ru:
               blank: Введите Фамилию и Имя
             role:
               blank: Выберите роль
+        user_remind_password_type:
+          attributes:
+            email:
+              blank: Введите email
+              invalid_email: Неправильный email
         user_sign_in_type:
           attributes:
             email:
