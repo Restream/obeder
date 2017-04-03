@@ -23,7 +23,7 @@ class User < ApplicationRecord
       transitions from: [:active, :inactive], to: :active
     end
 
-    event :inactivate do
+    event :deactivate do
       transitions from: [:active, :inactive], to: :inactive
     end
   end
