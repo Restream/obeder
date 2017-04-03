@@ -40,3 +40,7 @@ end
 ## Frontend
 
 * npm run dev - watching changes and recompiling bundle (also runs development server on 8080 port)
+
+## Sidekiq & Clockwork
+docker-compose run --rm web sidekiq
+docker-compose run --rm web clockwork clock.rb

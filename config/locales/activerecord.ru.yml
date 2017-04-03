@@ -56,3 +56,7 @@ ru:
             password_confirmation:
               blank: Введите пароль
               confirmation: Пароли не совпадают
+        user_menu:
+          attributes:
+            editable:
+              inclusion: Меню на текущий день недоступно для редактирования

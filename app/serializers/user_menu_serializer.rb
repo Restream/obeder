@@ -1,5 +1,5 @@
 class UserMenuSerializer < ActiveModel::Serializer
-  attributes :id, :date, :user_name, :description, :dishes, :neem
+  attributes :id, :date, :user_name, :description, :dishes, :neem, :editable
 
   def user_name
     object.user.name

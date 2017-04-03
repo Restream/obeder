@@ -1,5 +1,5 @@
 <template>
-  <div class="daily-menu">
+  <div class="daily-menu" v-bind:class="{ disable: !this.day.editable }">
     <h1 class="date">
       <span>{{date}}</span>
       <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
@@ -108,6 +108,15 @@
         lastState = currentState;
         usersService
           .setMenu(this.day.id, currentState)
+          .then((response) => {
+            this.errors = [];
+            if (!response.errors) return;
+            _.forOwn(response.errors, (errors) => {
+              for (let i = 0; i < errors.length; i += 1) {
+                this.errors.push(errors[i]);
+              }
+            });
+          })
           .catch(() => {
             this.errors.push(MENU_SAVE_ERROR);
           });
