@@ -139,7 +139,6 @@
 .menu-dish__description {
   font-size: 10px;
   margin-left: 30px;
-  text-align: justify;
   display: block;
 }
 
