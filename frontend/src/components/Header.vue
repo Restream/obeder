@@ -54,16 +54,16 @@
       };
     },
     methods: {
-      headerSwitchToggle(em) {
+      headerSwitchToggle(value) {
         const payload = {
           user: {
-            neem: !em,
+            neem: !value,
           },
         };
         usersService.saveUser(payload);
-        this.isSwitchOn = em;
-        this.user.em = em;
-        this.$emit('onDisableMenuSwitchers', !em);
+        this.isSwitchOn = value;
+        this.user.em = value;
+        this.$emit('onDisableMenuSwitchers', !value);
       },
     },
   };
