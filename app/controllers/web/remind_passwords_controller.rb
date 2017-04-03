@@ -8,15 +8,14 @@ class Web::RemindPasswordsController < Web::ApplicationController
   def update
     @user_type = UserRemindPasswordType.new(user_remind_password_type_params)
     user = @user_type.user
+
     if @user_type.valid? && user.present?
       user.deactivate!
       UserMailer.change_password(user).deliver
       flash[:success] = t('password_has_been_reset')
       redirect_to login_path
     else
-      if user.blank? && @user_type.valid?
-        flash.now[:error] = t('user_not_found')
-      end
+      flash.now[:error] = t('user_not_found') if (user.blank? && @user_type.valid?)
       render :edit
     end
   end
