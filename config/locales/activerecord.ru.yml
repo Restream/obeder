@@ -5,6 +5,7 @@ ru:
         name: Название
         description: Описание
         dish_type: Тип блюда
+        image: Фото блюда
       user:
         name: Фамилия Имя
         email: Email
@@ -30,6 +31,8 @@ ru:
         less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
         invalid_email: Неправильный email
         invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
+        blank: Поле обезательное для заполнения
+
       models:
         user:
           attributes:

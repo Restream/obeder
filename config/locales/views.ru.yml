@@ -4,6 +4,11 @@ ru:
       users:
         new:
           add_user: Добавить пользователя
+      dishes:
+        new:
+          add_dish: Добавить блюдо
+        edit:
+          edit_dish: Редактировать блюдо
       menus:
         edit:
           menu_for: Меню на

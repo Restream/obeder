@@ -1,6 +1,6 @@
 FROM ruby:2.4.0
 
-RUN apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev curl redis-tools
+RUN apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev curl redis-tools imagemagick
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g yarn
