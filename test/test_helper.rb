@@ -9,4 +9,6 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
   include Wrong
   include AuthHelper
+
+  CarrierWave.root = 'test/factories/files'
 end
