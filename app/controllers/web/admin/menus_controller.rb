@@ -22,7 +22,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     @menu.ready = true
     @menu.save
 
-    UserMenusCreateWorker.perform_async(@menu.id)
+    ::MenusService.create_user_menus(@menu)
 
     f(:success)
     redirect_to edit_admin_menu_path(@menu.date)
