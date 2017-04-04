@@ -10,7 +10,6 @@ class MenuServiceTest < ActiveSupport::TestCase
     ::MenusService.create_user_menus(@menu)
 
     @user.reload
-    p User.all
     assert @user.user_menus.where(menu: @menu).exists?
   end
 end
