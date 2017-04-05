@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329202145) do
+ActiveRecord::Schema.define(version: 20170404215854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20170329202145) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.date    "date"
-    t.boolean "ready", default: false
+    t.date   "date"
+    t.string "aasm_state"
   end
 
   create_table "user_menu_dishes", force: :cascade do |t|

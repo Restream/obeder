@@ -24,23 +24,11 @@ Deploy:
  * heroku addons:create sendgrid:starter
  * git push heroku master
 
-## Add new user
-```
-user = User.create(name: 'ФАМИЛИЯ ИМЯ', email: 'EMAIL')
-menus = Menu.ready.where('date >= ?', Date.current)
-
-menus.each do |menu|
-  user_menu = UserMenu.create(user: user, menu: menu, neem: user.neem)
-  menu_dishes = menu.menu_dishes.default
-  dishes = menu_dishes.map(&:dish)
-  user_menu.dishes << dishes
-end
-```
-
 ## Frontend
 
 * npm run dev - watching changes and recompiling bundle (also runs development server on 8080 port)
 
 ## Sidekiq & Clockwork
-docker-compose run --rm web sidekiq
-docker-compose run --rm web clockwork clock.rb
+
+* docker-compose run --rm web sidekiq
+* docker-compose run --rm web clockwork clock.rb
