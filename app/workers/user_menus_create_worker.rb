@@ -2,8 +2,8 @@ class UserMenusCreateWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'critical'
 
-  def perform(id)
-    menu = Menu.find_by(id: id)
+  def perform(menu_id)
+    menu = Menu.find_by(id: menu_id)
 
     ActiveRecord::Base.transaction do
       User.find_each do |user|
