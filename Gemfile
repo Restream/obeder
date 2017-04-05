@@ -31,6 +31,7 @@ gem 'pundit'
 gem 'clockwork'
 gem 'sidekiq'
 gem 'redis'
+gem 'rails-observers', git: 'https://github.com/rails/rails-observers'
 
 group :development, :test do
   gem 'byebug', platform: :mri

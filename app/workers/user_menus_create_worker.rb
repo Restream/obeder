@@ -11,7 +11,6 @@ class UserMenusCreateWorker
         menu_dishes = menu.menu_dishes.default
         dishes = menu_dishes.map(&:dish)
         user_menu.dishes << dishes
-        UserMailer.notify_menu_changed(user, menu)
       end
     end
   end

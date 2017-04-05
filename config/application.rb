@@ -14,5 +14,6 @@ module Obeder
 
     config.i18n.default_locale = :ru
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.active_record.observers = :user_menu_observer
   end
 end

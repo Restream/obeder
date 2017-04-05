@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/rails/rails-observers
+  revision: 7d3c9c331242d58ed8ebdbd2eff1f7d6f68a1b2c
+  specs:
+    rails-observers (0.1.3.alpha)
+      activemodel (>= 4.0, < 5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -311,6 +318,7 @@ DEPENDENCIES
   puma (~> 3.0)
   pundit
   rails (~> 5.0.2)
+  rails-observers!
   ransack
   redis
   rubocop

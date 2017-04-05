@@ -21,8 +21,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
     @menu = current_menu
     @menu.ready = true
     @menu.save
-
-    MenusService.create_user_menus(@menu)
+    @menu.approve!
 
     f(:success)
     redirect_to edit_admin_menu_path(@menu.date)
