@@ -15,8 +15,7 @@ class Menu < ApplicationRecord
     state :published
 
     event :approve do
-      transitions from: :created, to: :approved,
-        after: Proc.new { MenusService.create_user_menus(self) }
+      transitions from: :created, to: :approved
     end
 
     event :publish do

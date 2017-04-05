@@ -19,8 +19,6 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
 
   def approve
     @menu = current_menu
-    @menu.ready = true
-    @menu.save
     @menu.approve!
 
     f(:success)

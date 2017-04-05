@@ -12,6 +12,7 @@ class UserMenusCreateWorker
         dishes = menu_dishes.map(&:dish)
         user_menu.dishes << dishes
       end
+      menu.publish!
     end
   end
 end
