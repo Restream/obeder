@@ -4,7 +4,7 @@ class MenusService
       UserMenusCreateWorker.perform_async(menu.id)
     end
 
-    def notify_menu_changed(menu)
+    def notify_menu_published(menu)
       UserMenusNotifyWorker.perform_async(menu.id)
     end
   end
