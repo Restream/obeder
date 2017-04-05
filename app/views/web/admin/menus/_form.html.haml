@@ -1,7 +1,7 @@
 = render 'validation_modal'
 
 .text-center
-  - unless @menu.approved?
+  - if @menu.editable?
     %button{ id: 'menu-publish__btn', class: 'btn btn-lg btn-success', data: { toggle: :modal, target: '#menu-validation__modal' } }
       = t('.publish_menu')
     %br

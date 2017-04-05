@@ -10,12 +10,12 @@ class Menu < ApplicationRecord
   accepts_nested_attributes_for :menu_dishes, reject_if: :all_blank, allow_destroy: true
 
   aasm do
-    state :created, initial: true
+    state :editable, initial: true
     state :approved
     state :published
 
     event :approve do
-      transitions from: :created, to: :approved
+      transitions from: :editable, to: :approved
     end
 
     event :publish do
