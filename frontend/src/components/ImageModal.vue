@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'ShowImage',
+  name: 'ImageModal',
   data() {
     return {
       largeImage: false,
