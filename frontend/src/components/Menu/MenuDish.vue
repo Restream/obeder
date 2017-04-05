@@ -16,7 +16,7 @@
             :value="dish.id"
           >
           <span class="menu-dish__radio" />
-          <image-modal :url="dish.image.url" :thumbnailUrl="dish.image.thumb.url" :description="dish.description"/>
+          <image-modal v-show="dish.image.url !== null" :url="dish.image.url" :thumbnailUrl="dish.image.thumb.url" :description="dish.description"/>
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
         <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
