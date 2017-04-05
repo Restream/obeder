@@ -16,6 +16,7 @@
             :value="dish.id"
           >
           <span class="menu-dish__radio" />
+          <show-image :url="dish.image.url" :thumbnailUrl="dish.image.thumb.url" :description="dish.description"/>
           <span class="menu-dish__name">{{dish.name}}</span>
         </label>
         <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
@@ -26,6 +27,7 @@
 
 <script>
   import _ from 'lodash';
+  import ShowImage from '../ShowImage';
   import MenuPresenter from '../../presenters/MenuPresenter';
 
   function getSelectedDishId(dishes) {
@@ -36,6 +38,9 @@
 
   export default {
     name: 'MenuDish',
+    components: {
+      'show-image': ShowImage,
+    },
     props: {
       date: String,
       dishes: Array,
