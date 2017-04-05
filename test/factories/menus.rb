@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :menu do
     date
-    aasm_state :created
 
     trait :approved do
       aasm_state :approved
