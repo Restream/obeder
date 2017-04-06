@@ -1,27 +1,25 @@
 <template>
-  <div class="image-modal">
-    <div v-show="largeImage" @close="hideLargeImage" @click="hideLargeImage" transition="modal">
-      <transition name="modal">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
+  <div v-show="largeImage" @close="hideLargeImage" @click="hideLargeImage" transition="modal">
+    <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
 
-              <div class="modal-body">
-                <slot name="body">
-                  <img class="center" :src="curImage.url"/>
-                </slot>
-              </div>
+          <div class="modal-body">
+            <slot name="body">
+              <img class="center" :src="curImage.url"/>
+            </slot>
+          </div>
 
-              <div class="modal-footer">
-                <slot name="footer">
-                  {{ this.curImage.description }}
-                </slot>
-              </div>
-            </div>
+          <div class="modal-footer">
+            <slot name="footer">
+              {{ this.curImage.description }}
+            </slot>
           </div>
         </div>
-      </transition>
+      </div>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -122,9 +120,5 @@ export default {
 .modal-leave-active .modal-container {
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
-}
-
-.image-modal {
-  display: inline-block;
 }
 </style>

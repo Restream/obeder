@@ -3,11 +3,13 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes" class="menu-dish__item">
-        <div
-          v-show="dish.image.url"
-          class="thumbnail image size-fixed scale-fill"
-          :style="`background-image: url(${ dish.image.thumb.url });`"
-          @click="showImage(dish.image, dish.description)" >
+        <div>
+          <div
+             v-show="dish.image.url"
+             class="thumbnail image size-fixed scale-fill"
+             :style="`background-image: url(${ dish.image.thumb.url });`"
+             @click="showImage(dish.image, dish.description)" >
+          </div>
         </div>
         <label
           class="menu-dish__label"
