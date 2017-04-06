@@ -11,22 +11,28 @@
         %h2.glyphicon.glyphicon-chevron-right
 
 %table.table.table-bordered
-  %tr
-    %td.text-center
+  %tr.text-center
+    %td
       = t('.name_column_title')
     - dates_in_month = dates_in_month(@beginning_of_month)
     - dates_in_month.each do |date|
       %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
         = date.day
+    %td ∑
   - @users.each_with_index do |user, i|
-    %tr
-      %td.text-center
+    %tr.text-center
+      %td
         #{i + 1}.
         = user.name
+      - total_by_user = 0
       - dates_in_month.each do |date|
         %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
           - user_menu = @user_menus.where(menu: Menu.where(date: date)).find_by(user: user)
-          = user_menu.present? ? '1' : ''
+          - if user_menu.present?
+            - total_by_user += 1
+            = 1
+      %td
+        = total_by_user
 %p.text-right
   = t('.total')
   = @user_menus.size
