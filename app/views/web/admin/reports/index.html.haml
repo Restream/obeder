@@ -16,7 +16,7 @@
       = t('.name_column_title')
     - dates_in_month = dates_in_month(@beginning_of_month)
     - dates_in_month.each do |date|
-      %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
+      %td{ class: cell_color_class(date) }
         = date.day
     %td ∑
   - @users.each_with_index do |user, i|
@@ -26,7 +26,7 @@
         = user.name
       - total_by_user = 0
       - dates_in_month.each do |date|
-        %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
+        %td{ class: cell_color_class(date) }
           - user_menu = @user_menus.where(menu: Menu.where(date: date)).find_by(user: user)
           - if user_menu.present?
             - total_by_user += 1

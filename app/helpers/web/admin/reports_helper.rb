@@ -1,6 +1,6 @@
 module Web::Admin::ReportsHelper
   def report_header(current_month, current_year)
-    [current_month, current_year].join(' | ')
+    [current_month, current_year].join(' ')
   end
 
   def next_report_params(current_month, current_year)
@@ -31,5 +31,9 @@ module Web::Admin::ReportsHelper
     end_of_month = beginning_of_month.end_of_month
 
     (beginning_of_month..end_of_month).map { |date| date }
+  end
+
+  def cell_color_class(date)
+    date.saturday? || date.sunday? ? 'danger' : ''
   end
 end
