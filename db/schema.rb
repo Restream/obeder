@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170404215854) do
     t.string "name"
     t.text   "description"
     t.string "dish_type"
+    t.string "image"
   end
 
   create_table "menu_dishes", force: :cascade do |t|
