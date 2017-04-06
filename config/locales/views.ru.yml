@@ -39,6 +39,8 @@ ru:
       nav:
         menu: Меню
         reports: Отчеты
+        daily-reports: Ежедневные отчеты
+        monthly-reports: Ежемесячные отчеты
         dishes: Блюда
         users: Пользователи
     sessions:
