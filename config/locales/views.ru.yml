@@ -37,7 +37,8 @@ ru:
           default_marker: По умолчанию
       reports:
         index:
-          name_column_title: 'ФИО'
+          name_column_title: ФИО
+          total: 'Итого:'
     shared:
       nav:
         menu: Меню

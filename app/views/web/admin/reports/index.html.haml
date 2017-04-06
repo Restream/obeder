@@ -27,3 +27,6 @@
         %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
           - user_menu = @user_menus.where(menu: Menu.where(date: date)).find_by(user: user)
           = user_menu.present? ? '1' : ''
+%p.text-right
+  = t('.total')
+  = @user_menus.size
