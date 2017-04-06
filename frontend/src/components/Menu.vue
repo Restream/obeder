@@ -1,9 +1,10 @@
 <template>
   <div class="menu">
     <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
+    <div v-if="!menusLoaded" class="preloader"></div>
     <div class="content">
       <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
-      <div v-if="sortedDates.length === 0" class="bs-callout">
+      <div v-if="menusLoaded && sortedDates.length === 0" class="bs-callout">
         <h4 class="title">К сожалению, меню еще не заполнено</h4>
       </div>
     </div>
@@ -27,6 +28,7 @@
         .getMenus()
         .then(
           (menuDates) => {
+            this.menusLoaded = true;
             this.dates = menuDates;
           },
           error => error,
@@ -37,6 +39,7 @@
       return {
         dates: [],
         headerSwitchIsDisabled: false,
+        menusLoaded: false,
       };
     },
     computed: {
@@ -67,6 +70,7 @@
     padding: 30px 0;
   }
 }
+
 .bs-callout {
   padding: 20px;
   margin: 20px 0;
@@ -74,8 +78,24 @@
   border-left: 5px solid #1b809e;
   border-radius: 3px;
 }
+
 .title {
   margin: 0 0 5px;
   color: #1b809e;
+}
+
+.preloader {
+  margin: 120px auto 0;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
