@@ -27,8 +27,7 @@
       - total_by_user = 0
       - dates_in_month.each do |date|
         %td{ class: cell_color_class(date) }
-          - user_menu = @user_menus.where(menu: Menu.where(date: date)).find_by(user: user)
-          - if user_menu.present?
+          - if user_ate?(user.id, date, @user_menus)
             - total_by_user += 1
             = 1
       %td

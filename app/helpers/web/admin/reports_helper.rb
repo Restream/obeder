@@ -36,4 +36,8 @@ module Web::Admin::ReportsHelper
   def cell_color_class(date)
     date.saturday? || date.sunday? ? 'danger' : ''
   end
+
+  def user_ate?(user_id, date, user_menus_info)
+    user_menus_info.include?([date, user_id])
+  end
 end

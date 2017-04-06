@@ -7,7 +7,8 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
     @report_month = month.to_i
     @users = User.order(:name)
     @menus = monthly_report_menus
-    @user_menus = UserMenu.where(menu: @menus, neem: false)
+    @user_menus = UserMenu.joins(:menu).where(menu: @menus, neem: false)
+      .pluck(:'menus.date', :'user_id')
   end
 
   def export
