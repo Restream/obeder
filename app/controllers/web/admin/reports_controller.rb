@@ -2,6 +2,8 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
   before_action :authorize_cook
 
   def index
+    @report_year = year.to_i
+    @report_month = month.to_i
     @menus = monthly_report_menus
     @user_menus = UserMenu.where(menu: @menus).includes(:user)
   end
@@ -25,10 +27,10 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
   end
 
   def year
-    params[:year].to_i
+    params[:year]
   end
 
   def month
-    params[:month].to_i
+    params[:month]
   end
 end
