@@ -12,10 +12,16 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
   end
 
   def export
-
+    service = MonthlyReportService.new(month, year)
+    exported_data = service.export_to_xlsx_stream
+    send_data(exported_data[:read], filename: exported_data[:filename], type: exported_data[:type])
   end
 
   private
+
+  def export_xlsx_filename
+    monthly_report_service = MonthlyReportService.new(month, year)
+  end
 
   def monthly_report_menus
     Menu.in_date_range(start_date, start_date.end_of_month).order(:date)

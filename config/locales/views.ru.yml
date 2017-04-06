@@ -39,6 +39,7 @@ ru:
         index:
           name_column_title: ФИО
           total: 'Итого:'
+          export: 'Экспорт'
     shared:
       nav:
         menu: Меню

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
         end
       end
       resources :reports, only: [:index] do
-        member do
+        collection do
           get :export
         end
       end

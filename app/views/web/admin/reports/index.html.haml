@@ -35,3 +35,8 @@
 %p.text-right
   = t('.total')
   = @user_menus.size
+
+%a.btn.btn-default{ href: export_admin_reports_path(current_report_params(@report_month, @report_year)) }
+  %span
+    = t('.export')
+    %i.glyphicon.glyphicon-floppy-save
