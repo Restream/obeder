@@ -3,7 +3,12 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes" class="menu-dish__item">
-        <img class="thumbnail" v-show="dish.image.url" :src="dish.image.thumb.url" @click="showImage(dish.image, dish.description)"/>
+        <div
+          v-show="dish.image.url"
+          class="thumbnail image size-fixed scale-fill"
+          :style="`background-image: url(${ dish.image.thumb.url });`"
+          @click="showImage(dish.image, dish.description)" >
+        </div>
         <label
           class="menu-dish__label"
           :for="date + dish.id"
@@ -165,9 +170,24 @@
 
 .thumbnail {
   margin: -5px 10px 0px 0px;
+  cursor: pointer;
+}
+
+.image {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 1px solid #CCCCCC;
+}
+.image.size-fixed {
   width: 40px;
   height: 40px;
-  overflow: hidden;
+}
+.image.scale-fill {
+  background-size: cover;
+}
+.image img {
+  display: none;
 }
 
 </style>
