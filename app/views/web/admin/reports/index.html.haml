@@ -1,7 +1,3 @@
-%p
-  = 'Hello'
-
-= @user_menus.inspect
 .row
   .col-md-3
     = link_to admin_reports_path(previous_report_params(@report_month, @report_year)) do
@@ -13,3 +9,21 @@
     .text-right
       = link_to admin_reports_path(next_report_params(@report_month, @report_year)) do
         %h2.glyphicon.glyphicon-chevron-right
+
+%table.table.table-bordered
+  %tr
+    %td.text-center
+      = t('.name_column_title')
+    - dates_in_month = dates_in_month(@beginning_of_month)
+    - dates_in_month.each do |date|
+      %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
+        = date.day
+  - @users.each_with_index do |user, i|
+    %tr
+      %td.text-center
+        #{i + 1}.
+        = user.name
+      - dates_in_month.each do |date|
+        %td{ class: date.saturday? || date.sunday? ? 'danger' : '' }
+          - user_menu = @user_menus.where(menu: Menu.where(date: date)).find_by(user: user)
+          = user_menu.present? ? '1' : ''

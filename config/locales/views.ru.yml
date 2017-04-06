@@ -35,6 +35,9 @@ ru:
           dont_eat: 'Не едят:'
           default_dishes: 'Блюда по умолчанию:'
           default_marker: По умолчанию
+      reports:
+        index:
+          name_column_title: 'ФИО'
     shared:
       nav:
         menu: Меню

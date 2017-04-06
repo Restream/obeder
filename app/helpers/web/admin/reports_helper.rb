@@ -26,4 +26,10 @@ module Web::Admin::ReportsHelper
 
     { month: previous_month, year: previous_year }
   end
+
+  def dates_in_month(beginning_of_month)
+    end_of_month = beginning_of_month.end_of_month
+
+    (beginning_of_month..end_of_month).map { |date| date }
+  end
 end

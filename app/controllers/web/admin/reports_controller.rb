@@ -2,10 +2,12 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
   before_action :authorize_cook
 
   def index
+    @beginning_of_month = start_date
     @report_year = year.to_i
     @report_month = month.to_i
+    @users = User.order(:name).find_each
     @menus = monthly_report_menus
-    @user_menus = UserMenu.where(menu: @menus).includes(:user)
+    @user_menus = UserMenu.where(menu: @menus)
   end
 
   def export
@@ -15,15 +17,11 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
   private
 
   def monthly_report_menus
-    Menu.in_date_range(start_date, end_date)
+    Menu.in_date_range(start_date, start_date.end_of_month).order(:date)
   end
 
   def start_date
     "01-#{month}-#{year}".to_date
-  end
-
-  def end_date
-    start_date + 1.month - 1.day
   end
 
   def year
