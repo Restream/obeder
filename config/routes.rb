@@ -26,6 +26,11 @@ Rails.application.routes.draw do
           put :approve
         end
       end
+      resources :reports, only: [:index] do
+        member do
+          get :export
+        end
+      end
     end
   end
 

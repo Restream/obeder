@@ -11,5 +11,6 @@ module MenuRepository
       .for_date_range(date, Settings.closest_menus_date_offset)
       .except_date(date)
     end
+    scope :in_date_range, -> (start_date, end_date) { where(date: (start_date..end_date)).order(:date) }
   end
 end
