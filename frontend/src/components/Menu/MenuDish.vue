@@ -3,11 +3,7 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes" class="menu-dish__item">
-        <image-modal
-          v-show="dish.image.url"
-          :url="dish.image.url"
-          :thumbnailUrl="dish.image.thumb.url"
-          :description="dish.description"/>
+        <img class="thumbnail" v-show="dish.image.url" :src="dish.image.thumb.url" @click="showImage(dish.image, dish.description)"/>
         <label
           class="menu-dish__label"
           :for="date + dish.id"
@@ -31,7 +27,6 @@
 
 <script>
   import _ from 'lodash';
-  import ImageModal from '../ImageModal';
   import MenuPresenter from '../../presenters/MenuPresenter';
 
   function getSelectedDishId(dishes) {
@@ -42,15 +37,21 @@
 
   export default {
     name: 'MenuDish',
-    components: {
-      'image-modal': ImageModal,
+
+    data() {
+      return {
+        typePresented: MenuPresenter.dishType(this.type),
+        selectedDish: getSelectedDishId(this.dishes),
+      };
     },
+
     props: {
       date: String,
       dishes: Array,
       type: String,
       onChange: Function,
     },
+
     watch: {
       selectedDish(dish) {
         this.onChange(this.type, dish);
@@ -60,11 +61,10 @@
       },
     },
 
-    data() {
-      return {
-        typePresented: MenuPresenter.dishType(this.type),
-        selectedDish: getSelectedDishId(this.dishes),
-      };
+    methods: {
+      showImage(image, description) {
+        this.$emit('showImage', image, description);
+      },
     },
   };
 </script>
@@ -162,4 +162,12 @@
     font-size: 20px;
   }
 }
+
+.thumbnail {
+  margin: -5px 10px 0px 0px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
 </style>

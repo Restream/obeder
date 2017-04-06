@@ -2,27 +2,26 @@
   <div class="image-modal">
     <div v-show="largeImage" @close="hideLargeImage" @click="hideLargeImage" transition="modal">
       <transition name="modal">
-      <div class="modal-mask">
-        <div class="modal-wrapper">
-          <div class="modal-container">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
 
-            <div class="modal-body">
-              <slot name="body">
-              <img class="center" :src="url"/>
-              </slot>
-            </div>
+              <div class="modal-body">
+                <slot name="body">
+                  <img class="center" :src="curImage.url"/>
+                </slot>
+              </div>
 
-            <div class="modal-footer">
-              <slot name="footer">
-              {{ this.description }}
-              </slot>
+              <div class="modal-footer">
+                <slot name="footer">
+                  {{ this.curImage.description }}
+                </slot>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </transition>
     </div>
-    <img class="thumbnail" :src="thumbnailUrl" @click="showLargeImage"/>
   </div>
 </template>
 
@@ -34,25 +33,36 @@ export default {
       largeImage: false,
     };
   },
-  created() {
-    document.addEventListener('keydown', (e) => {
-      const escKey = 27;
-      if (this.largeImage && e.keyCode === escKey) {
-        this.hideLargeImage();
-      }
-    });
-  },
   props: {
-    url: String,
-    thumbnailUrl: String,
-    description: String,
+    image: Object,
+  },
+  watch: {
+    image(img) {
+      if (img.url !== null) {
+        this.showLargeImage();
+      }
+    },
+  },
+  computed: {
+    curImage() {
+      return this.image;
+    },
   },
   methods: {
-    hideLargeImage() {
-      this.largeImage = false;
+    escListener(e) {
+      const escKey = 27;
+      if (e.keyCode === escKey) {
+        this.hideLargeImage();
+      }
     },
     showLargeImage() {
       this.largeImage = true;
+      document.addEventListener('keydown', this.escListener);
+    },
+    hideLargeImage() {
+      this.largeImage = false;
+      document.removeEventListener('keydown', this.escListener);
+      this.$emit('close');
     },
   },
 };
@@ -112,13 +122,6 @@ export default {
 .modal-leave-active .modal-container {
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
-}
-
-.thumbnail {
-  margin: -5px 10px 0px 0px;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
 }
 
 .image-modal {
