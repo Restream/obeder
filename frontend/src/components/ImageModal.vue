@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="image-modal">
     <div v-show="largeImage" @close="hideLargeImage" @click="hideLargeImage" transition="modal">
       <transition name="modal">
       <div class="modal-mask">
@@ -36,7 +36,8 @@ export default {
   },
   created() {
     document.addEventListener('keydown', (e) => {
-      if (this.largeImage && e.keyCode === 27) {
+      const escKey = 27;
+      if (this.largeImage && e.keyCode === escKey) {
         this.hideLargeImage();
       }
     });
@@ -115,5 +116,12 @@ export default {
 
 .thumbnail {
   margin: -5px 10px 0px 0px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.image-modal {
+  display: inline-block;
 }
 </style>

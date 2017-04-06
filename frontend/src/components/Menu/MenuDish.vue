@@ -3,23 +3,27 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes" class="menu-dish__item">
+        <image-modal
+          v-show="dish.image.url"
+          :url="dish.image.url"
+          :thumbnailUrl="dish.image.thumb.url"
+          :description="dish.description"/>
         <label
           class="menu-dish__label"
           :for="date + dish.id"
-          :title="dish.description"
-        >
+          :title="dish.description" >
           <input
-            type="radio"
-            v-model="selectedDish"
-            :name="date + type"
-            :id="date + dish.id"
-            :value="dish.id"
-          >
+          type="radio"
+          v-model="selectedDish"
+          :name="date + type"
+          :id="date + dish.id"
+          :value="dish.id" >
           <span class="menu-dish__radio" />
-          <image-modal v-show="dish.image.url !== null" :url="dish.image.url" :thumbnailUrl="dish.image.thumb.url" :description="dish.description"/>
-          <span class="menu-dish__name">{{dish.name}}</span>
+          <div>
+            <span class="menu-dish__name">{{dish.name}}</span>
+            <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
+          </div>
         </label>
-        <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
       </li>
     </ul>
   </div>
@@ -78,6 +82,7 @@
 
 .menu-dish__item {
   margin-bottom: 10px;
+  display: flex;
 }
 
 .menu-dish__header {
@@ -143,7 +148,6 @@
 
 .menu-dish__description {
   font-size: 10px;
-  margin-left: 30px;
   display: block;
 }
 
