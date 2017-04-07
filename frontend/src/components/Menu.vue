@@ -8,7 +8,7 @@
         <h4 class="title">К сожалению, меню еще не заполнено</h4>
       </div>
     </div>
-    <image-modal :image="curImage" @close="curImage = { url: null }" />
+    <image-modal :show="showImageModal" :image="curImage" @close="hideImage" />
   </div>
 </template>
 
@@ -43,6 +43,7 @@
         dates: [],
         headerSwitchIsDisabled: false,
         menusLoaded: false,
+        showImageModal: false,
         curImage: {
           url: null,
           description: null,
@@ -58,9 +59,12 @@
       disableMenuSwitchers(val) {
         this.headerSwitchIsDisabled = val;
       },
-      showImage(image, description) {
-        this.curImage = image;
-        this.curImage.description = description;
+      showImage(url, description) {
+        this.curImage = { url, description };
+        this.showImageModal = true;
+      },
+      hideImage() {
+        this.showImageModal = false;
       },
     },
   };

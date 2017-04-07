@@ -6,9 +6,9 @@
         <div>
           <div
              v-show="dish.image.url"
-             class="thumbnail image size-fixed scale-fill"
+             class="thumbnail"
              :style="`background-image: url(${ dish.image.thumb.url });`"
-             @click="showImage(dish.image, dish.description)" >
+             @click="showImage(dish.image.url, dish.description)" >
           </div>
         </div>
         <label
@@ -69,8 +69,8 @@
     },
 
     methods: {
-      showImage(image, description) {
-        this.$emit('showImage', image, description);
+      showImage(url, description) {
+        this.$emit('showImage', url, description);
       },
     },
   };
@@ -171,25 +171,15 @@
 }
 
 .thumbnail {
+  width: 40px;
+  height: 40px;
   margin: -5px 10px 0px 0px;
   cursor: pointer;
-}
-
-.image {
   display: inline-block;
   background-position: center center;
   background-repeat: no-repeat;
   border: 1px solid #CCCCCC;
-}
-.image.size-fixed {
-  width: 40px;
-  height: 40px;
-}
-.image.scale-fill {
   background-size: cover;
-}
-.image img {
-  display: none;
 }
 
 </style>

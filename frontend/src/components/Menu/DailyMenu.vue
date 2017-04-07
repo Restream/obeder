@@ -202,8 +202,8 @@
         this.sendData();
       },
 
-      showImage(image, description) {
-        this.$emit('showImage', image, description);
+      showImage(url, description) {
+        this.$emit('showImage', url, description);
       },
     },
   };
