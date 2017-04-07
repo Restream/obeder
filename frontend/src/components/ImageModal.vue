@@ -39,8 +39,8 @@ export default {
     },
   },
   watch: {
-    show(isShow) {
-      if (isShow) {
+    show(newValue) {
+      if (newValue) {
         this.showLargeImage();
       }
     },
