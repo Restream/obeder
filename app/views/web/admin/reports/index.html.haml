@@ -10,6 +10,15 @@
       = link_to admin_reports_path(next_report_params(@report_month, @report_year)) do
         %h2.glyphicon.glyphicon-chevron-right
 
+%br
+
+.text-right
+  %a.btn.btn-default{ href: export_admin_reports_path(month: @report_month, year: @report_year) }
+    %span
+      = t('.export_to_excel')
+
+%br
+
 %table.table.table-bordered
   %tr.text-center
     %td
@@ -35,8 +44,3 @@
 %p.text-right
   = t('.total')
   = @user_menus.size
-
-%a.btn.btn-default{ href: export_admin_reports_path(current_report_params(@report_month, @report_year)) }
-  %span
-    = t('.export')
-    %i.glyphicon.glyphicon-floppy-save

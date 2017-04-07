@@ -3,10 +3,6 @@ module Web::Admin::ReportsHelper
     [current_month, current_year].join(' ')
   end
 
-  def current_report_params(current_month, current_year)
-    { month: current_month, year: current_year }
-  end
-
   def next_report_params(current_month, current_year)
     next_month = current_month + 1
     next_year = current_year
