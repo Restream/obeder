@@ -39,7 +39,10 @@ ru:
         index:
           name_column_title: ФИО
           total: 'Итого:'
+          sum: ∑
           export_to_excel: Экспорт в Excel
+        export:
+          export_date: 'Дата выгрузки:'
     shared:
       nav:
         menu: Меню
