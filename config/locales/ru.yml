@@ -15,10 +15,7 @@ ru:
   date:
     formats:
       menu_date: '%d %B, %A'
-      report_month_year: '%B %Y'
-      report_month_comma_year: '%B, %Y'
-      report_month: '%B'
-      report_day: '%-d'
+      report_default: '%d.%m.%Y'
 
     abbr_day_names:
       - Вс

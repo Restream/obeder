@@ -34,18 +34,19 @@ class MonthlyReportService
     workbook_styles = {}
     styles.each { |name, style| workbook_styles[name] = workbook.styles.add_style(style) }
 
-    workbook.add_worksheet(name: worksheet_name(@date)) do |sheet|
+    workbook.add_worksheet(name: month_comma_year(@date)) do |sheet|
       last_cell = report_width - 1
 
       sheet.add_row(report_title, style: workbook_styles[:title])
       sheet.merge_cells(sheet.rows.last.cells[(0..last_cell)])
-      sheet.add_row(report_upload_date, style: workbook_styles[:exported])
+      sheet.add_row(report_upload_date, style: workbook_styles[:uploaded])
       sheet.add_row()
-      sheet.add_row(report_table_header, style: workbook_styles[:header])
 
+      header_styles = table_header_styles.map { |style| workbook_styles[style] }
+      sheet.add_row(report_table_header, style: header_styles)
       @users.each do |user|
         user_info_row = report_table_user_info(user)
-        user_styles = calendar_styles.map { |style| workbook_styles[style] }
+        user_styles = table_user_styles.map { |style| workbook_styles[style] }
         sheet.add_row(user_info_row, style: user_styles)
       end
 
@@ -66,7 +67,7 @@ class MonthlyReportService
         b: true,
         alignment: { horizontal: :center }
       },
-      exported: {
+      uploaded: {
         font_name: 'Arial',
         sz: 9,
         b: false
@@ -77,6 +78,14 @@ class MonthlyReportService
         sz: 11,
         b: true,
         alignment: { horizontal: :center }
+      },
+      header_weekend: {
+        border: { color: 'FF000000', style: :medium },
+        font_name: 'Arial',
+        sz: 11,
+        b: true,
+        alignment: { horizontal: :center },
+        bg_color: '00ea829f'
       },
       name_cell: {
         border: { color: 'FF000000', style: :thin },
@@ -98,7 +107,7 @@ class MonthlyReportService
         sz: 11,
         b: false,
         alignment: { horizontal: :center },
-        bg_color: 'FFFF0000'
+        bg_color: '00ea829f'
       },
       bold_cell: {
         border: { color: 'FF000000', style: :thin },
@@ -126,10 +135,6 @@ class MonthlyReportService
     I18n.l(date, format: :report_month)
   end
 
-  def worksheet_name(date)
-    I18n.l(date, format: :report_month_comma_year)
- end
-
   def date_by_day(date, day)
     date.change(day: day.to_i)
   end
@@ -138,17 +143,23 @@ class MonthlyReportService
     (1..Time.days_in_month(date.month, date.year)).to_a.map(&:to_s)
   end
 
+  def month_comma_year(date)
+    I18n.t("months_from_digits.#{date.month}") + ", " + date.year.to_s
+  end
+
   def report_title
-    [I18n.l(@date, format: :report_month_comma_year)]
+    title = [month_comma_year(@date)]
+    width = report_width - 1
+    width.times { title << nil }
+    title
   end
 
   def report_upload_date
-    [translate('upload_date'), Date.current]
+    [translate('upload_date') + ' ' + I18n.l(Date.current, format: :report_default)]
   end
 
   def report_table_total
-    total = []
-    total << translate('total')
+    total = [translate('total')]
     width = report_width - 2
     width.times { total << nil }
     total << "#{@user_menus.size}"
@@ -161,8 +172,7 @@ class MonthlyReportService
   end
 
   def report_table_user_info(user)
-    user_row = []
-    user_row << user.name
+    user_row = [user.name]
 
     total = 0
     all_days_in_month(@date).each do |day|
@@ -178,26 +188,31 @@ class MonthlyReportService
     user_row << total
   end
 
-  def calendar_styles
-    styles = []
-    styles << :name_cell
-
-    daily_styles = all_days_in_month(@date).map do |day|
+  def calendar_styles(weekend, work)
+    all_days_in_month(@date).map do |day|
       date = date_by_day(@date, day)
       if date.saturday? || date.sunday?
-        :weekend_cell
+        weekend
       else
-        :default_cell
+        work
       end
     end
+  end
 
-    styles += daily_styles
+  def table_header_styles
+    styles = [:header]
+    styles += calendar_styles(:header_weekend, :header)
+    styles << :header
+  end
+
+  def table_user_styles
+    styles = [:name_cell]
+    styles += calendar_styles(:weekend_cell, :default_cell)
     styles << :default_cell
   end
 
   def total_styles
-    styles = []
-    styles << :total
+    styles = [:total]
     all_days_in_month(@date).each { styles << :default_cell }
     styles << :bold_cell
   end
