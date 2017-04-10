@@ -50,6 +50,8 @@ class MonthlyReportService
       end
 
       sheet.add_row(report_table_total, style: total_styles.map { |style| workbook_styles[style] })
+
+      sheet.column_widths *column_widths
     end
 
     package.to_stream.read
@@ -142,7 +144,7 @@ class MonthlyReportService
   end
 
   def month_comma_year(date)
-    I18n.t("months_from_digits.#{date.month}") + ", " + date.year.to_s
+    I18n.t("months_from_digits.#{date.month}") + ', ' + date.year.to_s
   end
 
   def report_title
@@ -217,5 +219,12 @@ class MonthlyReportService
 
   def report_width
     report_table_header.size
+  end
+
+  def column_widths
+    col_widths = [40]
+    9.times { col_widths << 2 }
+    (report_width - 11).times { col_widths << 3 }
+    col_widths << 12
   end
 end
