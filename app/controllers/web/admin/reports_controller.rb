@@ -12,9 +12,9 @@ class Web::Admin::ReportsController < Web::Admin::ApplicationController
   end
 
   def export
-    service = MonthlyReportService.new(month, year)
-    exported_data = service.export_to_xlsx_stream
-    send_data(exported_data[:read], filename: exported_data[:filename], type: exported_data[:type])
+    send_data(MonthlyReportService.export(month, year),
+      filename: MonthlyReportService.filename(month, year),
+      type: MonthlyReportService.type)
   end
 
   private

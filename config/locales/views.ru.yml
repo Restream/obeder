@@ -41,8 +41,6 @@ ru:
           total: 'Итого:'
           sum: ∑
           export_to_excel: Экспорт в Excel
-        export:
-          export_date: 'Дата выгрузки:'
     shared:
       nav:
         menu: Меню
@@ -64,3 +62,8 @@ ru:
       passwords:
         edit:
           title: Установка пароля
+  report:
+    upload_date: 'Дата выгрузки:'
+    name: ФИО
+    sum: ∑
+    total: 'Итого:'

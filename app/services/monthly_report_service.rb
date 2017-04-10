@@ -1,92 +1,163 @@
 class MonthlyReportService
-  def initialize(month, year)
-    @month = month.to_i
-    @year = year.to_i
-
+  def initialize(date)
+    @date = date
     @users = User.order(:name)
-
-    start_date = start_date_by_day(1)
-    menus = Menu.in_date_range(start_date, start_date.end_of_month).order(:date)
-
+    menus = Menu.in_date_range(@date.beginning_of_month, @date.end_of_month).order(:date)
     @user_menus = UserMenu.joins(:menu).where(menu: menus, neem: false)
       .pluck(:'menus.date', :'user_id')
   end
 
-  def export_to_xlsx_stream
-    package = Axlsx::Package.new
-
-    workbook = package.workbook
-    workbook.add_worksheet(name: worksheet_name) do |sheet|
-      sheet.add_row(report_title)
-      sheet.add_row(report_export_date)
-      sheet.add_row(report_table_header)
-      @users.each do |user|
-        sheet.add_row(report_table_user_info(user))
-      end
-      sheet.add_row(report_table_total)
-
-      #raise sheet.rows.first.cells[].inspect
-      last_cell = report_width - 1
-      sheet.merge_cells(sheet.rows.first.cells[(0..last_cell)])
-      sheet.merge_cells(sheet.rows.second.cells[(0..last_cell)])
-      sheet.merge_cells(sheet.rows.last.cells[(0..last_cell)])
+  class << self
+    def export(month, year)
+      date = self.date_from_params(month.to_i, year.to_i)
+      instance = self.new(date)
+      instance.export_to_xlsx_stream
     end
 
-    {
-      read: package.to_stream.read,
-      filename: "report_#{@month}_#{@year}.xlsx" ,
-      type: 'application/vnd.ms-excel'
-    }
+    def filename(month, year)
+      "report_#{month}_#{year}.xlsx"
+    end
+
+    def type
+      'application/vnd.ms-excel'
+    end
+
+    def date_from_params(month, year)
+      "#{1}-#{month}-#{year}".to_date
+    end
+  end
+
+  def export_to_xlsx_stream
+    package = Axlsx::Package.new
+    workbook = package.workbook
+
+    workbook_styles = {}
+    styles.each { |name, style| workbook_styles[name] = workbook.styles.add_style(style) }
+
+    workbook.add_worksheet(name: worksheet_name(@date)) do |sheet|
+      last_cell = report_width - 1
+
+      sheet.add_row(report_title, style: workbook_styles[:title])
+      sheet.merge_cells(sheet.rows.last.cells[(0..last_cell)])
+      sheet.add_row(report_upload_date, style: workbook_styles[:exported])
+      sheet.add_row()
+      sheet.add_row(report_table_header, style: workbook_styles[:header])
+
+      @users.each do |user|
+        user_info_row = report_table_user_info(user)
+        user_styles = calendar_styles.map { |style| workbook_styles[style] }
+        sheet.add_row(user_info_row, style: user_styles)
+      end
+
+      styles = total_styles.map { |style| workbook_styles[style] }
+      sheet.add_row(report_table_total, style: styles)
+    end
+
+    package.to_stream.read
   end
 
   private
 
-  def translations
+  def styles
     {
-      export_date: I18n.t('web.admin.reports.export.export_date'),
-      name: I18n.t('web.admin.reports.index.name_column_title'),
-      sum: I18n.t('web.admin.reports.index.sum'),
-      total: I18n.t('web.admin.reports.index.total'),
-      months: (1..12).to_a.map { |month| I18n.t("months_from_digits.#{month}") }
+      title: {
+        font_name: 'Arial',
+        sz: 22,
+        b: true,
+        alignment: { horizontal: :center }
+      },
+      exported: {
+        font_name: 'Arial',
+        sz: 9,
+        b: false
+      },
+      header: {
+        border: { color: 'FF000000', style: :medium },
+        font_name: 'Arial',
+        sz: 11,
+        b: true,
+        alignment: { horizontal: :center }
+      },
+      name_cell: {
+        border: { color: 'FF000000', style: :thin },
+        font_name: 'Arial',
+        sz: 11,
+        b: false,
+        alignment: { horizontal: :left }
+      },
+      default_cell: {
+        border: { color: 'FF000000', style: :thin },
+        font_name: 'Arial',
+        sz: 11,
+        b: false,
+        alignment: { horizontal: :center }
+      },
+      weekend_cell: {
+        border: { color: 'FF000000', style: :thin },
+        font_name: 'Arial',
+        sz: 11,
+        b: false,
+        alignment: { horizontal: :center },
+        bg_color: 'FFFF0000'
+      },
+      bold_cell: {
+        border: { color: 'FF000000', style: :thin },
+        font_name: 'Arial',
+        sz: 11,
+        b: true,
+        alignment: { horizontal: :center }
+      },
+      total: {
+        border: { color: 'FF000000', style: :thin },
+        font_name: 'Arial',
+        sz: 11,
+        b: true,
+        alignment: { horizontal: :right }
+      }
     }
   end
 
-  def start_date_by_day(day)
-    "#{day}-#{@month}-#{@year}".to_date
+  def translate(key)
+    I18n.t('report.' + key)
   end
 
-  def all_days_in_month
-    (1..Time.days_in_month(@month, @year)).to_a.map(&:to_s)
+  def month_translate(month_number)
+    date = Date.current(month: month_number)
+    I18n.l(date, format: :report_month)
   end
 
-  def worksheet_name
-    "#{translations[:months][@month]} #{@year}"
+  def worksheet_name(date)
+    I18n.l(date, format: :report_month_comma_year)
+ end
+
+  def date_by_day(date, day)
+    date.change(day: day.to_i)
   end
 
-  def row_wide(row)
-    new_row = []
-    new_row << row
-    (0...report_width - 1).to_a.each { new_row << nil }
-    new_row
+  def all_days_in_month(date)
+    (1..Time.days_in_month(date.month, date.year)).to_a.map(&:to_s)
   end
 
   def report_title
-    row_wide("#{translations[:months][@month]}, #{@year}")
+    [I18n.l(@date, format: :report_month_comma_year)]
   end
 
-  def report_export_date
-    row_wide("#{translations[:export_date]} #{Date.current}")
+  def report_upload_date
+    [translate('upload_date'), Date.current]
   end
 
   def report_table_total
-    row_wide("#{translations[:total]} #{@user_menus.size}")
+    total = []
+    total << translate('total')
+    width = report_width - 2
+    width.times { total << nil }
+    total << "#{@user_menus.size}"
   end
 
   def report_table_header
-    header = []
-    header << translations[:name]
-    header += all_days_in_month
-    header << translations[:sum]
+    header = [translate('name')]
+    header += all_days_in_month(@date)
+    header << translate('sum')
   end
 
   def report_table_user_info(user)
@@ -94,8 +165,8 @@ class MonthlyReportService
     user_row << user.name
 
     total = 0
-    all_days_in_month.each do |day|
-      date = start_date_by_day(day)
+    all_days_in_month(@date).each do |day|
+      date = date_by_day(@date, day)
       if @user_menus.include?([date, user.id])
         user_row << 1
         total += 1
@@ -105,6 +176,30 @@ class MonthlyReportService
     end
 
     user_row << total
+  end
+
+  def calendar_styles
+    styles = []
+    styles << :name_cell
+
+    daily_styles = all_days_in_month(@date).map do |day|
+      date = date_by_day(@date, day)
+      if date.saturday? || date.sunday?
+        :weekend_cell
+      else
+        :default_cell
+      end
+    end
+
+    styles += daily_styles
+    styles << :default_cell
+  end
+
+  def total_styles
+    styles = []
+    styles << :total
+    all_days_in_month(@date).each { styles << :default_cell }
+    styles << :bold_cell
   end
 
   def report_width
