@@ -5,4 +5,10 @@ role :db,  fetch(:host)
 set :branch, :master
 set :rails_env, :production
 
-set :ssh_options, user: :vagrant, forward_agent: true, auth_methods: %w(publickey password)
+set :user, 'vagrant'
+set :homdir, "/home/#{fetch(:user)}"
+set :ssh_options, user: fetch(:user)
+
+set :application, 'obeder'
+set :deploy_to, "#{fetch(:homdir)}/apps/#{fetch(:application)}"
+
