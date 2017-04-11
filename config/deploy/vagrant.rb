@@ -9,6 +9,5 @@ set :user, 'vagrant'
 set :homdir, "/home/#{fetch(:user)}"
 set :ssh_options, user: fetch(:user)
 
-set :application, 'obeder'
 set :deploy_to, "#{fetch(:homdir)}/apps/#{fetch(:application)}"
 
