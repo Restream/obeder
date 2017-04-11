@@ -13,7 +13,7 @@
             %span.caret
           %ul.dropdown-menu
             = active_link_to t('.daily-reports'), admin_daily_reports_path(date: today), class_active: 'active', wrap_tag: :li
-            = active_link_to t('.monthly-reports'), admin_monthly_reports_path(year: today.year, month: today.month), class_active: 'active', wrap_tag: :li
+            = active_link_to t('.monthly-reports'), admin_monthly_reports_path(date: today), class_active: 'active', wrap_tag: :li
         = active_link_to t('.dishes'), admin_dishes_path, class_active: 'active', wrap_tag: :li
         - if current_user.role.admin?
           = active_link_to t('.users'), admin_users_path, class_active: 'active', wrap_tag: :li
