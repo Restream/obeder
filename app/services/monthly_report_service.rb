@@ -15,7 +15,7 @@ class MonthlyReportService
   class << self
     def export(month, year)
       date = date_from_params(month.to_i, year.to_i)
-      instance = self.new(date)
+      instance = new(date)
       instance.export_to_xlsx_stream
     end
 
