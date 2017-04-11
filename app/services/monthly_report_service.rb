@@ -1,4 +1,9 @@
 class MonthlyReportService
+  NAME_COLUMN_WIDTH = 40
+  ONE_SIGN_DAY_COLUMN_WIDTH = 2
+  TWO_SIGN_DAY_COLUMN_WIDTH = 3
+  TOTAL_COLUMN_WIDTH = 12
+
   def initialize(date)
     @date = date
     @users = User.order(:name)
@@ -9,7 +14,7 @@ class MonthlyReportService
 
   class << self
     def export(month, year)
-      date = self.date_from_params(month.to_i, year.to_i)
+      date = date_from_params(month.to_i, year.to_i)
       instance = self.new(date)
       instance.export_to_xlsx_stream
     end
@@ -191,11 +196,7 @@ class MonthlyReportService
   def calendar_styles(weekend, work)
     all_days_in_month(@date).map do |day|
       date = date_by_day(@date, day)
-      if date.saturday? || date.sunday?
-        weekend
-      else
-        work
-      end
+      date.saturday? || date.sunday? ? weekend : work
     end
   end
 
@@ -222,9 +223,9 @@ class MonthlyReportService
   end
 
   def column_widths
-    col_widths = [40]
-    9.times { col_widths << 2 }
-    (report_width - 11).times { col_widths << 3 }
-    col_widths << 12
+    col_widths = [NAME_COLUMN_WIDTH]
+    9.times { col_widths << ONE_SIGN_DAY_COLUMN_WIDTH }
+    (report_width - 11).times { col_widths << TWO_SIGN_DAY_COLUMN_WIDTH }
+    col_widths << TOTAL_COLUMN_WIDTH
   end
 end
