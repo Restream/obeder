@@ -29,13 +29,13 @@ ru:
           validation_ok: Валидация прошла успешно
           validation_failed: Во время валидации возникли ошибки
           confirm: Подтвердить
-      user_menus:
+      daily_reports:
         index:
           print: Печать
           dont_eat: 'Не едят:'
           default_dishes: 'Блюда по умолчанию:'
           default_marker: По умолчанию
-      reports:
+      monthly_reports:
         index:
           name_column_title: ФИО
           total: 'Итого:'
@@ -62,7 +62,7 @@ ru:
       passwords:
         edit:
           title: Установка пароля
-  report:
+  monthly_report:
     upload_date: 'Дата выгрузки:'
     name: ФИО
     sum: ∑

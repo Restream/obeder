@@ -127,7 +127,7 @@ class MonthlyReportService
   end
 
   def translate(key)
-    I18n.t('report.' + key)
+    I18n.t('monthly_report.' + key)
   end
 
   def month_translate(month_number)
