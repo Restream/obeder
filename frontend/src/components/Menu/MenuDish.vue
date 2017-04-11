@@ -3,22 +3,30 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes" class="menu-dish__item">
+        <div>
+          <div
+             v-show="dish.image.url"
+             class="thumbnail"
+             :style="`background-image: url(${ dish.image.thumb.url });`"
+             @click="showImage(dish.image.url, dish.description)" >
+          </div>
+        </div>
         <label
           class="menu-dish__label"
           :for="date + dish.id"
-          :title="dish.description"
-        >
+          :title="dish.description" >
           <input
-            type="radio"
-            v-model="selectedDish"
-            :name="date + type"
-            :id="date + dish.id"
-            :value="dish.id"
-          >
+          type="radio"
+          v-model="selectedDish"
+          :name="date + type"
+          :id="date + dish.id"
+          :value="dish.id" >
           <span class="menu-dish__radio" />
-          <span class="menu-dish__name">{{dish.name}}</span>
+          <div>
+            <span class="menu-dish__name">{{dish.name}}</span>
+            <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
+          </div>
         </label>
-        <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
       </li>
     </ul>
   </div>
@@ -36,12 +44,21 @@
 
   export default {
     name: 'MenuDish',
+
+    data() {
+      return {
+        typePresented: MenuPresenter.dishType(this.type),
+        selectedDish: getSelectedDishId(this.dishes),
+      };
+    },
+
     props: {
       date: String,
       dishes: Array,
       type: String,
       onChange: Function,
     },
+
     watch: {
       selectedDish(dish) {
         this.onChange(this.type, dish);
@@ -51,11 +68,10 @@
       },
     },
 
-    data() {
-      return {
-        typePresented: MenuPresenter.dishType(this.type),
-        selectedDish: getSelectedDishId(this.dishes),
-      };
+    methods: {
+      showImage(url, description) {
+        this.$emit('showImage', url, description);
+      },
     },
   };
 </script>
@@ -73,6 +89,7 @@
 
 .menu-dish__item {
   margin-bottom: 10px;
+  display: flex;
 }
 
 .menu-dish__header {
@@ -138,7 +155,6 @@
 
 .menu-dish__description {
   font-size: 10px;
-  margin-left: 30px;
   display: block;
 }
 
@@ -153,4 +169,17 @@
     font-size: 20px;
   }
 }
+
+.thumbnail {
+  width: 40px;
+  height: 40px;
+  margin: -5px 10px 0px 0px;
+  cursor: pointer;
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 1px solid #CCCCCC;
+  background-size: cover;
+}
+
 </style>

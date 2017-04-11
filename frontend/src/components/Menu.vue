@@ -3,11 +3,12 @@
     <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
     <div v-if="!menusLoaded" class="preloader"></div>
     <div class="content">
-      <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
+      <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" @showImage="showImage"/>
       <div v-if="menusLoaded && sortedDates.length === 0" class="bs-callout">
         <h4 class="title">К сожалению, меню еще не заполнено</h4>
       </div>
     </div>
+    <image-modal :show="showImageModal" :image="curImage" @close="hideImage" />
   </div>
 </template>
 
@@ -17,11 +18,13 @@
 
   import Header from './Header';
   import DailyMenu from './Menu/DailyMenu';
+  import ImageModal from './ImageModal';
 
   export default {
     components: {
       'menu-header': Header,
       'daily-menu': DailyMenu,
+      'image-modal': ImageModal,
     },
     created() {
       usersService
@@ -40,6 +43,11 @@
         dates: [],
         headerSwitchIsDisabled: false,
         menusLoaded: false,
+        showImageModal: false,
+        curImage: {
+          url: null,
+          description: null,
+        },
       };
     },
     computed: {
@@ -50,6 +58,13 @@
     methods: {
       disableMenuSwitchers(val) {
         this.headerSwitchIsDisabled = val;
+      },
+      showImage(url, description) {
+        this.curImage = { url, description };
+        this.showImageModal = true;
+      },
+      hideImage() {
+        this.showImageModal = false;
       },
     },
   };

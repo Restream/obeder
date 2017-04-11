@@ -21,6 +21,7 @@
         :dishes="dishes"
         :type="type"
         :onChange="onDishChange"
+        @showImage="showImage"
       >
       </menu-dish>
       <div class="daily-menu__actions">
@@ -199,6 +200,10 @@
       menuSwitchToggle(value) {
         this.day.neem = !value;
         this.sendData();
+      },
+
+      showImage(url, description) {
+        this.$emit('showImage', url, description);
       },
     },
   };

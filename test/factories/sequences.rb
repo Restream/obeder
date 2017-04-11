@@ -18,4 +18,8 @@ FactoryGirl.define do
   sequence :date do |n|
     Date.current + n.days
   end
+
+  sequence :image do
+    Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'factories', 'files', 'dish.jpg'), 'image/jpg')
+  end
 end

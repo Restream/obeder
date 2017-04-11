@@ -6,6 +6,8 @@
 .idea
 .byebug_history
 public/static/
+public/uploads/
+test/factories/files/uploads/
 app/views/web/welcome/index.html
 npm-debug.log
 node_modules

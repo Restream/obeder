@@ -1,4 +1,11 @@
 ru:
+  errors:
+    messages:
+      carrierwave_processing_error: Нельзя изменить размер изображения
+      carrierwave_integrity_error: Не изображение
+      carrierwave_download_error: Не получается загрузить изображение
+      extension_whitelist_error: "Не правильное разрешение файла %{extension}, разрешенные типы: %{allowed_types}"
+
   user_mailer:
     change_password:
       subject: Obeder. Установка пароля.

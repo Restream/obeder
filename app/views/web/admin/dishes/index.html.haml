@@ -25,14 +25,13 @@
       - @dishes.each do |dish|
         %tr
           %td
+            = image_tag(dish.image.thumb.url) if dish.image?
             = dish.name
-
           %td{width: '200px'}
             = link_to edit_admin_dish_path(dish), {class: 'btn btn-info btn-sm'} do
               %i.glyphicon.glyphicon-plus.hidden-sm.hidden-md.hidden-lg
               %span.hidden-xs
                 = t('form.edit')
-
             = link_to admin_dish_path(dish), {class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: t('form.confirm') }} do
               %i.glyphicon.glyphicon-trash.hidden-sm.hidden-md.hidden-lg
               %span.hidden-xs

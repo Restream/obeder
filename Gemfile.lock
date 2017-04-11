@@ -78,6 +78,10 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     case_transform (0.2)
       activesupport
     clockwork (2.0.2)
@@ -165,6 +169,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_magick (4.7.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     mocha (1.2.1)
@@ -303,6 +308,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bullet
   byebug
+  carrierwave (~> 1.0)
   clockwork
   cocoon
   config
@@ -313,6 +319,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.0.5)
+  mini_magick
   mocha
   pg (~> 0.18)
   puma (~> 3.0)

@@ -32,6 +32,8 @@ gem 'clockwork'
 gem 'sidekiq'
 gem 'redis'
 gem 'rails-observers', git: 'https://github.com/rails/rails-observers'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platform: :mri
