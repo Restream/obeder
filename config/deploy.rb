@@ -7,9 +7,8 @@ set :user, :vagrant
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_role, :web
 
-# FIXME разобраться, почему падает тут
-# append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/puma.rb'
-# append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'log'
+append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/puma.rb'
+append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'log'
 
 namespace :deploy do
   namespace :assets do
