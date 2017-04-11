@@ -7,7 +7,7 @@ class Web::Admin::MonthlyReportsControllerTest < ActionController::TestCase
   end
 
   test 'index' do
-    get :index
+    get :index, params: { date: Date.current }
     assert_response :success
   end
 
