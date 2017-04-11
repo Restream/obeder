@@ -1,19 +1,19 @@
 .row
   .col-md-3
-    = link_to admin_reports_path(previous_report_params(@report_month, @report_year)) do
+    = link_to admin_monthly_reports_path(previous_report_params(@report_month, @report_year)) do
       %h2.glyphicon.glyphicon-chevron-left
   .col-md-6
     %h1.text-center
       = report_header(t("months_from_digits.#{@report_month}"), @report_year)
   .col-md-3
     .text-right
-      = link_to admin_reports_path(next_report_params(@report_month, @report_year)) do
+      = link_to admin_monthly_reports_path(next_report_params(@report_month, @report_year)) do
         %h2.glyphicon.glyphicon-chevron-right
 
 %br
 
 .text-right
-  %a.btn.btn-default{ href: export_admin_reports_path(month: @report_month, year: @report_year) }
+  %a.btn.btn-default{ href: export_admin_monthly_reports_path(month: @report_month, year: @report_year) }
     %span
       = t('.export_to_excel')
 

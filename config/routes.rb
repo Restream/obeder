@@ -19,14 +19,14 @@ Rails.application.routes.draw do
     namespace :admin do
       root to: 'welcome#index'
       resources :dishes, only: [:index, :edit, :new, :create, :update, :destroy]
-      resources :user_menus, only: [:index]
+      resources :daily_reports, only: [:index]
       resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
       resources :menus, param: :date, only: [:edit, :update] do
         member do
           put :approve
         end
       end
-      resources :reports, only: [:index] do
+      resources :monthly_reports, only: [:index] do
         collection do
           get :export
         end

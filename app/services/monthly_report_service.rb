@@ -15,7 +15,7 @@ class MonthlyReportService
     end
 
     def filename(month, year)
-      "report_#{month}_#{year}.xlsx"
+      "monthly_report_#{month}_#{year}.xlsx"
     end
 
     def type

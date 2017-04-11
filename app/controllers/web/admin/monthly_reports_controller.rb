@@ -1,4 +1,4 @@
-class Web::Admin::ReportsController < Web::Admin::ApplicationController
+class Web::Admin::MonthlyReportsController < Web::Admin::ApplicationController
   before_action :authorize_cook
 
   def index
