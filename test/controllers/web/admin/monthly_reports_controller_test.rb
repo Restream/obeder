@@ -12,7 +12,7 @@ class Web::Admin::MonthlyReportsControllerTest < ActionController::TestCase
   end
 
   test 'export' do
-    get :export, params: { month: '4', year: '2017' }
+    get :export, params: { month: Date.current.month, year: Date.current.year }
     assert_response :success
     assert_equal 'application/vnd.ms-excel', response.content_type
   end
