@@ -13,22 +13,17 @@ class MonthlyReportService
   end
 
   class << self
-    def export(month, year)
-      date = date_from_params(month.to_i, year.to_i)
+    def export(date)
       instance = new(date)
       instance.export_to_xlsx_stream
     end
 
-    def filename(month, year)
-      "monthly_report_#{month}_#{year}.xlsx"
+    def filename(date)
+      "monthly_report_#{date.month}_#{date.year}.xlsx"
     end
 
     def type
       'application/vnd.ms-excel'
-    end
-
-    def date_from_params(month, year)
-      "#{1}-#{month}-#{year}".to_date
     end
   end
 
@@ -149,7 +144,7 @@ class MonthlyReportService
   end
 
   def month_comma_year(date)
-    I18n.t("months_from_digits.#{date.month}") + ', ' + date.year.to_s
+    I18n.l(date, format: :report_month_comma_year)
   end
 
   def report_title

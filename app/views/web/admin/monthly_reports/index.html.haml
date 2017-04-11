@@ -1,19 +1,19 @@
 .row
   .col-md-3
-    = link_to admin_monthly_reports_path(previous_report_params(@report_month, @report_year)) do
+    = link_to admin_monthly_reports_path(previous_report_params(@date)) do
       %h2.glyphicon.glyphicon-chevron-left
   .col-md-6
     %h1.text-center
-      = report_header(t("months_from_digits.#{@report_month}"), @report_year)
+      = report_header(@date)
   .col-md-3
     .text-right
-      = link_to admin_monthly_reports_path(next_report_params(@report_month, @report_year)) do
+      = link_to admin_monthly_reports_path(next_report_params(@date)) do
         %h2.glyphicon.glyphicon-chevron-right
 
 %br
 
 .text-right
-  %a.btn.btn-default{ href: export_admin_monthly_reports_path(month: @report_month, year: @report_year) }
+  %a.btn.btn-default{ href: export_admin_monthly_reports_path(date: @date) }
     %span
       = t('.export_to_excel')
 
@@ -23,8 +23,8 @@
   %tr.text-center
     %td
       = t('.name_column_title')
-    - dates_in_month = dates_in_month(@beginning_of_month)
-    - dates_in_month.each do |date|
+    - dates = dates_in_month(@date)
+    - dates.each do |date|
       %td{ class: cell_color_class(date) }
         = date.day
     %td ∑
@@ -34,7 +34,7 @@
         #{i + 1}.
         = user.name
       - total_by_user = 0
-      - dates_in_month.each do |date|
+      - dates.each do |date|
         %td{ class: cell_color_class(date) }
           - if user_ate?(user.id, date, @user_menus)
             - total_by_user += 1
