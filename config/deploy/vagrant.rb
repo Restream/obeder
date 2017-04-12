@@ -10,4 +10,3 @@ set :homdir, "/home/#{fetch(:user)}"
 set :ssh_options, user: fetch(:user)
 
 set :deploy_to, "#{fetch(:homdir)}/apps/#{fetch(:application)}"
-
