@@ -27,7 +27,8 @@
     - dates.each do |date|
       %td{ class: cell_color_class(date) }
         = date.day
-    %td ∑
+    %td
+      = t('.sum')
   - @users.each_with_index do |user, i|
     %tr.text-center
       %td
