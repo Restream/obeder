@@ -80,10 +80,6 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
-    carrierwave (1.0.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
     capistrano (3.8.0)
       airbrussh (>= 1.0.0)
       i18n
@@ -98,6 +94,10 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     case_transform (0.2)
       activesupport
     clockwork (2.0.2)
@@ -330,10 +330,10 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bullet
   byebug
-  carrierwave (~> 1.0)
   capistrano (~> 3.8)
   capistrano-rails
   capistrano-rvm
+  carrierwave (~> 1.0)
   clockwork
   cocoon
   config
