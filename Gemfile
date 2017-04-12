@@ -40,7 +40,6 @@ group :development, :test do
   gem 'factory_girl_rails', require: false
   gem 'bullet'
   gem 'capistrano', '~> 3.8'
-  gem 'capistrano3-puma'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
 end
