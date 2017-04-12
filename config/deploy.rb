@@ -24,7 +24,7 @@ namespace :deploy do
   end
 
   desc 'Restart obeder application'
-  task :restart do
+  task :restart_obeder do
     on roles(:all) do
       execute 'sudo service obeder restart'
     end
@@ -32,3 +32,4 @@ namespace :deploy do
 end
 
 before 'deploy:assets:precompile', 'deploy:assets:build_frontend'
+after 'deploy:finished', 'deploy:restart_obeder'
