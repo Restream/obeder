@@ -25,7 +25,9 @@ namespace :deploy do
   desc 'Restart obeder application'
   task :restart_obeder do
     on roles(:all) do
-      execute 'sudo service obeder restart'
+      execute 'sudo service obeder_puma restart'
+      execute 'sudo service obeder_sidekiq restart'
+      execute 'sudo service obeder_clockwork restart'
     end
   end
 end
