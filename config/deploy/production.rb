@@ -5,7 +5,8 @@ role :db,  fetch(:host)
 set :branch, :master
 set :rails_env, :production
 
-set :user, 'root'
+set :user, 'deployer'
+set :homedir, "/home/#{fetch(:user)}"
 set :ssh_options, user: fetch(:user)
 
-set :deploy_to, "/root/apps/#{fetch(:application)}"
+set :deploy_to, "#{fetch(:homedir)}/apps/#{fetch(:application)}"
