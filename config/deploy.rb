@@ -3,8 +3,6 @@ lock '3.8.0'
 set :application, 'obeder'
 set :repo_url, 'git@github.com:Restream/obeder.git'
 
-set :user, :vagrant
-set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_role, :web
 
 append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'log'
