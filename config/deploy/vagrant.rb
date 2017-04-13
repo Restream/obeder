@@ -6,7 +6,7 @@ set :branch, :master
 set :rails_env, :production
 
 set :user, 'vagrant'
-set :homdir, "/home/#{fetch(:user)}"
+set :homedir, "/home/#{fetch(:user)}"
 set :ssh_options, user: fetch(:user)
 
-set :deploy_to, "#{fetch(:homdir)}/apps/#{fetch(:application)}"
+set :deploy_to, "#{fetch(:homedir)}/apps/#{fetch(:application)}"
