@@ -13,7 +13,7 @@
 %br
 
 .text-right
-  %a.btn.btn-default{ href: export_admin_monthly_reports_path(date: @date) }
+  %a.btn.btn-default{ href: export_admin_monthly_reports_path(date: @date), target: '_blank' }
     %span
       = t('.export_to_excel')
 
