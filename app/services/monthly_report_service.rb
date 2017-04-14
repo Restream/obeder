@@ -144,7 +144,7 @@ class MonthlyReportService
   end
 
   def month_comma_year(date)
-    I18n.l(date, format: :report_month_comma_year)
+    I18n.l(date, format: :monthly_report_date)
   end
 
   def report_title

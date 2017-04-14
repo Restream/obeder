@@ -1,6 +1,6 @@
 module Web::Admin::MonthlyReportsHelper
   def report_header(date)
-    I18n.l(date, format: :report_month_comma_year)
+    I18n.l(date, format: :monthly_report_date)
   end
 
   def next_report_params(date)
