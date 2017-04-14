@@ -14,6 +14,6 @@ class Web::Admin::MonthlyReportsControllerTest < ActionController::TestCase
   test 'export' do
     get :export, params: { date: Date.current }
     assert_response :success
-    assert_equal 'application/vnd.ms-excel', response.content_type
+    assert { response.content_type == 'application/vnd.ms-excel' }
   end
 end
