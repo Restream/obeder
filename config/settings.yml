@@ -1,6 +1,7 @@
 closest_menus_date_offset: 2
 domain: obeder.herokuapp.com
 freeze_user_menu_at: '19:00'
-REDIS_HOST: '127.0.0.1'
-REDIS_PORT: '6379'
-SIDEKIQ_REDIS_DB: 'db0'
+redis:
+  host: <%= ENV['REDIS_HOST'] || '127.0.0.1' %>
+  port: <%= ENV['REDIS_PORT'] || 6379 %>
+  sidekiq_db: <%= ENV['REDIS_DB'] || 'db0' %>
