@@ -23,7 +23,7 @@
   - dates = dates_in_month(@date)
   %tr.text-center
     %td
-      = t('.name_column_title')
+      = t('.name')
     - dates.each do |date|
       %td{ class: cell_color_class(date) }
         = date.day

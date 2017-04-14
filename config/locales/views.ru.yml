@@ -37,7 +37,7 @@ ru:
           default_marker: По умолчанию
       monthly_reports:
         index:
-          name_column_title: ФИО
+          name: ФИО
           total: 'Итого:'
           sum: ∑
           export_to_excel: Экспорт в Excel
