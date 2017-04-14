@@ -1,13 +1,13 @@
 .row
   .col-md-3
-    = link_to admin_monthly_reports_path(previous_report_params(@date)) do
+    = link_to admin_monthly_reports_path(date: previous_report_params(@date)) do
       %h2.glyphicon.glyphicon-chevron-left
   .col-md-6
     %h1.text-center
       = report_header(@date)
   .col-md-3
     .text-right
-      = link_to admin_monthly_reports_path(next_report_params(@date)) do
+      = link_to admin_monthly_reports_path(date: next_report_params(@date)) do
         %h2.glyphicon.glyphicon-chevron-right
 
 %br
@@ -20,10 +20,10 @@
 %br
 
 %table.table.table-bordered
+  - dates = dates_in_month(@date)
   %tr.text-center
     %td
       = t('.name_column_title')
-    - dates = dates_in_month(@date)
     - dates.each do |date|
       %td{ class: cell_color_class(date) }
         = date.day
