@@ -30,18 +30,8 @@
     %td
       = t('.sum')
   - @users.each_with_index do |user, i|
-    %tr.text-center
-      %td
-        #{i + 1}.
-        = user.name
-      - total_by_user = 0
-      - dates.each do |date|
-        %td{ class: cell_color_class(date) }
-          - if user_ate?(user.id, date, @user_menus)
-            - total_by_user += 1
-            = 1
-      %td
-        = total_by_user
+    = report_row(user, i, dates, @user_menus)
+
 %p.text-right
   = t('.total')
   = @user_menus.size
