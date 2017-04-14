@@ -155,7 +155,7 @@ class MonthlyReportService
   end
 
   def report_upload_date
-    [translate('upload_date') + ' ' + I18n.l(Date.current, format: :report_default)]
+    [translate('upload_date') + ' ' + I18n.l(Date.current)]
   end
 
   def report_table_total

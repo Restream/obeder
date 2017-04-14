@@ -15,7 +15,6 @@ ru:
   date:
     formats:
       menu_date: '%d %B, %A'
-      report_default: '%d.%m.%Y'
       monthly_report_date: '%B, %Y'
 
   flash:
