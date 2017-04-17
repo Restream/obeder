@@ -205,6 +205,7 @@ class MonthlyReportService
     report_table_header.size
   end
 
+  # FIXME: Поправить магические числа или отрефакторить
   def column_widths
     col_widths = [NAME_COLUMN_WIDTH]
     9.times { col_widths << ONE_SIGN_DAY_COLUMN_WIDTH }
