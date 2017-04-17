@@ -131,7 +131,7 @@ class MonthlyReportService
     I18n.l(date, format: :report_month)
   end
 
-  def all_dates_in_month(date)
+  def dates_in_month(date)
     (date.beginning_of_month..date.end_of_month).to_a
   end
 
@@ -159,7 +159,7 @@ class MonthlyReportService
 
   def report_table_header
     header = [translate('name')]
-    header += all_dates_in_month(@date).map(&:day)
+    header += dates_in_month(@date).map(&:day)
     header << translate('sum')
   end
 
@@ -167,7 +167,7 @@ class MonthlyReportService
     user_row = [user.name]
 
     total = 0
-    all_dates_in_month(@date).each do |date|
+    dates_in_month(@date).each do |date|
       if @user_menus.include?([date, user.id])
         user_row << 1
         total += 1
@@ -180,9 +180,7 @@ class MonthlyReportService
   end
 
   def calendar_styles(weekend, work)
-    all_dates_in_month(@date).map do |date|
-      date.saturday? || date.sunday? ? weekend : work
-    end
+    dates_in_month(@date).map { |date| date.saturday? || date.sunday? ? weekend : work }
   end
 
   def table_header_styles
@@ -199,7 +197,7 @@ class MonthlyReportService
 
   def total_styles
     styles = [:total]
-    all_dates_in_month(@date).each { styles << :default_cell }
+    dates_in_month(@date).each { styles << :default_cell }
     styles << :bold_cell
   end
 
