@@ -7,7 +7,7 @@
       %ul.nav.navbar-nav
         = active_link_to t('.menu'), edit_admin_menu_path(Date.current), class_active: 'active', wrap_tag: :li
         %li.dropdown
-          %a.dropdown-toggle{ href: '#', data: { toggle: :dropdown }, role: :button, aria: { haspopup: true, expanded: false } }
+          %a.dropdown-toggle{ data: { toggle: :dropdown }, role: :button, aria: { haspopup: true, expanded: false } }
             = t('.reports')
             %span.caret
           %ul.dropdown-menu
