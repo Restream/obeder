@@ -1,0 +1,35 @@
+.row
+  .col-md-3
+    = link_to admin_monthly_reports_path(date: previous_report_params(@date)) do
+      %h2.glyphicon.glyphicon-chevron-left
+  .col-md-6
+    %h1.text-center
+      = report_header(@date)
+  .col-md-3
+    .text-right
+      = link_to admin_monthly_reports_path(date: next_report_params(@date)) do
+        %h2.glyphicon.glyphicon-chevron-right
+
+%br
+
+.text-right
+  = link_to t('.export_to_excel'), export_admin_monthly_reports_path(date: @date), target: '_blank', class: 'btn btn-default'
+
+%br
+
+%table.table.table-bordered
+  - dates = dates_in_month(@date)
+  %tr.text-center
+    %td
+      = t('.name')
+    - dates.each do |date|
+      %td{ class: cell_color_class(date) }
+        = date.day
+    %td
+      = t('.sum')
+  - @users.each_with_index do |user, i|
+    = report_row(user, i, dates, @user_menus)
+
+%p.text-right
+  = t('.total')
+  = @user_menus.size

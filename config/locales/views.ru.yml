@@ -29,16 +29,24 @@ ru:
           validation_ok: Валидация прошла успешно
           validation_failed: Во время валидации возникли ошибки
           confirm: Подтвердить
-      user_menus:
+      daily_reports:
         index:
           print: Печать
           dont_eat: 'Не едят:'
           default_dishes: 'Блюда по умолчанию:'
           default_marker: По умолчанию
+      monthly_reports:
+        index:
+          name: ФИО
+          total: 'Итого:'
+          sum: ∑
+          export_to_excel: Экспорт в Excel
     shared:
       nav:
         menu: Меню
         reports: Отчеты
+        daily-reports: Ежедневные отчеты
+        monthly-reports: Ежемесячные отчеты
         dishes: Блюда
         users: Пользователи
     sessions:
@@ -54,3 +62,8 @@ ru:
       passwords:
         edit:
           title: Установка пароля
+  monthly_report:
+    upload_date: 'Дата выгрузки:'
+    name: ФИО
+    sum: ∑
+    total: 'Итого:'

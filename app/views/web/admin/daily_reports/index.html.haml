@@ -1,13 +1,13 @@
 .row
   .col-md-3
-    = link_to admin_user_menus_path(date: @date - 1), class: 'hidden-print' do
+    = link_to admin_daily_reports_path(date: @date - 1), class: 'hidden-print' do
       %h2.glyphicon.glyphicon-chevron-left
   .col-md-6
     %h1.text-center
       =l @date, format: :menu_date
   .col-md-3
     .text-right
-      = link_to admin_user_menus_path(date: @date + 1), class: 'hidden-print' do
+      = link_to admin_daily_reports_path(date: @date + 1), class: 'hidden-print' do
         %h2.glyphicon.glyphicon-chevron-right
 
 .well

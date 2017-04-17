@@ -34,6 +34,9 @@ gem 'redis'
 gem 'rails-observers', git: 'https://github.com/rails/rails-observers'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'russian'
 
 group :development, :test do
   gem 'byebug', platform: :mri
