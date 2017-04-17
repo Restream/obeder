@@ -42,12 +42,8 @@ class MonthlyReportService
       sheet.add_row(report_upload_date, style: workbook_styles[:uploaded])
       sheet.add_row()
 
-      sheet.add_row(report_table_header,
-        style: table_header_styles.map { |style| workbook_styles[style] })
-      @users.each do |user|
-        sheet.add_row(report_table_user_info(user),
-          style: table_user_styles.map { |style| workbook_styles[style] })
-      end
+      sheet.add_row(report_table_header, style: table_header_styles.map { |style| workbook_styles[style] })
+      @users.each { |user| sheet.add_row(report_table_user_info(user), style: table_user_styles.map { |style| workbook_styles[style] }) }
 
       sheet.add_row(report_table_total, style: total_styles.map { |style| workbook_styles[style] })
 
