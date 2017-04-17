@@ -39,6 +39,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_girl_rails', require: false
   gem 'bullet'
+  gem 'capistrano', '~> 3.8'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
 end
 
 group :development do

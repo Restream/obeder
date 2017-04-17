@@ -1,4 +1,4 @@
-class Menu < ActiveRecord::Base; end
+class Menu < ApplicationRecord; end
 
 class AddAssmStateToMenu < ActiveRecord::Migration[5.0]
   def change
