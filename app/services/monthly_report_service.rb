@@ -34,7 +34,7 @@ class MonthlyReportService
     workbook_styles = {}
     styles.each { |name, style| workbook_styles[name] = workbook.styles.add_style(style) }
 
-    workbook.add_worksheet(name: report_date(@date)) do |sheet|
+    workbook.add_worksheet(name: format_report_date(@date)) do |sheet|
       last_cell = report_width - 1
 
       sheet.add_row(report_title, style: workbook_styles[:title])
@@ -139,12 +139,12 @@ class MonthlyReportService
     (1..Time.days_in_month(date.month, date.year)).to_a.map(&:to_s)
   end
 
-  def report_date(date)
+  def format_report_date(date)
     I18n.l(date, format: :monthly_report_date)
   end
 
   def report_title
-    title = [report_date(@date)]
+    title = [format_report_date(@date)]
     width = report_width - 1
     width.times { title << nil }
     title
