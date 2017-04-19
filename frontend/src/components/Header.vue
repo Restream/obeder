@@ -7,11 +7,17 @@
 
     <header-switcher :isOn='isSwitchOn' @onToggle="headerSwitchToggle" />
 
-    <div class="header__user">{{user.name}}</div>
+    <div class="header__user">
+      {{user.name}}
+      <router-link class='logout_icon' to='/logout' v-hint.left.rounded='`Выйти`'>
+        <i class='fa fa-sign-out fa-lg' aria-hidden='true'></i>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+  import Hint from 'vue-hint.css';
   import usersService from 'api/users';
   import Switcher from './Switcher';
 
@@ -19,12 +25,13 @@
     components: {
       'header-switcher': Switcher,
     },
+    directives: {
+      Hint,
+    },
     name: 'Header',
     created() {
-      const id = localStorage.getItem('user_uid');
-
       usersService
-        .getOne(id)
+        .getUser()
         .then(
           (user) => {
             this.user = {
@@ -47,17 +54,16 @@
       };
     },
     methods: {
-      headerSwitchToggle(em) {
-        const id = localStorage.getItem('user_uid');
+      headerSwitchToggle(value) {
         const payload = {
           user: {
-            neem: !em,
+            neem: !value,
           },
         };
-        usersService.save(id, payload);
-        this.isSwitchOn = em;
-        this.user.em = em;
-        this.$emit('onDisableMenuSwitchers', !em);
+        usersService.saveUser(payload);
+        this.isSwitchOn = value;
+        this.user.em = value;
+        this.$emit('onDisableMenuSwitchers', !value);
       },
     },
   };
@@ -90,6 +96,11 @@
     left: 10px;
     align-items: center;
     display: none;
+  }
+
+  .logout_icon {
+    color:inherit;
+    text-decoration: none;
   }
 
   .logo {

@@ -2,8 +2,12 @@ FactoryGirl.define do
   factory :menu do
     date
 
-    trait :ready do
-      ready true
+    trait :approved do
+      aasm_state :approved
+    end
+
+    trait :published do
+      aasm_state :published
     end
 
     trait :with_dish do

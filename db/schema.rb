@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211145604) do
+ActiveRecord::Schema.define(version: 20170404215854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170211145604) do
     t.string "name"
     t.text   "description"
     t.string "dish_type"
+    t.string "image"
   end
 
   create_table "menu_dishes", force: :cascade do |t|
@@ -31,14 +32,15 @@ ActiveRecord::Schema.define(version: 20170211145604) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.date    "date"
-    t.boolean "ready", default: false
+    t.date   "date"
+    t.string "aasm_state"
   end
 
   create_table "user_menu_dishes", force: :cascade do |t|
     t.integer "user_menu_id"
     t.integer "dish_id"
     t.index ["dish_id"], name: "index_user_menu_dishes_on_dish_id", using: :btree
+    t.index ["user_menu_id", "dish_id"], name: "index_user_menu_dishes_on_user_menu_id_and_dish_id", unique: true, using: :btree
     t.index ["user_menu_id"], name: "index_user_menu_dishes_on_user_menu_id", using: :btree
   end
 
@@ -47,14 +49,18 @@ ActiveRecord::Schema.define(version: 20170211145604) do
     t.integer "menu_id"
     t.text    "description"
     t.boolean "neem",        default: false
+    t.boolean "editable",    default: true
     t.index ["menu_id"], name: "index_user_menus_on_menu_id", using: :btree
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string  "name"
     t.string  "email"
-    t.boolean "neem",        default: false
+    t.boolean "neem",            default: false
     t.string  "description"
+    t.string  "password_digest"
+    t.string  "role"
+    t.string  "aasm_state"
   end
 
   add_foreign_key "menu_dishes", "dishes"

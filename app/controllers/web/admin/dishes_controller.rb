@@ -1,4 +1,6 @@
 class Web::Admin::DishesController < Web::Admin::ApplicationController
+  before_action :authorize_cook
+
   def index
     params[:q] ||= {}
     params[:q][:dish_type_eq] ||= 'soup'
@@ -46,6 +48,6 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
   private
 
   def dish_params
-    params.require(:dish).permit(:name, :description, :dish_type)
+    params.require(:dish).permit(:name, :description, :dish_type, :image, :image_cache)
   end
 end

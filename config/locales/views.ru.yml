@@ -1,16 +1,69 @@
 ru:
   web:
     admin:
+      users:
+        new:
+          add_user: Добавить пользователя
+      dishes:
+        new:
+          add_dish: Добавить блюдо
+        edit:
+          edit_dish: Редактировать блюдо
       menus:
         edit:
-          menu_for: 'Меню на'
+          menu_for: Меню на
         closest_days_menus:
           closest_days_menus_btn: Меню на ближайшие дни
-          default: 'по умолчанию'
+          default: по умолчанию
         menu_dish_fields:
-          default: 'По умолчанию'
-          delete_dish: 'Удалить блюдо'
+          default: По умолчанию
+          delete_dish: Удалить блюдо
         form:
-          publish_menu: 'Опубликовать меню'
-          add_dish: 'Добавить блюдо'
-          save: 'Сохранить'
+          publish_menu: Опубликовать меню
+          add_dish: Добавить блюдо
+          save: Сохранить
+        validation_modal:
+          publish_modal_header: Подтвердите публикацию меню
+          check_if_menu_saved: Проверьте, сохранено ли меню!
+          validation_in_progress: Валидация меню...
+          validation_ok: Валидация прошла успешно
+          validation_failed: Во время валидации возникли ошибки
+          confirm: Подтвердить
+      daily_reports:
+        index:
+          print: Печать
+          dont_eat: 'Не едят:'
+          default_dishes: 'Блюда по умолчанию:'
+          default_marker: По умолчанию
+      monthly_reports:
+        index:
+          name: ФИО
+          total: 'Итого:'
+          sum: ∑
+          export_to_excel: Экспорт в Excel
+    shared:
+      nav:
+        menu: Меню
+        reports: Отчеты
+        daily-reports: Ежедневные отчеты
+        monthly-reports: Ежемесячные отчеты
+        dishes: Блюда
+        users: Пользователи
+    sessions:
+      new:
+        title: Вход
+        login: Вход
+        have_you_forgotten_password: Забыли пароль?
+    remind_passwords:
+      edit:
+        title: Восстановление пароля
+        reset_password: Сбросить пароль
+    user:
+      passwords:
+        edit:
+          title: Установка пароля
+  monthly_report:
+    upload_date: 'Дата выгрузки:'
+    name: ФИО
+    sum: ∑
+    total: 'Итого:'

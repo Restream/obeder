@@ -5,19 +5,63 @@ ru:
         name: Название
         description: Описание
         dish_type: Тип блюда
+        image: Фото блюда
       user:
         name: Фамилия Имя
         email: Email
         neem: Не есть
         description: Описание
+        role: Роль
+        aasm_state:
+          active: Активный
+          inactive: Неактивный
+      user_sign_in_type:
+        email: Email
+        password: Пароль
+      user_password_edit_type:
+        password: Введите пароль
+        password_confirmation: Повторите пароль
 
     errors:
+      messages:
+        less_than_two_soups: Менее двух супов
+        less_than_two_salads: Менее двух салатов
+        no_defaults: Блюда по умолчанию не указаны или указаны некорректно
+        main_to_side_dishes_mismatch: Количество гарниров не совпадает с количеством основных блюд
+        less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
+        invalid_email: Неправильный email
+        invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
+        blank: Поле, обязательное для заполнения
+
       models:
         user:
           attributes:
             email:
               blank: Введите email
-              invalid_email: Введите Рестрим email, вида username@restream.rt.ru
+              taken: Пользователь с таким email уже существует
             name:
               blank: Введите Фамилию и Имя
-
+            role:
+              blank: Выберите роль
+        user_remind_password_type:
+          attributes:
+            email:
+              blank: Введите email
+        user_sign_in_type:
+          attributes:
+            email:
+              blank: Введите email
+            password:
+              blank: Введите пароль
+              user_or_password_invalid: Email или пароль не правильные
+        user_password_edit_type:
+          attributes:
+            password:
+              blank: Введите пароль
+            password_confirmation:
+              blank: Введите пароль
+              confirmation: Пароли не совпадают
+        user_menu:
+          attributes:
+            editable:
+              inclusion: Меню на текущий день недоступно для редактирования

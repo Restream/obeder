@@ -2,6 +2,12 @@
   = f.input :name
   = f.input :description
   = f.input :dish_type
+  = f.input :image_cache, as: :hidden
+  = f.input :image, as: :file, wrapper: :horizontal_form
+  .form-group
+    .col-sm-12
+      .pull-right
+        = image_tag(@dish.image_url) if @dish.image?
   .form-group
     .col-sm-offset-3.col-sm-9
-      = f.submit 'Сохранить', class: 'btn btn-primary'
+      = f.submit t('save'), class: 'btn btn-primary'

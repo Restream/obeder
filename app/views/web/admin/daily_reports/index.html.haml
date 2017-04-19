@@ -1,0 +1,50 @@
+.row
+  .col-md-3
+    = link_to admin_daily_reports_path(date: @date - 1), class: 'hidden-print' do
+      %h2.glyphicon.glyphicon-chevron-left
+  .col-md-6
+    %h1.text-center
+      =l @date, format: :menu_date
+  .col-md-3
+    .text-right
+      = link_to admin_daily_reports_path(date: @date + 1), class: 'hidden-print' do
+        %h2.glyphicon.glyphicon-chevron-right
+
+.well
+  .row
+    .col-md-9
+      .row
+        - @dishes_stats.in_groups(2, false) do |group|
+          .col-md-6
+            - group.each do |stat|
+              #{stat[:type]}:
+              %b #{stat[:count]}
+              %br
+      %hr
+      .row
+        .col-md-12
+          %b
+            = t('.dont_eat')
+          = @neem_users.decorate.names
+    .col-md-3.text-right.hidden-print
+      %button.btn.btn-lg.btn-primary{onclick: "window.print()"}
+        %span.glyphicon.glyphicon-print
+        = t('.print')
+
+%p
+  = t('.default_dishes')
+  = @default_dishes && @default_dishes.decorate.names
+
+%table.table.table-condensed
+  - @user_menus.each_with_index do |user_menu, i|
+    %tr
+      %td.visible-print-block
+        %span.glyphicon.glyphicon-unchecked
+      %td
+        #{i + 1}.
+        = user_menu.user.name
+      %td
+        .small
+          = user_menu.dishes.ordered_by_name.decorate.names_or_default(@default_dishes, t('.default_marker'))
+      %td
+        = user_menu.description

@@ -2,25 +2,31 @@
   <div class="menu-dish">
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
-      <li v-for="dish in dishes">
+      <li v-for="dish in dishes" class="menu-dish__item">
+        <div>
+          <div
+             v-show="dish.image.url"
+             class="thumbnail"
+             :style="`background-image: url(${ dish.image.thumb.url });`"
+             @click="showImage(dish.image.url, dish.description)" >
+          </div>
+        </div>
         <label
           class="menu-dish__label"
           :for="date + dish.id"
-          :title="dish.description"
-        >
+          :title="dish.description" >
           <input
-            type="radio"
-            v-model="selectedDish"
-            :name="date + type"
-            :id="date + dish.id"
-            :value="dish.id"
-          >
+          type="radio"
+          v-model="selectedDish"
+          :name="date + type"
+          :id="date + dish.id"
+          :value="dish.id" >
           <span class="menu-dish__radio" />
-          <span class="menu-dish__name">{{dish.name}}</span>
+          <div>
+            <span class="menu-dish__name">{{dish.name}}</span>
+            <span class="menu-dish__description" v-if="dish.description">{{dish.description}}</span>
+          </div>
         </label>
-        <a href="#" v-if="dish.description" v-hint.right.rounded="dish.description">
-          <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-        </a>
       </li>
     </ul>
   </div>
@@ -28,7 +34,6 @@
 
 <script>
   import _ from 'lodash';
-  import Hint from 'vue-hint.css';
   import MenuPresenter from '../../presenters/MenuPresenter';
 
   function getSelectedDishId(dishes) {
@@ -39,15 +44,21 @@
 
   export default {
     name: 'MenuDish',
+
+    data() {
+      return {
+        typePresented: MenuPresenter.dishType(this.type),
+        selectedDish: getSelectedDishId(this.dishes),
+      };
+    },
+
     props: {
       date: String,
       dishes: Array,
       type: String,
       onChange: Function,
     },
-    directives: {
-      Hint,
-    },
+
     watch: {
       selectedDish(dish) {
         this.onChange(this.type, dish);
@@ -57,11 +68,10 @@
       },
     },
 
-    data() {
-      return {
-        typePresented: MenuPresenter.dishType(this.type),
-        selectedDish: getSelectedDishId(this.dishes),
-      };
+    methods: {
+      showImage(url, description) {
+        this.$emit('showImage', url, description);
+      },
     },
   };
 </script>
@@ -77,6 +87,11 @@
   padding: 16px 13px;
 }
 
+.menu-dish__item {
+  margin-bottom: 10px;
+  display: flex;
+}
+
 .menu-dish__header {
   margin-bottom: 12px;
   font-weight: 500;
@@ -88,7 +103,6 @@
 .menu-dish__label {
   cursor: pointer;
   display: inline-flex;
-  margin-bottom: 10px;
 
   & input {
     display: none;
@@ -136,7 +150,12 @@
   font-size: 16px;
   color: #000000;
   letter-spacing: 0.01px;
-  padding-top: 3px;
+  padding-top: 1px;
+}
+
+.menu-dish__description {
+  font-size: 10px;
+  display: block;
 }
 
 @media (--desktop) {
@@ -150,4 +169,17 @@
     font-size: 20px;
   }
 }
+
+.thumbnail {
+  width: 40px;
+  height: 40px;
+  margin: -5px 10px 0px 0px;
+  cursor: pointer;
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 1px solid #CCCCCC;
+  background-size: cover;
+}
+
 </style>

@@ -1,5 +1,5 @@
 class UserMenuSerializer < ActiveModel::Serializer
-  attributes :id, :date, :user_name, :description, :dishes, :neem
+  attributes :id, :date, :user_name, :description, :dishes, :neem, :editable
 
   def user_name
     object.user.name
@@ -10,7 +10,7 @@ class UserMenuSerializer < ActiveModel::Serializer
   end
 
   def dishes
-    menu_dishes = object.menu.menu_dishes
+    menu_dishes = object.menu.menu_dishes.includes(:dish)
     user_dish_ids = object.dishes.pluck(:id)
 
     menu_dishes.map do |menu_dish|

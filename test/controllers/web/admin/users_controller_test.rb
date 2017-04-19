@@ -2,9 +2,10 @@ require 'test_helper'
 
 class Web::Admin::UsersControllerTest < ActionController::TestCase
   setup do
-    @user = create :user_with_user_menus, neem: false
+    @user = create :user, :with_user_menu_dishes, neem: false
+    @admin = create :user, :admin
+    sign_in @admin
     @user_attrs = attributes_for :user
-    admin_http_login
   end
 
   test 'index' do
@@ -36,11 +37,10 @@ class Web::Admin::UsersControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-   test 'destroy' do
+  test 'destroy' do
     assert_difference('User.count', -1) do
       delete :destroy, params: { id: @user.id }
     end
     assert_redirected_to admin_users_path
   end
-
 end

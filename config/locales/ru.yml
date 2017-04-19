@@ -1,53 +1,21 @@
 ru:
+  errors:
+    messages:
+      carrierwave_processing_error: Нельзя изменить размер изображения
+      carrierwave_integrity_error: Не изображение
+      carrierwave_download_error: Не получается загрузить изображение
+      extension_whitelist_error: "Не правильное разрешение файла %{extension}, разрешенные типы: %{allowed_types}"
+
+  user_mailer:
+    change_password:
+      subject: Obeder. Установка пароля.
+    notify_menu_changed:
+      subject: Obeder. Новое меню.
+
   date:
     formats:
       menu_date: '%d %B, %A'
-
-    abbr_day_names:
-      - Вс
-      - Пн
-      - Вт
-      - Ср
-      - Чт
-      - Пт
-      - Сб
-    abbr_month_names:
-      -
-      - янв.
-      - февр.
-      - марта
-      - апр.
-      - мая
-      - июня
-      - июля
-      - авг.
-      - сент.
-      - окт.
-      - нояб.
-      - дек.
-    day_names:
-      - воскресенье
-      - понедельник
-      - вторник
-      - среда
-      - четверг
-      - пятница
-      - суббота
-    month_names:
-      -
-      - января
-      - февраля
-      - марта
-      - апреля
-      - мая
-      - июня
-      - июля
-      - августа
-      - сентября
-      - октября
-      - ноября
-      - декабря
-
+      monthly_report_date: '%B, %Y'
 
   flash:
     web:
@@ -69,3 +37,21 @@ ru:
 
   title:
     dishes: Блюда
+
+  save: Сохранить
+  add: Добавить
+  edit: Редактировать
+  delete: Удалить
+  are_you_sure: Вы уверены?
+  password_changed: Пароль изменен успешно
+  authenticate_to_change_password: Авторизуйтесь для смены пароля
+  password_not_set: Пароль не установлен
+  password_has_been_reset: Пароль был сброшен, проверьте свой email
+  user_not_found: Пользователь не найден
+  logout: Выйти
+  obeder: Обедер
+
+  pundit:
+    admin: Вы должны авторизоваться как администратор
+    cook: Вы должны авторизоваться как повар
+    user: Вы должны авторизоваться

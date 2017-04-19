@@ -1,4 +1,6 @@
 class Web::Admin::UsersController < Web::Admin::ApplicationController
+  before_action :authorize_admin
+
   def index
     @q = User.order(:name).ransack(params[:q])
     @users = @q.result.page(params[:page])
@@ -16,7 +18,8 @@ class Web::Admin::UsersController < Web::Admin::ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      ::DishesService.set_default_dishes_for_user(@user)
+      DishesService.set_default_dishes_for_user(@user)
+      UserMailer.change_password(@user).deliver
       redirect_to admin_users_path
     else
       render :new
@@ -43,6 +46,6 @@ class Web::Admin::UsersController < Web::Admin::ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :neem, :description)
+    params.require(:user).permit(:name, :email, :neem, :description, :role)
   end
 end

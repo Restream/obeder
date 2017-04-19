@@ -1,14 +1,8 @@
 class Web::Admin::MenusController < Web::Admin::ApplicationController
-  DATE_OFFSET = 2
+  before_action :authorize_cook
 
   def edit
-    @date = date
     @menu = current_menu
-    @dishes = Dish.order(:name).all
-    @closest_days_menus = Menu.includes(menu_dishes: :dish)
-      .except_date(@date)
-      .for_date_range(@date, DATE_OFFSET)
-      .decorate
   end
 
   def update
@@ -25,15 +19,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
 
   def approve
     @menu = current_menu
-    @menu.ready = true
-    @menu.save
-
-    User.find_each do |user|
-      user_menu = UserMenu.create(user: user, menu: @menu, neem: user.neem)
-      menu_dishes = @menu.menu_dishes.default
-      dishes = menu_dishes.map(&:dish)
-      user_menu.dishes << dishes
-    end
+    @menu.approve!
 
     f(:success)
     redirect_to edit_admin_menu_path(@menu.date)
@@ -46,7 +32,7 @@ class Web::Admin::MenusController < Web::Admin::ApplicationController
   end
 
   def current_menu
-    Menu.for_date(params[:date]).first || Menu.create(date: params[:date])
+    Menu.current_menu(params[:date])
   end
 
   def date

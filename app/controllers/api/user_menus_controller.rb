@@ -7,7 +7,7 @@ class Api::UserMenusController < Api::ApplicationController
   end
 
   def update
-    user_menu = UserMenu.find(params[:id])
+    user_menu = UserMenuUpdateType.find(params[:id])
 
     if user_menu.update(user_menu_params)
       user_menu.dishes.delete_all

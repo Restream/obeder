@@ -2,7 +2,8 @@ require 'test_helper'
 
 class Web::Admin::DishesControllerTest < ActionController::TestCase
   setup do
-    admin_http_login
+    @user = create :user, :cook
+    sign_in @user
   end
 
   test 'index' do

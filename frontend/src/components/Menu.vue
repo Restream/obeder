@@ -1,12 +1,14 @@
 <template>
   <div class="menu">
     <menu-header @onDisableMenuSwitchers="disableMenuSwitchers"/>
+    <div v-if="!menusLoaded" class="preloader"></div>
     <div class="content">
-      <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" />
-      <div v-if="sortedDates.length === 0" class="bs-callout">
+      <daily-menu v-for="date in sortedDates" :day="date" :isSwitchDisabled="headerSwitchIsDisabled" @showImage="showImage"/>
+      <div v-if="menusLoaded && sortedDates.length === 0" class="bs-callout">
         <h4 class="title">К сожалению, меню еще не заполнено</h4>
       </div>
     </div>
+    <image-modal :show="showImageModal" :image="curImage" @close="hideImage" />
   </div>
 </template>
 
@@ -16,19 +18,20 @@
 
   import Header from './Header';
   import DailyMenu from './Menu/DailyMenu';
+  import ImageModal from './ImageModal';
 
   export default {
     components: {
       'menu-header': Header,
       'daily-menu': DailyMenu,
+      'image-modal': ImageModal,
     },
     created() {
-      const id = localStorage.getItem('user_uid');
-
       usersService
-        .getMenus(id)
+        .getMenus()
         .then(
           (menuDates) => {
+            this.menusLoaded = true;
             this.dates = menuDates;
           },
           error => error,
@@ -39,6 +42,12 @@
       return {
         dates: [],
         headerSwitchIsDisabled: false,
+        menusLoaded: false,
+        showImageModal: false,
+        curImage: {
+          url: null,
+          description: null,
+        },
       };
     },
     computed: {
@@ -49,6 +58,13 @@
     methods: {
       disableMenuSwitchers(val) {
         this.headerSwitchIsDisabled = val;
+      },
+      showImage(url, description) {
+        this.curImage = { url, description };
+        this.showImageModal = true;
+      },
+      hideImage() {
+        this.showImageModal = false;
       },
     },
   };
@@ -69,6 +85,7 @@
     padding: 30px 0;
   }
 }
+
 .bs-callout {
   padding: 20px;
   margin: 20px 0;
@@ -76,8 +93,24 @@
   border-left: 5px solid #1b809e;
   border-radius: 3px;
 }
+
 .title {
   margin: 0 0 5px;
   color: #1b809e;
+}
+
+.preloader {
+  margin: 120px auto 0;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
