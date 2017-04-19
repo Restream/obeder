@@ -1,5 +1,5 @@
 closest_menus_date_offset: 2
-domain: obeder.herokuapp.com
+domain: obeder.restream.pro
 freeze_user_menu_at: '19:00'
 redis:
   host: <%= ENV['REDIS_HOST'] || '127.0.0.1' %>
