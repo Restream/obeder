@@ -1,3 +1,4 @@
-Привет, #{ @user.name }!
+- ['Здравствуйте', @user.name.split.last].join(', ') + '!'
 %br
-Опубликовано #{ link_to('меню' , root_url) } на #{ @menu.date.strftime("%d.%m.%Y") }.
+%br
+Опубликовано #{ link_to("меню на #{@menu.date.strftime('%d.%m.%Y')}" , root_url) }.
