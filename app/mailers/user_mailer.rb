@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  add_template_helper Web::Admin::MenusHelper
+
   def change_password(user)
     @user = user
     mail to: user.email
