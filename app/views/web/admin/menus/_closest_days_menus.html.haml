@@ -10,4 +10,4 @@
         %ul
           - menu.menu_dishes.each do |menu_dish|
             %li
-              = menu_dish.decorate.dish_name(t('.default'))
+              = dish_name(menu_dish)

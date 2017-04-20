@@ -5,6 +5,6 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def notify_menu_changed
-    UserMailer.notify_menu_changed(User.first, Menu.first)
+    UserMailer.notify_menu_changed(User.first, Menu.last)
   end
 end

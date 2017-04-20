@@ -1,0 +1,8 @@
+= ['Здравствуйте', @user.name.split.last].join(', ') + '!'
+%br
+%br
+Опубликовано #{ link_to("меню на #{l(@menu.date)}" , root_url) }.
+%ul
+  - @menu.menu_dishes.each do |menu_dish|
+    %li
+      = dish_name(menu_dish)
