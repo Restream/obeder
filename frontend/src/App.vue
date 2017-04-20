@@ -69,4 +69,7 @@ table {
 * {
   box-sizing: border-box;
 }
+a.logout_icon[href="/logout"] {
+	margin-left: 1em;
+}
 </style>
