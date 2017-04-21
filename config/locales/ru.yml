@@ -4,13 +4,13 @@ ru:
       carrierwave_processing_error: Нельзя изменить размер изображения
       carrierwave_integrity_error: Не изображение
       carrierwave_download_error: Не получается загрузить изображение
-      extension_whitelist_error: "Не правильное разрешение файла %{extension}, разрешенные типы: %{allowed_types}"
+      extension_whitelist_error: "Неправильное расширение %{extension}. Разрешены только %{allowed_types}"
 
   user_mailer:
     change_password:
-      subject: Obeder. Установка пароля.
+      subject: "Обедер: Установка пароля"
     notify_menu_changed:
-      subject: "Obeder. Новое меню на %{date}."
+      subject: "Обедер: Новое меню на %{date}"
 
   date:
     formats:
@@ -43,15 +43,15 @@ ru:
   edit: Редактировать
   delete: Удалить
   are_you_sure: Вы уверены?
-  password_changed: Пароль изменен успешно
-  authenticate_to_change_password: Авторизуйтесь для смены пароля
+  password_changed: Пароль изменён
+  authenticate_to_change_password: Войдите, чтобы сменить пароль
   password_not_set: Пароль не установлен
-  password_has_been_reset: Пароль был сброшен, проверьте свой email
+  password_has_been_reset: Пароль сброшен, проверьте почту
   user_not_found: Пользователь не найден
   logout: Выйти
   obeder: Обедер
 
   pundit:
-    admin: Вы должны авторизоваться как администратор
-    cook: Вы должны авторизоваться как повар
-    user: Вы должны авторизоваться
+    admin: Войдите как администратор
+    cook: Войдите как повар
+    user: Войдите
