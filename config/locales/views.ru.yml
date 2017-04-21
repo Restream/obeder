@@ -25,9 +25,9 @@ ru:
         validation_modal:
           publish_modal_header: Подтвердите публикацию меню
           check_if_menu_saved: Проверьте, сохранено ли меню!
-          validation_in_progress: Валидация меню...
-          validation_ok: Валидация прошла успешно
-          validation_failed: Во время валидации возникли ошибки
+          validation_in_progress: Проверка меню...
+          validation_ok: Проверка пройдена
+          validation_failed: Во время проверки возникли ошибки
           confirm: Подтвердить
       daily_reports:
         index:
@@ -40,20 +40,20 @@ ru:
           name: ФИО
           total: 'Итого:'
           sum: ∑
-          export_to_excel: Экспорт в Excel
+          export_to_excel: Скачать Excel-файл
     shared:
       nav:
         menu: Меню
-        reports: Отчеты
-        daily-reports: Ежедневные отчеты
-        monthly-reports: Ежемесячные отчеты
+        reports: Отчёты
+        daily-reports: Ежедневные отчёты
+        monthly-reports: Ежемесячные отчёты
         dishes: Блюда
         users: Пользователи
     sessions:
       new:
         title: Вход
         login: Вход
-        have_you_forgotten_password: Забыли пароль?
+        have_you_forgotten_password: Сбросить пароль
     remind_passwords:
       edit:
         title: Восстановление пароля
