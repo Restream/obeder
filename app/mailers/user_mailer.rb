@@ -2,12 +2,12 @@ class UserMailer < ApplicationMailer
   add_template_helper Web::Admin::MenusHelper
 
   def change_password(user)
-    @user = user
+    @user = user.decorate
     mail to: user.email
   end
 
   def notify_menu_changed(user, menu)
-    @user = user
+    @user = user.decorate
     @menu = menu
     mail(
       to: user.email,
