@@ -8,7 +8,7 @@ ru:
         image: Фото блюда
       user:
         name: Фамилия Имя
-        email: Email
+        email: Почта
         neem: Не есть
         description: Описание
         role: Роль
@@ -16,7 +16,7 @@ ru:
           active: Активный
           inactive: Неактивный
       user_sign_in_type:
-        email: Email
+        email: Почта
         password: Пароль
       user_password_edit_type:
         password: Введите пароль
@@ -26,34 +26,34 @@ ru:
       messages:
         less_than_two_soups: Менее двух супов
         less_than_two_salads: Менее двух салатов
-        no_defaults: Блюда по умолчанию не указаны или указаны некорректно
+        no_defaults: Блюда по умолчанию не указаны или указаны неверно
         main_to_side_dishes_mismatch: Количество гарниров не совпадает с количеством основных блюд
         less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
-        invalid_email: Неправильный email
-        invalid_restream_email: Введите Рестрим email, вида username@restream.rt.ru
-        blank: Поле, обязательное для заполнения
+        invalid_email: Неправильная почта
+        invalid_restream_email: "Введите корпоративную почту: username@restream.rt.ru"
+        blank: Обязательное поле
 
       models:
         user:
           attributes:
             email:
-              blank: Введите email
-              taken: Пользователь с таким email уже существует
+              blank: Введите почту
+              taken: Занято!
             name:
-              blank: Введите Фамилию и Имя
+              blank: Введите фамилию и имя
             role:
               blank: Выберите роль
         user_remind_password_type:
           attributes:
             email:
-              blank: Введите email
+              blank: Введите почту
         user_sign_in_type:
           attributes:
             email:
-              blank: Введите email
+              blank: Введите почту
             password:
               blank: Введите пароль
-              user_or_password_invalid: Email или пароль не правильные
+              user_or_password_invalid: Неправильные почта или пароль
         user_password_edit_type:
           attributes:
             password:
@@ -64,4 +64,4 @@ ru:
         user_menu:
           attributes:
             editable:
-              inclusion: Меню на текущий день недоступно для редактирования
+              inclusion: Меню на сегодня нельзя редактировать
