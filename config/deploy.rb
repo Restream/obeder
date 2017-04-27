@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:Restream/obeder.git'
 set :puma_role, :web
 set :keep_releases, 3
 
-append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'log'
+append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'log', 'public/uploads'
 
 namespace :deploy do
   namespace :assets do
