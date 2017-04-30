@@ -205,11 +205,11 @@ class MonthlyReportService
     report_table_header.size
   end
 
-  # FIXME: Поправить магические числа или отрефакторить
   def column_widths
     col_widths = [NAME_COLUMN_WIDTH]
-    9.times { col_widths << ONE_SIGN_DAY_COLUMN_WIDTH }
-    (report_width - 11).times { col_widths << TWO_SIGN_DAY_COLUMN_WIDTH }
+    col_widths += dates_in_month(@date).map do |date|
+      date.day.to_s.length > 1 ? TWO_SIGN_DAY_COLUMN_WIDTH : ONE_SIGN_DAY_COLUMN_WIDTH
+    end
     col_widths << TOTAL_COLUMN_WIDTH
   end
 end
