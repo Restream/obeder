@@ -6,7 +6,7 @@ class MonthlyReportService
 
   def initialize(date)
     @date = date
-    @users = User.order(:name)
+    @users = User.where.not(role: 'cook').order(:name)
     menus = Menu.in_date_range(@date.beginning_of_month, @date.end_of_month).order(:date)
     @user_menus = UserMenu.joins(:menu).where(menu: menus, neem: false)
       .pluck(:'menus.date', :'user_id')
