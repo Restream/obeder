@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   extend Enumerize
+  include UserRepository
   include AASM
 
   has_many :user_menus, dependent: :destroy
