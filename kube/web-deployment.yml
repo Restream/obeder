@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: web
+  namespace: obeder
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: obeder
+    spec:
+      containers:
+      - name: obeder
+        image: "docker-registry.restr.im:5000/obeder/web:latest"
+        command: ["/bin/sh","-c"]
+        args: [ "bundle && rake db:create db:migrate db:seed && rm -f tmp/pids/server.pid && rails s -b '0.0.0.0'" ]
+        env:
+            - name: DATABASE_HOST
+              value: "db"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USERNAME
+              value: "postgres"
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_DB
+              value: "db0"
+            - name: SENDGRID_USERNAME
+              value: "username"
+            - name: SENDGRID_PASSWORD
+              value: "password"
+
+        ports:
+        - containerPort: 3000
