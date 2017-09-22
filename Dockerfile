@@ -19,8 +19,10 @@ COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN bundle install --path /bundle_cache
 
+COPY package.json package.json
+COPY yarn.lock yarn.lock
+
 ADD . /app
 
-EXPOSE 3000
-
-CMD bundle && rake db:create db:migrate db:seed && rm -f tmp/pids/server.pid && rails s -b '0.0.0.0'
+RUN yarn && yarn run build
+RUN rails assets:precompile

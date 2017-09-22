@@ -30,10 +30,21 @@ spec:
               value: "6379"
             - name: REDIS_DB
               value: "db0"
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: web
+                  key: secret_key_base
             - name: SENDGRID_USERNAME
-              value: "username"
+              valueFrom:
+                secretKeyRef:
+                  name: web
+                  key: sendgrid_username
             - name: SENDGRID_PASSWORD
-              value: "password"
+              valueFrom:
+                secretKeyRef:
+                  name: web
+                  key: sendgrid_password
 
         ports:
         - containerPort: 3000
