@@ -11,40 +11,60 @@ spec:
         app: obeder
     spec:
       containers:
-      - name: obeder
-        image: "docker-registry.restr.im:5000/obeder/web:latest"
-        command: ["/bin/sh","-c"]
-        args: [ "bundle && rake db:create db:migrate db:seed && rm -f tmp/pids/server.pid && rails s -b '0.0.0.0'" ]
-        env:
-            - name: RAILS_ENV
-              value: production
-            - name: DATABASE_HOST
-              value: "db"
-            - name: DATABASE_PORT
-              value: "5432"
-            - name: DATABASE_USERNAME
-              value: "postgres"
-            - name: REDIS_HOST
-              value: "redis"
-            - name: REDIS_PORT
-              value: "6379"
-            - name: REDIS_DB
-              value: "db0"
-            - name: SECRET_KEY_BASE
-              valueFrom:
-                secretKeyRef:
-                  name: web
-                  key: secret_key_base
-            - name: SENDGRID_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: web
-                  key: sendgrid_username
-            - name: SENDGRID_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: web
-                  key: sendgrid_password
-
-        ports:
-        - containerPort: 3000
+        - name: obeder
+          image: "docker-registry.restr.im:5000/obeder/web:latest"
+          command: ["/bin/sh","-c"]
+          args: [ "cp -r public/assets/ /static; rake db:migrate && rails s -b '0.0.0.0'" ]
+          env:
+              - name: RAILS_ENV
+                value: production
+              - name: DATABASE_HOST
+                value: "db"
+              - name: DATABASE_PORT
+                value: "5432"
+              - name: DATABASE_USERNAME
+                value: "postgres"
+              - name: REDIS_HOST
+                value: "redis"
+              - name: REDIS_PORT
+                value: "6379"
+              - name: REDIS_DB
+                value: "db0"
+              - name: SECRET_KEY_BASE
+                valueFrom:
+                  secretKeyRef:
+                    name: web
+                    key: secret_key_base
+              - name: SENDGRID_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: web
+                    key: sendgrid_username
+              - name: SENDGRID_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: web
+                    key: sendgrid_password
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: static
+              mountPath: /static
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nginx/conf.d
+            - name: static
+              mountPath: /static
+      volumes:
+        - name: config
+          configMap:
+            name: web
+            items:
+              - key: nginx
+                path: default.conf
+        - name: static
+          emptyDir: {}

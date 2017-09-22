@@ -1,19 +1,17 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx
+  name: web
   namespace: obeder
 data:
-  default: |
+  nginx: |
     upstream puma {
       server web:3000;
     }
 
     server {
       listen 80;
-      root /root/apps/obeder/current/public;
-      access_log /var/log/nginx/obeder_access.log;
-      error_log /var/log/nginx/obeder_error.log;
+      root /static;
 
       location @obeder {
         proxy_http_version 1.1;
