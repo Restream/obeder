@@ -15,3 +15,10 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+        volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/sites-available/
+      volumes:
+        - name: config
+          configMap:
+            name: nginx
