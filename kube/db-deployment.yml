@@ -13,6 +13,16 @@ spec:
     spec:
       containers:
       - name: db
-        image: "postgres"
+        image: postgres
+        env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
         ports:
         - containerPort: 5432
+        volumeMounts:
+          - name: db-files
+            mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: db-files
+        persistentVolumeClaim:
+          claimName: db

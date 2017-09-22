@@ -32,3 +32,13 @@ Deploy:
 
 * docker-compose run --rm web sidekiq
 * docker-compose run --rm web clockwork clock.rb
+
+## Закинуть базу в кубер
+
+- на проде (ssh deployer@obeder-1.staging.ul.restr.im)
+* pg_dump -xc -O  obeder_production -U postgres | gzip > obeder.sql.gz
+- на своей тачке
+* scp deployer@obeder-1.staging.ul.restr.im:obeder.sql.gz obeder.sql.gz
+* kubectl cp obeder.sql.gz obeder/db-2830043074-s18jf:/obeder.sql.gz
+- в контейнере базы (kubectl exec db-2830043074-s18jf bash --namespace=obeder -it)
+* zcat obeder.sql.gz | psql -U postgres
