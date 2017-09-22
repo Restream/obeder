@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     ipsNeeded: "1"
-  name: web
+  name: nginx
   namespace: obeder
 spec:
   backend:
-    serviceName: web
+    serviceName: nginx
     servicePort: 1
