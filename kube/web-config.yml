@@ -19,6 +19,10 @@ data:
         root /public/;
       }
 
+      location /uploads/ {
+        root /public/;
+      }
+
       location @obeder {
         proxy_http_version 1.1;
         proxy_pass http://puma;

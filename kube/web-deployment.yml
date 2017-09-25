@@ -30,6 +30,8 @@ spec:
                 value: "6379"
               - name: REDIS_DB
                 value: "db0"
+              - name: RAILS_LOG_TO_STDOUT
+                value: "true"
               - name: SECRET_KEY_BASE
                 valueFrom:
                   secretKeyRef:
@@ -50,6 +52,8 @@ spec:
           volumeMounts:
             - name: static
               mountPath: /public
+            - name: uploads
+              mountPath: /app/public/uploads
         - name: nginx
           image: nginx
           ports:
@@ -59,6 +63,8 @@ spec:
               mountPath: /etc/nginx/conf.d
             - name: static
               mountPath: /public
+            - name: uploads
+              mountPath: /public/uploads
       volumes:
         - name: config
           configMap:
@@ -68,3 +74,6 @@ spec:
                 path: default.conf
         - name: static
           emptyDir: {}
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: web

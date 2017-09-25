@@ -46,6 +46,11 @@ Deploy:
 * create database obeder_production;
 * zcat obeder.sql.gz | psql -U postgres obeder_production
 
+## перетащить картинки в кубер
+rsync -rvP deployer@obeder-1.staging.ul.restr.im:apps/obeder/current/public/uploads/ public/uploads
+kubectl cp public/uploads obeder/web-1260677708-3mxwf:/app/public/uploads --container=obeder
+
+
 ## Задеплоить в кубер
 * docker-compose build
 * docker tag obeder_web docker-registry.restr.im:5000/obeder/web:1
