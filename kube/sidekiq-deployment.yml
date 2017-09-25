@@ -1,0 +1,47 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sidekiq
+  namespace: obeder
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: obeder
+    spec:
+      containers:
+        - name: sidekiq
+          image: "docker-registry.restr.im:5000/obeder/web:latest"
+          command: ["/bin/sh","-c"]
+          args: [ "sidekiq -C config/sidekiq.yml" ]
+          env:
+              - name: RAILS_ENV
+                value: production
+              - name: DATABASE_HOST
+                value: "db"
+              - name: DATABASE_PORT
+                value: "5432"
+              - name: DATABASE_USERNAME
+                value: "postgres"
+              - name: REDIS_HOST
+                value: "redis"
+              - name: REDIS_PORT
+                value: "6379"
+              - name: REDIS_DB
+                value: "db0"
+              - name: SECRET_KEY_BASE
+                valueFrom:
+                  secretKeyRef:
+                    name: web
+                    key: secret_key_base
+              - name: SENDGRID_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: web
+                    key: sendgrid_username
+              - name: SENDGRID_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: web
+                    key: sendgrid_password
