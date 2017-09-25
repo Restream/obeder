@@ -6,12 +6,18 @@ metadata:
 data:
   nginx: |
     upstream puma {
-      server web:3000;
+      server localhost:3000;
     }
 
     server {
       listen 80;
-      root /static;
+      location /static/ {
+        root /public/;
+      }
+
+      location /assets/ {
+        root /public/;
+      }
 
       location @obeder {
         proxy_http_version 1.1;

@@ -14,7 +14,7 @@ spec:
         - name: obeder
           image: "docker-registry.restr.im:5000/obeder/web:latest"
           command: ["/bin/sh","-c"]
-          args: [ "cp -r public/assets/ /static; rake db:migrate && rails s -b '0.0.0.0'" ]
+          args: [ "cp -r public/ /; rake db:migrate && rails s -b '0.0.0.0'" ]
           env:
               - name: RAILS_ENV
                 value: production
@@ -49,7 +49,7 @@ spec:
             - containerPort: 3000
           volumeMounts:
             - name: static
-              mountPath: /static
+              mountPath: /public
         - name: nginx
           image: nginx
           ports:
@@ -58,7 +58,7 @@ spec:
             - name: config
               mountPath: /etc/nginx/conf.d
             - name: static
-              mountPath: /static
+              mountPath: /public
       volumes:
         - name: config
           configMap:
