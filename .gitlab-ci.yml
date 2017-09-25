@@ -1,0 +1,2 @@
+before_script:
+  - docker info
