@@ -1,2 +1,5 @@
 before_script:
   - docker info
+build:
+  script:
+  - docker -v
