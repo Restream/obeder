@@ -1,27 +1,29 @@
-web:
-  build: .
-  volumes: &app_volumes
-    - .:/app
-    - ~/.ssh:/root/.ssh
-    - ~/.bash_history:/root/.bash_history
-  volumes_from:
-    - bundle_cache
-  ports:
-    - 3000:3000
-  links: &app_links
-    - db
-    - redis
-  env_file:
-    - web.env
-    - secrets.env
+version: '2'
 
-db:
-  image: postgres:9.6
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+      - ~/.ssh/known_hosts:/root/.ssh/known_hosts:rw
+      - ~/.bash_history:/root/.bash_history
+      - ~/.gitconfig:/root/.gitconfig:ro
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - 3000:3000
+    links:
+      - db
+      - redis
+    env_file:
+      - web.env
+      - secrets.env
 
-bundle_cache:
-  image: busybox
-  volumes:
-    - /bundle_cache
+  db:
+    image: postgres:9.6
 
-redis:
-  image: redis:3.0
+  redis:
+    image: redis:3.0
+
+volumes:
+  bundle_cache:
