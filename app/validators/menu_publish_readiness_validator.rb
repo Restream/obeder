@@ -2,10 +2,11 @@ class MenuPublishReadinessValidator < ActiveModel::Validator
   def validate(record)
     errors = record.errors
     dishes = record.dishes
+
     errors.add(:dishes, :less_than_two_soups) if less_than?(dishes, :soup, 2)
     errors.add(:dishes, :less_than_two_salads) if less_than?(dishes, :salad, 2)
     errors.add(:dishes, :less_than_two_main_dishes) if main_and_separate_dishes_count(dishes) < 2
-    errors.add(:dishes, :no_defaults) unless has_defaults?(dishes)
+    errors.add(:dishes, :no_defaults) unless has_defaults?(record)
     errors.add(:dishes, :main_to_side_dishes_mismatch) unless quantity_matches?(dishes, :main_dish, :side_dish)
   end
 
@@ -15,8 +16,10 @@ class MenuPublishReadinessValidator < ActiveModel::Validator
     dishes.where(dish_type: dish_type).size < required_number
   end
 
-  def exists_default?(dishes, dish_type)
-    dishes.where(dish_type: dish_type).any? { |dish| dish.menu_dishes.exists?(default: true) }
+  def single_default?(record, dish_type)
+    record.dishes.where(dish_type: dish_type).one? do |dish|
+      dish.menu_dishes.where(menu: record).exists?(default: true)
+    end
   end
 
   def quantity_matches?(dishes, dish_one, dish_two)
@@ -29,9 +32,9 @@ class MenuPublishReadinessValidator < ActiveModel::Validator
       .size
   end
 
-  def has_defaults?(dishes)
-    (exists_default?(dishes, :soup) && exists_default?(dishes, :salad)) ||
-    (exists_default?(dishes, :main_dish) && exists_default?(dishes, :side_dish)) ||
-    exists_default?(dishes, :separate_dish)
+  def has_defaults?(record)
+    exists_default?(record, :soup) &&
+      exists_default?(record, :salad) &&
+      (exists_default?(record, :main_dish) && exists_default?(record, :side_dish) || exists_default?(record, :separate_dish))
   end
 end
