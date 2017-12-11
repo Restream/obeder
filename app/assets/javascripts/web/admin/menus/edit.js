@@ -1,49 +1,51 @@
-(function () {
-  const menuForm = $('#menu-form__form');
-  const publishBtn = $('#menu-publish__btn');
-  const validationModal = $('#menu-validation__modal');
-  const validationSubmitBtn = $('#menu-validation__submit-btn');
+(function() {
+  var menuForm = $('#menu-form__form');
+  var publishBtn = $('#menu-publish__btn');
+  var validationModal = $('#menu-validation__modal');
+  var validationSubmitBtn = $('#menu-validation__submit-btn');
 
-  const validationUrl = validationModal.attr('validationUrl');
+  var validationUrl = validationModal.attr('validationUrl');
 
-  const validationMarkers = {
+  var validationMarkers = {
     inProgress: $('#menu-validation__marker__in-validation'),
     ok: $('#menu-validation__marker__ok'),
-    failed: $('#menu-validation__marker__failed'),
+    failed: $('#menu-validation__marker__failed')
   };
 
-  const validationErrorsList = $('#menu-validation__errors-list');
+  var validationErrorsList = $('#menu-validation__errors-list');
 
-  menuForm.change(() => {
+  menuForm.change(function(e) {
     publishBtn.prop('disabled', true);
   });
 
-  validationModal.on('show.bs.modal', () => {
+  validationModal.on('show.bs.modal', function (e) {
     validationMarkers.inProgress.show();
     validationMarkers.ok.hide();
     validationMarkers.failed.hide();
   });
 
-  validationModal.on('hide.bs.modal', () => {
+  validationModal.on('hide.bs.modal', function (e) {
     validationSubmitBtn.prop('disabled', true);
     validationErrorsList.empty();
   });
 
   menuForm
-    .on('cocoon:after-insert', () => {
+    .on('cocoon:after-insert', function(e) {
       publishBtn.prop('disabled', true);
     })
-    .on('cocoon:after-remove', () => {
+    .on('cocoon:after-remove', function(e) {
       publishBtn.prop('disabled', true);
     });
 
-  publishBtn.click(() => {
-    $.get(validationUrl, (data) => {
+  publishBtn.click(function(e) {
+    $.get(validationUrl, function(data) {
       validationMarkers.inProgress.hide();
 
       if (!data.valid) {
         validationMarkers.failed.show();
-        const errors = $.map(data.errors, error => $('<li></li>').text(error));
+        var errors = $.map(data.errors, function(error) {
+          return $('<li></li>').text(error);
+        });
         validationErrorsList.html(errors);
         validationSubmitBtn.prop('disabled', true);
       } else {
@@ -52,4 +54,4 @@
       }
     });
   });
-}());
+})();
