@@ -3,7 +3,15 @@
     <h5 class="menu-dish__header">{{typePresented}}</h5>
     <ul>
       <li v-for="dish in dishes" class="menu-dish__item">
-        <div>
+        <div class="voter-container">
+          <menu-voter
+            :dishId="dish.id"
+            :voted="dish.voted"
+            :rating="dish.rating"
+            @vote="vote" >
+          </menu-voter>
+        </div>
+        <div class="thumbnail-container">
           <div
              v-show="dish.image.url"
              class="thumbnail"
@@ -35,6 +43,7 @@
 <script>
   import _ from 'lodash';
   import MenuPresenter from '../../presenters/MenuPresenter';
+  import MenuVoter from './MenuVoter';
 
   function getSelectedDishId(dishes) {
     const selectedDish = _.find(dishes, { selected: true });
@@ -43,6 +52,9 @@
   }
 
   export default {
+    components: {
+      'menu-voter': MenuVoter,
+    },
     name: 'MenuDish',
 
     data() {
@@ -71,6 +83,9 @@
     methods: {
       showImage(url, description) {
         this.$emit('showImage', url, description);
+      },
+      vote(value, dishId) {
+        this.$emit('vote', value, dishId, this.type);
       },
     },
   };
@@ -103,6 +118,8 @@
 .menu-dish__label {
   cursor: pointer;
   display: inline-flex;
+  align-self: center;
+  align-items: center;
 
   & input {
     display: none;
@@ -173,13 +190,23 @@
 .thumbnail {
   width: 40px;
   height: 40px;
-  margin: -5px 10px 0px 0px;
+  margin: 2px 15px 0 0;
   cursor: pointer;
   display: inline-block;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: no-repeat center center;
   border: 1px solid #CCCCCC;
   background-size: cover;
 }
 
+.thumbnail-container {
+  display: inline-flex;
+  align-self: center;
+}
+
+.voter-container {
+  width: 40px;
+  padding-right: 15px;
+  display: inline-flex;
+  align-self: center;
+}
 </style>

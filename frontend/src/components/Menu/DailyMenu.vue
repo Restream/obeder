@@ -2,7 +2,7 @@
   <div class="daily-menu" v-bind:class="{ disable: !this.day.editable }">
     <h1 class="date">
       <span>{{date}}</span>
-      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle"></menu-switcher>
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
 
@@ -22,6 +22,7 @@
         :type="type"
         :onChange="onDishChange"
         @showImage="showImage"
+        @vote="vote"
       >
       </menu-dish>
       <div class="daily-menu__actions">
@@ -44,6 +45,7 @@
 
   const COMMENT_SEND_TIMEOUT = 350;
   const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
+  const MENU_SEND_VOTE_ERROR = 'При попытке проголосовать произошла ошибка. Попробуйте обновить страницу.';
 
   let lastState;
 
@@ -122,7 +124,23 @@
             this.errors.push(MENU_SAVE_ERROR);
           });
       },
+      sendVote(data, dishType) {
+        usersService
+          .setVote(this.day.id, data)
+          .then((response) => {
+            this.errors = [];
 
+            this.dishTypes[dishType] = this.dishTypes[dishType].map((dish) => {
+              if (dish.id === response.dishId) {
+                return { ...dish, rating: response.rating, voted: data.voted };
+              }
+              return dish;
+            });
+          })
+          .catch(() => {
+            this.errors.push(MENU_SEND_VOTE_ERROR);
+          });
+      },
       setToDefault() {
         const defaultDishes = {};
 
@@ -204,6 +222,9 @@
 
       showImage(url, description) {
         this.$emit('showImage', url, description);
+      },
+      vote(value, dishId, dishType) {
+        this.sendVote({ dish_id: dishId, voted: value }, dishType);
       },
     },
   };

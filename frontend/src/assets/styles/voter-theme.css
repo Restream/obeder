@@ -1,0 +1,8 @@
+:root {
+  --unvotedColor: #d2d1d1;
+  --unvotedColorBorder: #c5c5c4;
+  --votedDownColor: #f1d346;
+  --votedDownColorBorder: #e79d36;
+  --votedUpColor: #beee44;
+  --votedUpColorBorder: #a7d436;
+}
