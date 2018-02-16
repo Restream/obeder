@@ -9,7 +9,7 @@ class MenuDishVoteType < ActiveType::Object
 
   def voteable
     user_menu = UserMenu.find_by(id: user_menu_id)
-    return nil unless user_menu
+    return if user_menu.blank?
 
     MenuDish.find_by(menu_id: user_menu.menu_id, dish_id: dish_id)
   end

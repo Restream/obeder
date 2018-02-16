@@ -4,7 +4,6 @@ class VoteUp < Vote
   default_scope { where(vote: true) }
 
   def default_values
-    return unless self.new_record?
     self.vote = true
   end
 end
