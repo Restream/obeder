@@ -1,27 +1,25 @@
 class Api::UserMenuVotesController < Api::ApplicationController
   def update
-    user_menu = UserMenuUpdateType.find(params[:id])
-    return head :bad_request unless user_menu
+    vote_type = MenuDishVoteType.new(user_menu_vote_params)
+    voteable = vote_type.voteable
 
-    menu_dish = MenuDishVoteType.find_by(menu_id: user_menu.menu_id, dish_id: params[:dish_id])
-    return head :bad_request unless menu_dish
+    if vote_type.valid?
+      raise ::ActiveRecord::RecordNotFound if voteable.nil?
 
-    if params[:voted]
-      menu_dish.voted_by(current_user)
+      voting_action = vote_type.voted ? :voted_by : :unvoted_by
+      voteable.send(voting_action, current_user)
+
+      render json: { id: vote_type.user_menu_id, dish_id: vote_type.dish_id, rating: voteable.rating }
     else
-      menu_dish.unvoted_by(current_user)
+      render json: { errors: vote_type.errors }
     end
-
-    render json: { id: user_menu.id, dish_id: menu_dish.dish_id, rating: menu_dish.rating }
   end
 
   private
 
-  def user_menu_params
-    params.require(:user_menu).permit(:description, :neem)
-  end
-
-  def dishes_params
-    params.require(:user_menu).permit(dishes: [:id])[:dishes] || []
+  def user_menu_vote_params
+    vote_params = params.require(:user_menu_vote).permit(:dish_id, :voted).to_h
+    vote_params[:user_menu_id] = params[:id]
+    vote_params
   end
 end
