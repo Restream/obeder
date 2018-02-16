@@ -1,5 +1,5 @@
 class MenuDishSerializer < ActiveModel::Serializer
-  attributes :id, :dish_id, :default, :name, :description
+  attributes :id, :dish_id, :default, :name, :description, :rating
 
   def name
     object.dish.name

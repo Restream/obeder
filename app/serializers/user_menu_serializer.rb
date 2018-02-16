@@ -18,7 +18,7 @@ class UserMenuSerializer < ActiveModel::Serializer
       dish_hash = DishSerializer.new(dish).attributes
       dish_hash[:selected] = user_dish_ids.include?(dish.id)
       dish_hash[:default] = menu_dish.default
-
+      dish_hash[:rating] = menu_dish.rating
       dish_hash
     end
   end

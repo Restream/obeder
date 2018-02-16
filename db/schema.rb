@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404215854) do
+ActiveRecord::Schema.define(version: 20180216060838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,9 @@ ActiveRecord::Schema.define(version: 20170404215854) do
   create_table "menu_dishes", force: :cascade do |t|
     t.integer "menu_id"
     t.integer "dish_id"
-    t.boolean "default", default: false
+    t.boolean "default",          default: false
+    t.integer "vote_downs_count", default: 0
+    t.integer "vote_ups_count",   default: 0
     t.index ["dish_id"], name: "index_menu_dishes_on_dish_id", using: :btree
     t.index ["menu_id"], name: "index_menu_dishes_on_menu_id", using: :btree
   end
@@ -63,10 +65,24 @@ ActiveRecord::Schema.define(version: 20170404215854) do
     t.string  "aasm_state"
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.boolean  "vote",          default: false, null: false
+    t.string   "voteable_type",                 null: false
+    t.integer  "voteable_id",                   null: false
+    t.uuid     "user_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["user_id", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
+    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+    t.index ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
+    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id", using: :btree
+  end
+
   add_foreign_key "menu_dishes", "dishes"
   add_foreign_key "menu_dishes", "menus"
   add_foreign_key "user_menu_dishes", "dishes"
   add_foreign_key "user_menu_dishes", "user_menus"
   add_foreign_key "user_menus", "menus"
   add_foreign_key "user_menus", "users"
+  add_foreign_key "votes", "users"
 end
