@@ -6,7 +6,7 @@
     %br
   .col-md-6
     .pull-right
-      = link_to t('form.add'), new_admin_dish_path, class: 'btn btn-default btn-lg btn-primary'
+      = link_to t('form.add'), new_admin_dish_path(q: {dish_type_eq: @selected_dish_type}), class: 'btn btn-default btn-lg btn-primary'
 
 .row
   .col-md-12
