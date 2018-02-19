@@ -14,8 +14,6 @@ class Api::UserMenuVotesController < Api::ApplicationController
   private
 
   def user_menu_vote_params
-    vote_params = params.require(:user_menu_vote).permit(:dish_id, :voted)
-    vote_params[:user_menu_id] = params[:user_menu_id]
-    vote_params
+    params.require(:user_menu_vote).permit(:dish_id, :voted).merge(user_menu_id: params[:user_menu_id])
   end
 end
