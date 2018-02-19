@@ -8,8 +8,7 @@
             :dishId="dish.id"
             :voted="dish.voted"
             :rating="dish.rating"
-            @vote="vote" >
-          </menu-voter>
+            @vote="vote" />
         </div>
         <div class="thumbnail-container">
           <div

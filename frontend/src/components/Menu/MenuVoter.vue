@@ -41,12 +41,18 @@
     flex-direction: column;
     align-items: center;
   }
-  
+
   .vote, .inner {
     width: 0;
     height: 0;
     border: solid transparent;
     cursor: pointer;
+  }
+
+  .vote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .caption {
@@ -60,9 +66,7 @@
     border-bottom-color: var(--unvotedColorBorder);
 
     & .inner {
-      position: relative;
-      top: 1px;
-      left: -8px;
+      transform: translate(0%, 66%);
       border-width: 0 8px 8px 8px;
       border-bottom-color: var(--unvotedColor);
     }
@@ -81,9 +85,7 @@
     border-top-color: var(--unvotedColorBorder);
 
     & .inner {
-      position: relative;
-      top: -9px;
-      left: -8px;
+      transform: translate(0%, -66%);
       border-width: 8px 8px 0 8px;
       border-top-color: var(--unvotedColor);
     }

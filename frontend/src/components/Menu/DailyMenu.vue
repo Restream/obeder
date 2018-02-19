@@ -2,7 +2,7 @@
   <div class="daily-menu" v-bind:class="{ disable: !this.day.editable }">
     <h1 class="date">
       <span>{{date}}</span>
-      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle"></menu-switcher>
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle"/>
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
 
