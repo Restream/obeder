@@ -6,7 +6,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     params[:q][:dish_type_eq] ||= 'soup'
 
     @q = Dish.order(:name).ransack(params[:q])
-    @dishes = @q.result.includes(:menu_dishes).page(params[:page])
+    @dishes = @q.result.page(params[:page])
     @selected_dish_type = params[:q][:dish_type_eq]
   end
 

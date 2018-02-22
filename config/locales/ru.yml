@@ -35,6 +35,9 @@ ru:
   list:
     no_data: Нет данных
     actions: Действия
+    rating: Рейтинг
+    votes: Оценки
+    rating_up_down: "За %{up}, против %{down}"
 
   title:
     dishes: Блюда

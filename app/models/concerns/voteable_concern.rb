@@ -7,18 +7,24 @@ module VoteableConcern
   end
 
   def voted_by(user)
-    VoteDown.destroy_all(voteable: self, user: user)
-    VoteUp.find_or_create_by!(voteable: self, user: user)
-    reload
+    change_vote(VoteUp, VoteDown, user)
   end
 
   def unvoted_by(user)
-    VoteUp.destroy_all(voteable: self, user: user)
-    VoteDown.find_or_create_by!(voteable: self, user: user)
-    reload
+    change_vote(VoteDown, VoteUp, user)
   end
 
   def rating
     vote_ups_count - vote_downs_count
+  end
+
+  def change_vote(be_created_vote, be_destroyed_vote, user)
+    totals = { ups: vote_ups_count, downs: vote_downs_count }
+
+    be_destroyed_vote.destroy_all(voteable: self, user: user)
+    be_created_vote.find_or_create_by!(voteable: self, user: user)
+    reload
+
+    { ups: vote_ups_count - totals[:ups], downs: vote_downs_count - totals[:downs] }
   end
 end

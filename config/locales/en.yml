@@ -31,6 +31,7 @@ en:
   list:
     no_data: No data
     actions: Actions
+    rating: Rating
 
   title:
     dishes: Dishes

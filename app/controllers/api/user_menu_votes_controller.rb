@@ -6,7 +6,12 @@ class Api::UserMenuVotesController < Api::ApplicationController
 
     voteable = vote_type.voteable
     voting_action = vote_type.voted ? :voted_by : :unvoted_by
-    voteable.send(voting_action, current_user)
+    votes_difference = voteable.send(voting_action, current_user)
+
+    dish = voteable.dish
+    dish.vote_ups_count += votes_difference[:ups]
+    dish.vote_downs_count += votes_difference[:downs]
+    dish.save
 
     render json: { user_menu_id: vote_type.user_menu_id, dish_id: vote_type.dish_id, rating: voteable.rating }
   end

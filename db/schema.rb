@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180216060838) do
+ActiveRecord::Schema.define(version: 20180219133606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "dishes", force: :cascade do |t|
-    t.string "name"
-    t.text   "description"
-    t.string "dish_type"
-    t.string "image"
+    t.string  "name"
+    t.text    "description"
+    t.string  "dish_type"
+    t.string  "image"
+    t.integer "vote_downs_count", default: 0
+    t.integer "vote_ups_count",   default: 0
   end
 
   create_table "menu_dishes", force: :cascade do |t|
