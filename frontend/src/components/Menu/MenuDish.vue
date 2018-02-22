@@ -7,7 +7,8 @@
           <menu-voter
             :dishId="dish.id"
             :voted="dish.voted"
-            :rating="dish.rating"
+            :ratingUp="dish.ratingUp"
+            :ratingDown="dish.ratingDown"
             @vote="vote" />
         </div>
         <div class="thumbnail-container">
@@ -203,7 +204,7 @@
 }
 
 .voter-container {
-  width: 40px;
+  width: 60px;
   padding-right: 15px;
   display: inline-flex;
   align-self: center;

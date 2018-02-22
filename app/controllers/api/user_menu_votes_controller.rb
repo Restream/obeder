@@ -12,7 +12,12 @@ class Api::UserMenuVotesController < Api::ApplicationController
     dish.vote_downs_count += votes_difference[:downs]
     dish.save
 
-    render json: { user_menu_id: vote_type.user_menu_id, dish_id: vote_type.dish_id, rating: voteable.rating }
+    render json: {
+      user_menu_id: vote_type.user_menu_id,
+      dish_id: vote_type.dish_id,
+      rating_up: dish.vote_ups_count,
+      rating_down: dish.vote_downs_count
+    }
   end
 
   private

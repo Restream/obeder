@@ -5,7 +5,9 @@
          @click="voteChanged(true)">
       <div class="inner"></div>
     </div>
-    <div class="caption">{{rating}}</div>
+    <div class="caption">
+      <span class="text-success">{{ratingUp}}</span>&nbsp;/&nbsp;<span class="text-danger">{{ratingDown}}</span>
+    </div>
     <div class="vote vote-down"
          v-bind:class="{'vote-down--active': voted === false}"
          @click="voteChanged(false)">
@@ -18,7 +20,8 @@
   export default {
     name: 'MenuVoter',
     props: {
-      rating: Number,
+      ratingUp: Number,
+      ratingDown: Number,
       dishId: Number,
       voted: {
         type: Boolean,
@@ -97,5 +100,13 @@
     &:hover, &--active {
       border-top-color: var(--votedDownColorBorder);
     }
+  }
+
+  .text-success {
+    color: var(--textSuccess);
+  }
+
+  .text-danger {
+    color: var(--textDanger);
   }
 </style>

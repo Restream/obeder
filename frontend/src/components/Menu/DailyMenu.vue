@@ -132,7 +132,12 @@
 
             this.dishTypes[dishType] = this.dishTypes[dishType].map((dish) => {
               if (dish.id === response.dishId) {
-                return { ...dish, rating: response.rating, voted: data.voted };
+                return {
+                  ...dish,
+                  ratingUp: response.ratingUp,
+                  ratingDown: response.ratingDown,
+                  voted: data.voted,
+                };
               }
               return dish;
             });
