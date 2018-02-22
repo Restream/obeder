@@ -10,7 +10,7 @@ class MenuDishVoteType < ActiveType::Object
 
   def check_user_menu_exists
     @user_menu ||= UserMenu.find_by(id: user_menu_id)
-    errors.add(:user_menu_id, :invalid) if @user_menu.blank?
+    errors.add(:user_menu_id, :invalid) if @user_menu.nil?
   end
 
   def voteable

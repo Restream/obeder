@@ -23,7 +23,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.new(dish_params)
 
     if @dish.save
-      redirect_to admin_dishes_path(q: {dish_type_eq: @dish.dish_type})
+      redirect_to admin_dishes_path(q: { dish_type_eq: @dish.dish_type })
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.find(params[:id])
 
     if @dish.update dish_params
-      redirect_to admin_dishes_path(q: {dish_type_eq: @dish.dish_type})
+      redirect_to admin_dishes_path(q: { dish_type_eq: @dish.dish_type })
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.find(params[:id])
     @dish.destroy
 
-    redirect_to admin_dishes_path(q: {dish_type_eq: @dish.dish_type})
+    redirect_to admin_dishes_path(q: { dish_type_eq: @dish.dish_type })
   end
 
   private

@@ -21,7 +21,7 @@ module VoteableConcern
   def change_vote(be_created_vote, be_destroyed_vote, user)
     totals = { ups: vote_ups_count, downs: vote_downs_count }
 
-    be_destroyed_vote.destroy_all(voteable: self, user: user)
+    be_destroyed_vote.where(voteable: self, user: user).destroy_all
     be_created_vote.find_or_create_by!(voteable: self, user: user)
     reload
 

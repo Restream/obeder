@@ -1,7 +1,6 @@
 class Api::UserMenuVotesController < Api::ApplicationController
   def update
     vote_type = MenuDishVoteType.new(user_menu_vote_params)
-
     return render json: { errors: vote_type.errors } if vote_type.invalid?
 
     voteable = vote_type.voteable
