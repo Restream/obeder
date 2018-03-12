@@ -18,13 +18,10 @@ module VoteableConcern
     vote_ups_count - vote_downs_count
   end
 
+  private
   def change_vote(be_created_vote, be_destroyed_vote, user)
-    totals = { ups: vote_ups_count, downs: vote_downs_count }
-
     be_destroyed_vote.where(voteable: self, user: user).destroy_all
     be_created_vote.find_or_create_by!(voteable: self, user: user)
     reload
-
-    { ups: vote_ups_count - totals[:ups], downs: vote_downs_count - totals[:downs] }
   end
 end

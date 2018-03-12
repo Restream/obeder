@@ -12,7 +12,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
 
   def new
     dish_type = params.fetch(:q, {}).fetch(:dish_type_eq, 'soup')
-    @dish = Dish.new dish_type: dish_type
+    @dish = Dish.new(dish_type: dish_type)
   end
 
   def edit

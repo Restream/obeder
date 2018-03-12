@@ -14,6 +14,6 @@ class MenuDishVoteType < ActiveType::Object
   end
 
   def voteable
-    MenuDish.find_by(menu_id: @user_menu.menu_id, dish_id: dish_id)
+    @voteable ||= MenuDish.find_by(menu_id: @user_menu.menu_id, dish_id: dish_id)
   end
 end
