@@ -1,4 +1,4 @@
-class MenuDishVoteTypeSerializer < ActiveModel::Serializer
+class UserMenuVoteTypeSerializer < ActiveModel::Serializer
   attributes :user_menu_id, :dish_id, :rating_up, :rating_down
 
   delegate :user_menu_id, :dish_id, to: :object

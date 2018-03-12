@@ -3,7 +3,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
 
   def index
     params[:q] ||= {}
-    params[:q][:dish_type_eq] ||= 'soup'
+    params[:q][:dish_type_eq] ||= Dish::DEFAULT_DISH_TYPE
 
     @q = Dish.order(:name).ransack(params[:q])
     @dishes = @q.result.page(params[:page])
@@ -11,7 +11,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
   end
 
   def new
-    dish_type = params.fetch(:q, {}).fetch(:dish_type_eq, 'soup')
+    dish_type = params.dig(:q, :dish_type_eq) || Dish::DEFAULT_DISH_TYPE
     @dish = Dish.new(dish_type: dish_type)
   end
 
@@ -23,7 +23,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.new(dish_params)
 
     if @dish.save
-      redirect_to admin_dishes_path(q: { dish_type_eq: @dish.dish_type })
+      redirect_to helpers.current_dishes_path(@dish)
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.find(params[:id])
 
     if @dish.update dish_params
-      redirect_to admin_dishes_path(q: { dish_type_eq: @dish.dish_type })
+      redirect_to helpers.current_dishes_path(@dish)
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.find(params[:id])
     @dish.destroy
 
-    redirect_to admin_dishes_path(q: { dish_type_eq: @dish.dish_type })
+    redirect_to helpers.current_dishes_path(@dish)
   end
 
   private

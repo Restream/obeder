@@ -6,14 +6,14 @@
     %br
   .col-md-6
     .pull-right
-      = link_to t('form.add'), new_admin_dish_path(q: {dish_type_eq: @selected_dish_type}), class: 'btn btn-default btn-lg btn-primary'
+      = link_to t('form.add'), new_dish_of_type_path(@selected_dish_type), class: 'btn btn-default btn-lg btn-primary'
 
 .row
   .col-md-12
     %ul.nav.nav-pills.nav-justified{role: 'tablist'}
       - Dish.dish_type.values.each do |dish_type|
         %li{class: ('active' if dish_type.to_s == @selected_dish_type)}
-          = link_to dish_type.text, admin_dishes_path(q: {dish_type_eq: dish_type})
+          = link_to dish_type.text, current_dishes_path(dish_type)
 
     %br
     %table.table.table-hover.table-condensed.table-striped

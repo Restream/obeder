@@ -1,4 +1,4 @@
-class MenuDishVoteType < ActiveType::Object
+class UserMenuVoteType < ActiveType::Object
   attribute :voted, :boolean
   attribute :dish_id, :integer
   attribute :user_menu_id, :integer

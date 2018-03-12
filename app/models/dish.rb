@@ -1,4 +1,6 @@
 class Dish < ApplicationRecord
+  DEFAULT_DISH_TYPE = 'soup'.freeze
+
   extend Enumerize
   include DishRepository
 

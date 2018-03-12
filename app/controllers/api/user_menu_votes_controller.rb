@@ -1,6 +1,6 @@
 class Api::UserMenuVotesController < Api::ApplicationController
   def update
-    vote_type = MenuDishVoteType.new(user_menu_vote_params)
+    vote_type = UserMenuVoteType.new(user_menu_vote_params)
 
     if vote_type.valid?
       VotesService.assign_dish_vote(vote_type, current_user)
