@@ -308,8 +308,20 @@
 }
 
 .disable {
-  pointer-events: none;
-  opacity: 0.3
+  position: relative;
+  z-index: 0;
+}
+
+.disable::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, .75);
 }
 
 @media (--desktop) {

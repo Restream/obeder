@@ -208,5 +208,10 @@
   padding-right: 15px;
   display: inline-flex;
   align-self: center;
+  pointer-events: auto;
+
+  position: relative;
+  z-index: 2;
 }
+
 </style>
