@@ -9,7 +9,6 @@
             :voted="dish.voted"
             :ratingUp="dish.ratingUp"
             :ratingDown="dish.ratingDown"
-            data-voting
             @vote="vote" />
         </div>
         <div class="thumbnail-container">
