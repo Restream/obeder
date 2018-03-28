@@ -65,3 +65,7 @@ ru:
           attributes:
             editable:
               inclusion: Меню на сегодня нельзя редактировать
+        menu_dish_vote_type:
+          attributes:
+            user_menu_id:
+              invalid: Указан неверный идентификатор меню пользователя

@@ -6,27 +6,37 @@
     %br
   .col-md-6
     .pull-right
-      = link_to t('form.add'), new_admin_dish_path, class: 'btn btn-default btn-lg btn-primary'
+      = link_to t('form.add'), new_dish_path(@selected_dish_type), class: 'btn btn-default btn-lg btn-primary'
 
 .row
   .col-md-12
     %ul.nav.nav-pills.nav-justified{role: 'tablist'}
       - Dish.dish_type.values.each do |dish_type|
         %li{class: ('active' if dish_type.to_s == @selected_dish_type)}
-          = link_to dish_type.text, admin_dishes_path(q: {dish_type_eq: dish_type})
+          = link_to dish_type.text, current_dishes_path(dish_type)
 
     %br
     %table.table.table-hover.table-condensed.table-striped
       %tr
         %th
           = sort_link(@q, :name)
-        %th{width: '100px'}
+        %th{width: '10%'}
+          = t('list.votes')
+        %th{width: '20%'}
+          = t('list.rating')
+        %th{width: '20%'}
           = t('list.actions')
       - @dishes.each do |dish|
         %tr
           %td
             = image_tag(dish.image.thumb.url) if dish.image?
             = dish.name
+          %td
+            = t('list.rating_up_down', up: dish.vote_ups_count, down: dish.vote_downs_count)
+          %td
+            .progress{style: 'margin-top: 10px; height: 3px'}
+              .progress-bar.progress-bar-success{style: "width: #{dish.decorate.vote_ups_percent}%"}
+              .progress-bar.progress-bar-danger{style: "width: #{dish.decorate.vote_downs_percent}%"}
           %td{width: '200px'}
             = link_to edit_admin_dish_path(dish), {class: 'btn btn-info btn-sm'} do
               %i.glyphicon.glyphicon-plus.hidden-sm.hidden-md.hidden-lg

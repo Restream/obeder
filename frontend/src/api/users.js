@@ -17,5 +17,13 @@ apiWrapper.setMenu = (id, { dishes, description, neem }) => {
 
   return request(menuUrl, 'PUT', false, payload);
 };
+apiWrapper.setVote = (id, { dish_id, voted }) => {
+  const menuUrl = urljoin(baseUrl, 'user_menu_votes', id);
+  const payload = {
+    user_menu_vote: { dish_id, voted },
+  };
+
+  return request(menuUrl, 'PUT', false, payload);
+};
 
 export default apiWrapper;

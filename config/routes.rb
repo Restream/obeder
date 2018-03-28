@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :dishes, only: [:index, :create, :update, :destroy]
     resources :menus, only: [:index, :create, :update, :destroy]
     resources :user_menus, only: [:index, :update]
+    resources :user_menu_votes, only: [:update], param: :user_menu_id
   end
 
   match '*path' => 'web/welcome#index', via: :get
