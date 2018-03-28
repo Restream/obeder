@@ -1,10 +1,10 @@
 :root {
-  --unvotedColor: #d2d1d1;
-  --unvotedColorBorder: #c5c5c4;
-  --votedDownColor: #f1d346;
-  --votedDownColorBorder: #e79d36;
-  --votedUpColor: #beee44;
-  --votedUpColorBorder: #a7d436;
-  --textSuccess: #769624;
-  --textDanger: #be6119;
+  --unvotedColor: #999;
+  --unvotedColorBorder: #999;
+  --votedDownColor: #e73b00;
+  --votedDownColorBorder: #e73b00;
+  --votedUpColor: #38B5C7;
+  --votedUpColorBorder: #38B5C7;
+  --textSuccess: #38B5C7;
+  --textDanger: #e73b00;
 }

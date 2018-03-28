@@ -103,8 +103,4 @@ export default {
   }
 }
 
-.disable {
-  pointer-events: none;
-  opacity: 0.3
-}
 </style>
