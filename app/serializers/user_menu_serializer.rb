@@ -10,7 +10,7 @@ class UserMenuSerializer < ActiveModel::Serializer
   end
 
   def dishes
-    menu_dishes = object.menu.menu_dishes.includes(:dish, :votes)
+    menu_dishes = object.menu.menu_dishes.includes(:dish, :votes).ordered_by_dish
     user_dish_ids = object.dishes.pluck(:id)
 
     menu_dishes.map do |menu_dish|

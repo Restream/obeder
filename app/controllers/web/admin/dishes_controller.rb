@@ -23,7 +23,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.new(dish_params)
 
     if @dish.save
-      redirect_to helpers.current_dishes_path(@dish)
+      redirect_to helpers.current_dishes_path(@dish.dish_type)
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.find(params[:id])
 
     if @dish.update dish_params
-      redirect_to helpers.current_dishes_path(@dish)
+      redirect_to helpers.current_dishes_path(@dish.dish_type)
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class Web::Admin::DishesController < Web::Admin::ApplicationController
     @dish = Dish.find(params[:id])
     @dish.destroy
 
-    redirect_to helpers.current_dishes_path(@dish)
+    redirect_to helpers.current_dishes_path(@dish.dish_type)
   end
 
   private

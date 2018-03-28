@@ -4,11 +4,8 @@ class VotesService
       voteable = vote_type.voteable
       prev_counters = voteable.slice(:vote_ups_count, :vote_downs_count)
 
-      if vote_type.voted
-        voteable.voted_by(voter)
-      else
-        voteable.unvoted_by(voter)
-      end
+      vote_type.voted ? voteable.voted_by(voter) : voteable.unvoted_by(voter)
+      voteable.reload
 
       update_total_dish_counters(prev_counters, voteable)
     end

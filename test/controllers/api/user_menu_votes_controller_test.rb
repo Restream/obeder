@@ -17,7 +17,9 @@ class Api::UserMenuVotesControllerTest < ActionController::TestCase
     @dish.reload
     assert { @dish.vote_ups_count == 1 }
     assert { @dish.vote_downs_count.zero? }
+  end
 
+  test 'update vote down for dish' do
     assert_difference 'VoteDown.count' do
       put :update, params: { user_menu_id: @user_menu.id, user_menu_vote: { dish_id: @dish.id, voted: false } }
       assert_response :success
