@@ -16,6 +16,7 @@ gem 'active_link_to'
 gem 'config'
 
 gem 'aasm'
+gem 'acts_as_paranoid'
 gem 'bcrypt'
 gem 'authority'
 gem 'ransack'
