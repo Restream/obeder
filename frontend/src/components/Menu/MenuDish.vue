@@ -214,4 +214,25 @@
   z-index: 2;
 }
 
+@media (max-width: 800px)
+{
+.menu-dish__header {
+    font-size: 20px;
+}
+
+.menu-dish__name {
+    font-size: 18px;
+}
+
+.voter-container {
+    width: auto;
+    padding: 0;
+    margin-right: 15px;
+}
+
+.menu-dish__description {
+    font-size: 14px;
+}
+}
+
 </style>
