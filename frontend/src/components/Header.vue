@@ -118,10 +118,9 @@
     }
   }
 
-@media (max-width: 800px){
-  .header {
-    justify-content: flex-start;
+  @media (--tablet) {
+    .header {
+        justify-content: flex-start;
+    }
   }
-}
-
 </style>

@@ -340,18 +340,16 @@
   }
 }
 
-
-@media (max-width: 800px)
-{
-.date {
-    overflow-x: scroll;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    white-space: nowrap;
-    font-size: 20px;
+@media (--tablet) {
+  .date {
+      overflow-x: scroll;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 20px;
+      padding: 1px 0px;
+    }
   }
-}
-
 </style>
