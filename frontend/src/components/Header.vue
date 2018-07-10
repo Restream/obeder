@@ -73,6 +73,8 @@ export default {
   position: relative;
   height: 56px;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__user {
