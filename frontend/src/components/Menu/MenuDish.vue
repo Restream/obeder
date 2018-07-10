@@ -41,54 +41,54 @@
 </template>
 
 <script>
-  import _ from 'lodash';
-  import MenuPresenter from '../../presenters/MenuPresenter';
-  import MenuVoter from './MenuVoter';
+import _ from "lodash";
+import MenuPresenter from "../../presenters/MenuPresenter";
+import MenuVoter from "./MenuVoter";
 
-  function getSelectedDishId(dishes) {
-    const selectedDish = _.find(dishes, { selected: true });
+function getSelectedDishId(dishes) {
+  const selectedDish = _.find(dishes, { selected: true });
 
-    return selectedDish && selectedDish.id;
+  return selectedDish && selectedDish.id;
+}
+
+export default {
+  components: {
+    "menu-voter": MenuVoter
+  },
+  name: "MenuDish",
+
+  data() {
+    return {
+      typePresented: MenuPresenter.dishType(this.type),
+      selectedDish: getSelectedDishId(this.dishes)
+    };
+  },
+
+  props: {
+    date: String,
+    dishes: Array,
+    type: String,
+    onChange: Function
+  },
+
+  watch: {
+    selectedDish(dish) {
+      this.onChange(this.type, dish);
+    },
+    dishes(dishes) {
+      this.selectedDish = getSelectedDishId(dishes);
+    }
+  },
+
+  methods: {
+    showImage(url, description) {
+      this.$emit("showImage", url, description);
+    },
+    vote(value, dishId) {
+      this.$emit("vote", value, dishId, this.type);
+    }
   }
-
-  export default {
-    components: {
-      'menu-voter': MenuVoter,
-    },
-    name: 'MenuDish',
-
-    data() {
-      return {
-        typePresented: MenuPresenter.dishType(this.type),
-        selectedDish: getSelectedDishId(this.dishes),
-      };
-    },
-
-    props: {
-      date: String,
-      dishes: Array,
-      type: String,
-      onChange: Function,
-    },
-
-    watch: {
-      selectedDish(dish) {
-        this.onChange(this.type, dish);
-      },
-      dishes(dishes) {
-        this.selectedDish = getSelectedDishId(dishes);
-      },
-    },
-
-    methods: {
-      showImage(url, description) {
-        this.$emit('showImage', url, description);
-      },
-      vote(value, dishId) {
-        this.$emit('vote', value, dishId, this.type);
-      },
-    },
-  };
+};
 </script>
 <style scoped>
 @import "../../assets/styles/variables.css";
@@ -96,8 +96,8 @@
 .menu-dish {
   width: 100%;
   margin-bottom: 15px;
-  background: #FAFAFA;
-  box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+  background: #fafafa;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
   border-radius: 3px;
   padding: 16px 13px;
 }
@@ -127,10 +127,10 @@
 
   & input:checked {
     & + .menu-dish__radio {
-      border: 2px solid #38B5C7;
+      border: 2px solid #38b5c7;
 
       &::after {
-        background-color: #38B5C7;
+        background-color: #38b5c7;
         transform: translate(-50%, -50%) scale(10);
         opacity: 1;
       }
@@ -149,7 +149,7 @@
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     width: 1px;
     height: 1px;
     border-radius: 50%;
@@ -194,7 +194,7 @@
   cursor: pointer;
   display: inline-block;
   background: no-repeat center center;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   background-size: cover;
 }
 
@@ -214,22 +214,20 @@
 }
 
 @media (--tablet) {
-.menu-dish__header {
-  font-size: 24px;
-}
+  .menu-dish__header {
+    font-size: 24px;
+  }
 
-.menu-dish__name {
-  font-size: 18px;
-}
+  .menu-dish__name {
+    font-size: 18px;
+  }
 
-.voter-container {
-  width: auto;
-  padding: 0;
-  margin-right: 15px;
-}
+  .menu-dish__description {
+    font-size: 14px;
+  }
 
-.menu-dish__description {
-  font-size: 14px;
+  .voter-container {
+    width: 50px;
   }
 }
 </style>
