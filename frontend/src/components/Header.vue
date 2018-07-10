@@ -117,4 +117,10 @@
       display: flex;
     }
   }
+
+  @media (--tablet) {
+    .header {
+        justify-content: flex-start;
+    }
+  }
 </style>

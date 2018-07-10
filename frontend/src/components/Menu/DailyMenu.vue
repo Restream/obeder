@@ -251,7 +251,6 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-
   &:first-letter {
     text-transform: uppercase;
   }
@@ -262,6 +261,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 
 .default_link {
   font-size: 18px;
@@ -339,4 +339,17 @@
     width: calc(50% - 14px);
   }
 }
+
+@media (--tablet) {
+  .date {
+      overflow-x: scroll;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 20px;
+      padding: 1px 0px;
+    }
+  }
 </style>
