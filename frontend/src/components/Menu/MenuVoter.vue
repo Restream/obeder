@@ -63,6 +63,9 @@ export default {
   color: #9b9999;
   margin: 5px 0;
   font-size: 14pt;
+  width: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .vote-up {
