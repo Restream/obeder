@@ -355,7 +355,6 @@ export default {
   .date {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
