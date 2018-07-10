@@ -213,4 +213,22 @@ export default {
   position: relative;
   z-index: 2;
 }
+
+@media (--tablet) {
+  .menu-dish__header {
+    font-size: 24px;
+  }
+
+  .menu-dish__name {
+    font-size: 18px;
+  }
+
+  .menu-dish__description {
+    font-size: 14px;
+  }
+
+  .voter-container {
+    width: 50px;
+  }
+}
 </style>
