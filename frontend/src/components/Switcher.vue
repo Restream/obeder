@@ -11,32 +11,32 @@
 
 <script>
 export default {
-  name: 'Switcher',
+  name: "Switcher",
   props: {
     isDisabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     isOn: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
-      active: this.isOn,
+      active: this.isOn
     };
   },
   watch: {
     isOn(newVal) {
       this.active = newVal;
-    },
+    }
   },
   methods: {
     onChange(value) {
-      this.$emit('onToggle', value);
-    },
-  },
+      this.$emit("onToggle", value);
+    }
+  }
 };
 </script>
 
@@ -46,12 +46,13 @@ export default {
 .switcher {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .switcher-label {
   font-weight: 400;
   font-size: 20px;
-  color: #4D4D4D;
+  color: #4d4d4d;
   letter-spacing: 0.01px;
   display: inline-block;
   margin: 0 14px;
@@ -71,7 +72,7 @@ export default {
     & + .circle {
       &::after {
         transform: translateX(24px);
-        background: #38B5C7;
+        background: #38b5c7;
         border: none;
       }
     }
@@ -79,7 +80,7 @@ export default {
 }
 
 .circle {
-  background: rgba(0,0,0,0.30);
+  background: rgba(0, 0, 0, 0.3);
   height: 2px;
   width: 50px;
   position: relative;
@@ -88,7 +89,7 @@ export default {
   font-size: 0;
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     width: 26px;
     height: 26px;
@@ -103,4 +104,9 @@ export default {
   }
 }
 
+@media (--tablet) {
+  .switcher {
+    margin-right: 20px;
+  }
+}
 </style>
