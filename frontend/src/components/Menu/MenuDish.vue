@@ -205,6 +205,7 @@ export default {
 
 .voter-container {
   width: 60px;
+  padding-right: 15px;
   margin-right: 5px;
   display: inline-flex;
   align-self: center;
