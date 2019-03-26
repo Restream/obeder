@@ -30,7 +30,7 @@ ru:
         main_to_side_dishes_mismatch: Количество гарниров не совпадает с количеством основных блюд
         less_than_two_main_dishes: Недостаточно основных или самостоятельных блюд
         invalid_email: Неправильная почта
-        invalid_restream_email: "Введите корпоративную почту: username@restream.rt.ru"
+        invalid_restream_email: "Введите корпоративную почту: username@restream.rt.ru или username@rt.ru"
         blank: Обязательное поле
 
       models:

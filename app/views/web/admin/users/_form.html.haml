@@ -1,6 +1,6 @@
 = simple_form_for @user, url: url, html: { method: method, class: 'form-horizontal' } do |f|
   = f.input :name
-  = f.input :email, input_html: { placeholder: 'username@restream.rt.ru' }
+  = f.input :email, input_html: { placeholder: 'username@restream.rt.ru, username@rt.ru' }
   = f.input :description
   = f.input :role, as: :select, include_blank: false
   .form-group
