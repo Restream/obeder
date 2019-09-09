@@ -16,6 +16,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #4a4a4a;
+  min-width: 320px;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/

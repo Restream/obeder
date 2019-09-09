@@ -3,12 +3,8 @@
 [![Build Status](https://travis-ci.org/Restream/obeder.svg?branch=develop)](https://travis-ci.org/Restream/obeder)
 
 ## Setup
- * docker-compose up
- * docker-compose exec web yarn
- * docker-compose exec web yarn build
 
- Если возникает ошибка `ERROR: Couldn't find env file: /Users/maksim/Workspace/obeder/secrets.env`,
- берем файлик secrets.sample.env, копируем его и соответствующим образом называем.
+ * make docker-setup
 
 ## EZ deploy
 

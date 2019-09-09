@@ -2,7 +2,7 @@
   <div class="daily-menu" v-bind:class="{ disable: !this.day.editable }">
     <h1 class="date">
       <span>{{date}}</span>
-      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle" />
+      <menu-switcher :isDisabled='isSwitchDisabled' :isOn='isSwitchOn' @onToggle="menuSwitchToggle"/>
       <a v-on:click="setToDefault" class="default_link">Сбросить</a>
     </h1>
 
@@ -22,6 +22,7 @@
         :type="type"
         :onChange="onDishChange"
         @showImage="showImage"
+        @vote="vote"
       >
       </menu-dish>
       <div class="daily-menu__actions">
@@ -34,179 +35,216 @@
 </template>
 
 <script>
-  import _ from 'lodash';
+import _ from "lodash";
 
-  import dishTypesDictionary from 'contants/dishTypes';
-  import usersService from 'api/users';
-  import MenuDish from './MenuDish';
-  import MenuPresenter from '../../presenters/MenuPresenter';
-  import Switcher from '../Switcher';
+import dishTypesDictionary from "contants/dishTypes";
+import usersService from "api/users";
+import MenuDish from "./MenuDish";
+import MenuPresenter from "../../presenters/MenuPresenter";
+import Switcher from "../Switcher";
 
-  const COMMENT_SEND_TIMEOUT = 350;
-  const MENU_SAVE_ERROR = 'При сохранении меню возникла ошибка. Попробуйте обновить страницу.';
+const COMMENT_SEND_TIMEOUT = 350;
+const MENU_SAVE_ERROR =
+  "При сохранении меню возникла ошибка. Попробуйте обновить страницу.";
+const MENU_SEND_VOTE_ERROR =
+  "При попытке проголосовать произошла ошибка. Попробуйте обновить страницу.";
 
-  let lastState;
+let lastState;
 
-  function getSelectedDishes(dishTypes) {
-    return _.reduce(dishTypes, (acc, dishes) => {
+function getSelectedDishes(dishTypes) {
+  return _.reduce(
+    dishTypes,
+    (acc, dishes) => {
       const selectedDish = _.find(dishes, { selected: true });
 
-      return [
-        ...acc,
-        { id: selectedDish && selectedDish.id },
-      ];
-    }, []);
-  }
+      return [...acc, { id: selectedDish && selectedDish.id }];
+    },
+    []
+  );
+}
 
-  function deselectDishes(dishes) {
-    return dishes && dishes.map(dish => ({
+function deselectDishes(dishes) {
+  return (
+    dishes &&
+    dishes.map(dish => ({
       ...dish,
-      selected: false,
-    }));
-  }
+      selected: false
+    }))
+  );
+}
 
-  export default {
-    components: {
-      'menu-dish': MenuDish,
-      'menu-switcher': Switcher,
+export default {
+  components: {
+    "menu-dish": MenuDish,
+    "menu-switcher": Switcher
+  },
+  name: "DailyMenu",
+  props: {
+    day: Object,
+    isSwitchDisabled: Boolean
+  },
+  data() {
+    const types = {};
+
+    this.day.dishes.forEach(dish => {
+      if (!types[dish.dishType]) {
+        types[dish.dishType] = [];
+      }
+
+      types[dish.dishType].push(dish);
+    });
+
+    return {
+      date: MenuPresenter.date(this.day.date),
+      dishTypes: types,
+      isSwitchOn: !this.day.neem,
+      errors: []
+    };
+  },
+  created() {
+    this.sendComment = _.debounce(this.sendData, COMMENT_SEND_TIMEOUT);
+  },
+  methods: {
+    sendData() {
+      const currentState = {
+        dishes: getSelectedDishes(this.dishTypes),
+        description: this.day.description,
+        neem: this.day.neem
+      };
+
+      if (_.isEqual(lastState, currentState)) return;
+
+      lastState = currentState;
+      usersService
+        .setMenu(this.day.id, currentState)
+        .then(response => {
+          this.errors = [];
+          if (!response.errors) return;
+          _.forOwn(response.errors, errors => {
+            for (let i = 0; i < errors.length; i += 1) {
+              this.errors.push(errors[i]);
+            }
+          });
+        })
+        .catch(() => {
+          this.errors.push(MENU_SAVE_ERROR);
+        });
     },
-    name: 'DailyMenu',
-    props: {
-      day: Object,
-      isSwitchDisabled: Boolean,
+    sendVote(data, dishType) {
+      usersService
+        .setVote(this.day.id, data)
+        .then(response => {
+          this.errors = [];
+
+          this.dishTypes[dishType] = this.dishTypes[dishType].map(dish => {
+            if (dish.id === response.dishId) {
+              return {
+                ...dish,
+                ratingUp: response.ratingUp,
+                ratingDown: response.ratingDown,
+                voted: data.voted
+              };
+            }
+            return dish;
+          });
+        })
+        .catch(() => {
+          this.errors.push(MENU_SEND_VOTE_ERROR);
+        });
     },
-    data() {
-      const types = {};
+    setToDefault() {
+      const defaultDishes = {};
 
-      this.day.dishes.forEach((dish) => {
-        if (!types[dish.dishType]) {
-          types[dish.dishType] = [];
-        }
-
-        types[dish.dishType].push(dish);
+      _.each(this.dishTypes, (dishes, type) => {
+        defaultDishes[type] = dishes.map(dish => ({
+          ...dish,
+          selected: dish.default
+        }));
       });
 
-      return {
-        date: MenuPresenter.date(this.day.date),
-        dishTypes: types,
-        isSwitchOn: !this.day.neem,
-        errors: [],
-      };
+      this.dishTypes = defaultDishes;
     },
-    created() {
-      this.sendComment = _.debounce(this.sendData, COMMENT_SEND_TIMEOUT);
-    },
-    methods: {
-      sendData() {
-        const currentState = {
-          dishes: getSelectedDishes(this.dishTypes),
-          description: this.day.description,
-          neem: this.day.neem,
-        };
 
-        if (_.isEqual(lastState, currentState)) return;
-
-        lastState = currentState;
-        usersService
-          .setMenu(this.day.id, currentState)
-          .then((response) => {
-            this.errors = [];
-            if (!response.errors) return;
-            _.forOwn(response.errors, (errors) => {
-              for (let i = 0; i < errors.length; i += 1) {
-                this.errors.push(errors[i]);
-              }
-            });
-          })
-          .catch(() => {
-            this.errors.push(MENU_SAVE_ERROR);
-          });
-      },
-
-      setToDefault() {
-        const defaultDishes = {};
-
-        _.each(this.dishTypes, (dishes, type) => {
-          defaultDishes[type] = dishes.map(dish => ({
-            ...dish,
-            selected: dish.default,
-          }));
-        });
-
-        this.dishTypes = defaultDishes;
-      },
-
-      onDishChange(type, dishId) {
-        if (!dishId) {
-          this.dishTypes = {
-            ...this.dishTypes,
-            [type]: deselectDishes(this.dishTypes[type]),
-          };
-          return;
-        }
-
-        const dishUpdates = {};
-
-        switch (type) {
-          case dishTypesDictionary.separate_dish: {
-            const mainDishes = deselectDishes(this.dishTypes[dishTypesDictionary.main_dish]);
-            const sideDishes = deselectDishes(this.dishTypes[dishTypesDictionary.side_dish]);
-
-            if (mainDishes) {
-              dishUpdates[dishTypesDictionary.main_dish] = mainDishes;
-            }
-            if (sideDishes) {
-              dishUpdates[dishTypesDictionary.side_dish] = sideDishes;
-            }
-            break;
-          }
-          case dishTypesDictionary.main_dish:
-          case dishTypesDictionary.side_dish: {
-            if (!this.dishTypes[dishTypesDictionary.separate_dish]) {
-              break;
-            }
-
-            const separateDishes = deselectDishes(this.dishTypes[dishTypesDictionary.separate_dish]);
-
-            if (separateDishes) {
-              dishUpdates[dishTypesDictionary.separate_dish] = separateDishes;
-            }
-            break;
-          }
-          default: {
-            break;
-          }
-        }
-        const dishes = this.dishTypes[type];
-        const updatedDishes = dishes.map(dish => ({
-          ...dish,
-          selected: dish.id === dishId,
-        }));
-
+    onDishChange(type, dishId) {
+      if (!dishId) {
         this.dishTypes = {
           ...this.dishTypes,
-          ...dishUpdates,
-          [type]: updatedDishes,
+          [type]: deselectDishes(this.dishTypes[type])
         };
+        return;
+      }
 
-        this.sendData();
-      },
+      const dishUpdates = {};
 
-      onChangeComment(event) {
-        this.day.description = event.target.value;
-        this.sendComment();
-      },
+      switch (type) {
+        case dishTypesDictionary.separate_dish: {
+          const mainDishes = deselectDishes(
+            this.dishTypes[dishTypesDictionary.main_dish]
+          );
+          const sideDishes = deselectDishes(
+            this.dishTypes[dishTypesDictionary.side_dish]
+          );
 
-      menuSwitchToggle(value) {
-        this.day.neem = !value;
-        this.sendData();
-      },
+          if (mainDishes) {
+            dishUpdates[dishTypesDictionary.main_dish] = mainDishes;
+          }
+          if (sideDishes) {
+            dishUpdates[dishTypesDictionary.side_dish] = sideDishes;
+          }
+          break;
+        }
+        case dishTypesDictionary.main_dish:
+        case dishTypesDictionary.side_dish: {
+          if (!this.dishTypes[dishTypesDictionary.separate_dish]) {
+            break;
+          }
 
-      showImage(url, description) {
-        this.$emit('showImage', url, description);
-      },
+          const separateDishes = deselectDishes(
+            this.dishTypes[dishTypesDictionary.separate_dish]
+          );
+
+          if (separateDishes) {
+            dishUpdates[dishTypesDictionary.separate_dish] = separateDishes;
+          }
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+      const dishes = this.dishTypes[type];
+      const updatedDishes = dishes.map(dish => ({
+        ...dish,
+        selected: dish.id === dishId
+      }));
+
+      this.dishTypes = {
+        ...this.dishTypes,
+        ...dishUpdates,
+        [type]: updatedDishes
+      };
+
+      this.sendData();
     },
-  };
+
+    onChangeComment(event) {
+      this.day.description = event.target.value;
+      this.sendComment();
+    },
+
+    menuSwitchToggle(value) {
+      this.day.neem = !value;
+      this.sendData();
+    },
+
+    showImage(url, description) {
+      this.$emit("showImage", url, description);
+    },
+    vote(value, dishId, dishType) {
+      this.sendVote({ dish_id: dishId, voted: value }, dishType);
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -225,7 +263,6 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-
   &:first-letter {
     text-transform: uppercase;
   }
@@ -282,8 +319,20 @@
 }
 
 .disable {
-  pointer-events: none;
-  opacity: 0.3
+  position: relative;
+  z-index: 0;
+}
+
+.disable::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 @media (--desktop) {
@@ -299,6 +348,19 @@
 
   .daily-menu__actions {
     width: calc(50% - 14px);
+  }
+}
+
+@media (--tablet) {
+  .date {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 20px;
+    padding: 1px 0px;
   }
 }
 </style>

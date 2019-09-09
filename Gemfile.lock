@@ -60,6 +60,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts_as_paranoid (0.5.0)
+      activerecord (>= 4.0, < 5.1)
+      activesupport (>= 4.0, < 5.1)
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
@@ -204,7 +207,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     parser (2.4.0.0)
       ast (~> 2.2)
-    pg (0.19.0)
+    pg (0.21.0)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
     powerpack (0.1.1)
@@ -332,6 +335,7 @@ DEPENDENCIES
   active_link_to
   active_model_serializers (~> 0.10.0)
   active_type
+  acts_as_paranoid
   authority
   autoprefixer-rails
   axlsx (= 2.1.0.pre)
@@ -377,4 +381,4 @@ DEPENDENCIES
   wrong
 
 BUNDLED WITH
-   1.14.6
+   1.16.1

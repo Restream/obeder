@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :user_menus, dependent: :destroy
   has_many :menus, through: :user_menus
 
+  acts_as_paranoid
+
   validates :name, :role, :email, presence: true
   validates :email, uniqueness: true
   validates :email, email: true, if: 'role.cook?'

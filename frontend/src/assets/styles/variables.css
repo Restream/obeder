@@ -3,3 +3,5 @@
 :root {
   --desktop-width: 800px;
 }
+
+@custom-media --tablet (max-width: 800px );

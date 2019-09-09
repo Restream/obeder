@@ -1,0 +1,10 @@
+:root {
+  --unvotedColor: #999;
+  --unvotedColorBorder: #999;
+  --votedDownColor: #e73b00;
+  --votedDownColorBorder: #e73b00;
+  --votedUpColor: #38B5C7;
+  --votedUpColorBorder: #38B5C7;
+  --textSuccess: #38B5C7;
+  --textDanger: #e73b00;
+}

@@ -29,6 +29,14 @@
     validationErrorsList.empty();
   });
 
+  menuForm
+    .on('cocoon:after-insert', function(e) {
+      publishBtn.prop('disabled', true);
+    })
+    .on('cocoon:after-remove', function(e) {
+      publishBtn.prop('disabled', true);
+    });
+
   publishBtn.click(function(e) {
     $.get(validationUrl, function(data) {
       validationMarkers.inProgress.hide();
@@ -39,11 +47,11 @@
           return $('<li></li>').text(error);
         });
         validationErrorsList.html(errors);
+        validationSubmitBtn.prop('disabled', true);
       } else {
         validationMarkers.ok.show();
+        validationSubmitBtn.prop('disabled', false);
       }
-
-      validationSubmitBtn.prop('disabled', false);
     });
   });
 })();

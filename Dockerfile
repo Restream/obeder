@@ -1,8 +1,19 @@
-FROM ruby:2.4.0
+FROM ruby:2.4
 
-RUN apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev curl redis-tools imagemagick
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs
+
+RUN apt-get update -qq && apt-get install -y \
+  build-essential \
+  curl \
+  imagemagick \
+  libpq-dev \
+  nodejs \
+  postgresql \
+  redis-tools \
+  vim \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN npm install -g yarn
 
 RUN apt-get install locales
@@ -13,16 +24,9 @@ ENV LC_ALL=ru_RU.utf8
 ENV LANGUAGE=ru_RU.utf8
 RUN update-locale LC_ALL="ru_RU.utf8" LANG="ru_RU.utf8" LANGUAGE="ru_RU"
 
-WORKDIR /app
+ENV EDITOR=vim
 
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-RUN bundle install --path /bundle_cache
+ARG APP_DIR=/app
 
-COPY package.json package.json
-COPY yarn.lock yarn.lock
-
-ADD . /app
-
-RUN yarn && yarn run build
-RUN rails assets:precompile
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR

@@ -13,7 +13,7 @@ before_install:
   - gem install bundler
   - npm install -g yarn
 rvm:
-  - 2.2.2
+  - 2.4.3
 install:
   - bundle
   - rake db:create db:migrate db:seed
